@@ -3,10 +3,10 @@
 giant.postpone(giant, 'File', function () {
     "use strict";
 
-    var fs = require('fs'),
-        base = giant.Base,
+    var base = giant.Base,
         self = base.extend()
-            .addTrait(giant.Evented);
+            .addTrait(giant.Evented),
+        fs;
 
     /**
      * Creates an File instance.
@@ -52,6 +52,7 @@ giant.postpone(giant, 'File', function () {
              * @private
              */
             _readFileProxy: function (filename, options, callback) {
+                fs = fs || require('fs');
                 return fs.readFile(filename, options, callback);
             },
 
@@ -62,6 +63,7 @@ giant.postpone(giant, 'File', function () {
              * @private
              */
             _readFileSyncProxy: function (filename, options) {
+                fs = fs || require('fs');
                 return fs.readFileSync(filename, options);
             },
 
