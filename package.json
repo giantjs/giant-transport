@@ -1,6 +1,6 @@
 {
-    "name"           : "poodle",
-    "version"        : "0.4.0",
+    "name"           : "giant-transport",
+    "version"        : "0.0.3",
     "description"    : "Transport framework",
     "keywords"       : [
         "service",
@@ -14,7 +14,7 @@
     "license"        : "MIT",
     "repository"     : {
         "type": "git",
-        "url" : "https://github.com/danstocker/poodle.git"
+        "url" : "git@github.com:giantjs/giant-transport.git"
     },
     "dependencies"   : {
         "dessert": "~0.3.2",
