@@ -1,25 +1,25 @@
-/*global dessert, troop, sntls, evan, jQuery, poodle */
-troop.postpone(poodle, 'FilePath', function () {
+/*global giant, giant, giant, giant, jQuery, giant */
+giant.postpone(giant, 'FilePath', function () {
     "use strict";
 
-    var base = poodle.Location,
+    var base = giant.Location,
         self = base.extend();
 
     /**
      * Creates an FilePath instance.
-     * @name poodle.FilePath.create
+     * @name giant.FilePath.create
      * @function
-     * @param {sntls.Path} imagePath
-     * @returns {poodle.FilePath}
+     * @param {giant.Path} imagePath
+     * @returns {giant.FilePath}
      */
 
     /**
      * The FilePath is a Location that allows loading of local files.
      * @class
-     * @extends poodle.Location
+     * @extends giant.Location
      */
-    poodle.FilePath = self
-        .addConstants(/** @lends poodle.FilePath */{
+    giant.FilePath = self
+        .addConstants(/** @lends giant.FilePath */{
             /**
              * Root path for all file event paths.
              * @constant
@@ -27,14 +27,14 @@ troop.postpone(poodle, 'FilePath', function () {
              */
             EVENT_ROOT_PATH: 'file'
         })
-        .addMethods(/** @lends poodle.FilePath# */{
+        .addMethods(/** @lends giant.FilePath# */{
             /**
-             * @param {sntls.Path} filePath
+             * @param {giant.Path} filePath
              * @ignore
              */
             init: function (filePath) {
                 base.init.call(this, filePath);
-                this.setEventSpace(poodle.fileSystemEventSpace);
+                this.setEventSpace(giant.fileSystemEventSpace);
             },
 
             /**
@@ -42,28 +42,28 @@ troop.postpone(poodle, 'FilePath', function () {
              * @returns {Q.Promise}
              */
             readFile: function () {
-                return poodle.File.create(this).readFile();
+                return giant.File.create(this).readFile();
             },
 
             /**
              * @returns {*}
              */
             readFileSync: function () {
-                return poodle.File.create(this).readFileSync();
+                return giant.File.create(this).readFileSync();
             }
         });
 });
 
-troop.amendPostponed(sntls, 'Path', function () {
+giant.amendPostponed(giant, 'Path', function () {
     "use strict";
 
-    sntls.Path.addMethods(/** @lends sntls.Path# */{
+    giant.Path.addMethods(/** @lends giant.Path# */{
         /**
          * Converts `Path` to `FilePath`.
-         * @returns {poodle.FilePath}
+         * @returns {giant.FilePath}
          */
         toFilePath: function () {
-            return poodle.FilePath.create(this);
+            return giant.FilePath.create(this);
         }
     });
 });
@@ -71,16 +71,16 @@ troop.amendPostponed(sntls, 'Path', function () {
 (function () {
     "use strict";
 
-    troop.Properties.addProperties.call(
+    giant.Properties.addProperties.call(
         String.prototype,
         /** @lends String# */{
             /**
              * Converts `String` to `FilePath`.
-             * @returns {poodle.FilePath}
+             * @returns {giant.FilePath}
              */
             toFilePath: function () {
-                return poodle.FilePath.create(this
-                    .replace(poodle.Location.LEADING_TRAILING_SLASHES, '') // removing leading & trailing slashes
+                return giant.FilePath.create(this
+                    .replace(giant.Location.LEADING_TRAILING_SLASHES, '') // removing leading & trailing slashes
                     .split('/') // splitting up slash-separated path
                     .toPath());
             }
@@ -88,15 +88,15 @@ troop.amendPostponed(sntls, 'Path', function () {
         false, false, false
     );
 
-    troop.Properties.addProperties.call(
+    giant.Properties.addProperties.call(
         Array.prototype,
         /** @lends Array# */{
             /**
              * Converts `Array` to `FilePath`.
-             * @returns {poodle.FilePath}
+             * @returns {giant.FilePath}
              */
             toFilePath: function () {
-                return poodle.FilePath.create(this.toPath());
+                return giant.FilePath.create(this.toPath());
             }
         },
         false, false, false

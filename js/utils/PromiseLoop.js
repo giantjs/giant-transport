@@ -1,21 +1,21 @@
-/*global dessert, troop, sntls, poodle, jQuery */
-troop.postpone(poodle, 'PromiseLoop', function (ns, className, /**jQuery*/$) {
+/*global giant, giant, giant, giant, jQuery */
+giant.postpone(giant, 'PromiseLoop', function (ns, className, /**jQuery*/$) {
     "use strict";
 
-    var base = troop.Base,
+    var base = giant.Base,
         self = base.extend(),
         slice = Array.prototype.slice;
 
     /**
      * @class
-     * @extends troop.Base
+     * @extends giant.Base
      */
-    poodle.PromiseLoop = self
-        .addConstants(/** @lends poodle.PromiseLoop */{
+    giant.PromiseLoop = self
+        .addConstants(/** @lends giant.PromiseLoop */{
             /** @constant */
             NOTIFICATION_TYPE_RETRY: 'notification-retry'
         })
-        .addMethods(/** @lends poodle.PromiseLoop */{
+        .addMethods(/** @lends giant.PromiseLoop */{
             /**
              * Runs handler and re-tries the specified number of times if the promise fails.
              * @param {function} handler Expected to return a jQuery promise.

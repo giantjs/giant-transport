@@ -1,16 +1,16 @@
-/*global dessert, troop, sntls, evan, jQuery, poodle */
-troop.postpone(poodle, 'ImageEvent', function () {
+/*global giant, giant, giant, giant, jQuery, giant */
+giant.postpone(giant, 'ImageEvent', function () {
     "use strict";
 
-    var base = evan.Event,
+    var base = giant.Event,
         self = base.extend();
 
     /**
      * Creates an ImageEvent instance.
-     * @name poodle.ImageEvent.create
+     * @name giant.ImageEvent.create
      * @function
      * @param {string} eventName Event name
-     * @returns {poodle.ImageEvent}
+     * @returns {giant.ImageEvent}
      */
 
     /**
@@ -18,20 +18,20 @@ troop.postpone(poodle, 'ImageEvent', function () {
      * about the image being / having been loaded.
      * Image events are usually triggered at various stages of the loading process.
      * @class
-     * @extends evan.Event
+     * @extends giant.Event
      */
-    poodle.ImageEvent = self
-        .addMethods(/** @lends poodle.ImageEvent# */{
+    giant.ImageEvent = self
+        .addMethods(/** @lends giant.ImageEvent# */{
             /**
              * @param {string} eventName Event name
              * @ignore
              */
             init: function (eventName) {
-                base.init.call(this, eventName, poodle.imageEventSpace);
+                base.init.call(this, eventName, giant.imageEventSpace);
 
                 /**
                  * Location of image associated with event.
-                 * @type {poodle.ImageUrl}
+                 * @type {giant.ImageUrl}
                  */
                 this.imageUrl = undefined;
 
@@ -44,11 +44,11 @@ troop.postpone(poodle, 'ImageEvent', function () {
 
             /**
              * Sets image location property.
-             * @param {poodle.ImageUrl} imageUrl
-             * @returns {poodle.ImageEvent}
+             * @param {giant.ImageUrl} imageUrl
+             * @returns {giant.ImageEvent}
              */
             setImageLocation: function (imageUrl) {
-                dessert.isLocation(imageUrl, "Invalid location");
+                giant.isLocation(imageUrl, "Invalid location");
                 this.imageUrl = imageUrl;
                 return this;
             },
@@ -58,19 +58,19 @@ troop.postpone(poodle, 'ImageEvent', function () {
              * @param {HTMLImageElement} imageElement
              */
             setImageElement: function (imageElement) {
-                dessert.isImageElement(imageElement, "Invalid image element");
+                giant.isImageElement(imageElement, "Invalid image element");
                 this.imageElement = imageElement;
                 return this;
             },
 
             /**
-             * Clones event instance. In addition to `evan.Event.clone()`, also copies image-specific properties
+             * Clones event instance. In addition to `giant.Event.clone()`, also copies image-specific properties
              * (by reference).
-             * @param {sntls.Path} [currentPath]
-             * @returns {poodle.ImageEvent}
+             * @param {giant.Path} [currentPath]
+             * @returns {giant.ImageEvent}
              */
             clone: function (currentPath) {
-                var clone = /** @type {poodle.ImageEvent} */base.clone.call(this, currentPath);
+                var clone = /** @type {giant.ImageEvent} */base.clone.call(this, currentPath);
 
                 return clone
                     .setImageLocation(this.imageUrl)
@@ -79,19 +79,19 @@ troop.postpone(poodle, 'ImageEvent', function () {
         });
 });
 
-troop.amendPostponed(evan, 'Event', function () {
+giant.amendPostponed(giant, 'Event', function () {
     "use strict";
 
-    evan.Event
-        .addSurrogate(poodle, 'ImageEvent', function (eventName, eventSpace) {
-            return eventSpace === poodle.imageEventSpace;
+    giant.Event
+        .addSurrogate(giant, 'ImageEvent', function (eventName, eventSpace) {
+            return eventSpace === giant.imageEventSpace;
         });
 });
 
 (function () {
     "use strict";
 
-    dessert.addTypes(/** @lends dessert */{
+    giant.addTypes(/** @lends giant */{
         /** @param {HTMLImageElement} expr */
         isImageElement: function (expr) {
             return expr instanceof HTMLImageElement;

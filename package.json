@@ -35,7 +35,7 @@
         "grunt-jstestdriver"  : "git://github.com/danstocker/grunt-jstestdriver.git",
         "grunt-regex-replace" : "~0.2.6",
         "grunt-yui-compressor": "~0.4.0",
-        "node-troop"          : "0.2.0",
+        "node-giant"          : "0.2.0",
         "phil"                : "~0.2.3"
     },
     "files"          : [

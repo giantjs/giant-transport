@@ -1,4 +1,4 @@
-/*global dessert, troop, sntls, poodle, Q */
+/*global giant, giant, giant, giant, Q */
 /*global module, test, asyncTest, start, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
@@ -7,15 +7,15 @@
 
     test("Instantiation", function () {
         raises(function () {
-            poodle.File.create();
+            giant.File.create();
         }, "should raise exception on no arguments");
 
         raises(function () {
-            poodle.File.create('foo');
+            giant.File.create('foo');
         }, "should raise exception on invalid argument");
 
         var filePath = 'foo/bar'.toFilePath(),
-            file = poodle.File.create(filePath);
+            file = giant.File.create(filePath);
 
         strictEqual(file.filePath, filePath, "should set filePath property");
         strictEqual(file.eventPath, filePath.eventPath, "should set eventPath property");
@@ -25,7 +25,7 @@
         var filePath = 'foo/bar'.toFilePath(),
             file = filePath.toFile();
 
-        ok(file.isA(poodle.File), "should return an File instance");
+        ok(file.isA(giant.File), "should return an File instance");
         strictEqual(file.filePath, filePath, "should set filePath property to self");
     });
 
@@ -44,14 +44,14 @@
         });
 
         'foo/bar'.toFilePath()
-            .subscribeTo(poodle.File.EVENT_FILE_READ_START, function (event) {
-                ok(event.isA(poodle.FileEvent), "should trigger file load start event");
+            .subscribeTo(giant.File.EVENT_FILE_READ_START, function (event) {
+                ok(event.isA(giant.FileEvent), "should trigger file load start event");
                 equal(event.originalPath.toString(), 'file>foo>bar', "should trigger start event on correct path");
                 strictEqual(event.filePath, file.filePath,
                     "should set event's filePath to file's filePath");
             })
-            .subscribeTo(poodle.File.EVENT_FILE_READ_SUCCESS, function (event) {
-                ok(event.isA(poodle.FileEvent), "should trigger file load success event");
+            .subscribeTo(giant.File.EVENT_FILE_READ_SUCCESS, function (event) {
+                ok(event.isA(giant.FileEvent), "should trigger file load success event");
                 equal(event.originalPath.toString(), 'file>foo>bar', "should trigger success event on correct path");
                 strictEqual(event.filePath, file.filePath,
                     "should set event's filePath to file's filePath");
@@ -61,7 +61,7 @@
 
         file.readFile()
             .then(function (event) {
-                ok(event.isA(poodle.FileEvent), "should return promise resolved with the success event");
+                ok(event.isA(giant.FileEvent), "should return promise resolved with the success event");
                 strictEqual(event.filePath, file.filePath, "should pass filePath to promise");
                 equal(event.fileData, 'fileContents', "should pass file contents to resolved promise");
                 start();
@@ -86,8 +86,8 @@
         });
 
         'foo/bar'.toFilePath()
-            .subscribeTo(poodle.File.EVENT_FILE_READ_FAILURE, function (event) {
-                ok(event.isA(poodle.FileEvent), "should trigger file load success event");
+            .subscribeTo(giant.File.EVENT_FILE_READ_FAILURE, function (event) {
+                ok(event.isA(giant.FileEvent), "should trigger file load success event");
                 equal(event.originalPath.toString(), 'file>foo>bar', "should trigger success event on correct path");
                 strictEqual(event.filePath, file.filePath,
                     "should set event's filePath to file's filePath");
@@ -97,7 +97,7 @@
 
         file.readFile()
             .catch(function (event) {
-                ok(event.isA(poodle.FileEvent), "should return promise resolved with the failure event");
+                ok(event.isA(giant.FileEvent), "should return promise resolved with the failure event");
                 strictEqual(event.filePath, file.filePath, "should pass filePath to promise");
                 equal(event.fileError, error, "should pass error to rejected promise");
                 start();
@@ -120,14 +120,14 @@
         });
 
         'foo/bar'.toFilePath()
-            .subscribeTo(poodle.File.EVENT_FILE_READ_START, function (event) {
-                ok(event.isA(poodle.FileEvent), "should trigger file load start event");
+            .subscribeTo(giant.File.EVENT_FILE_READ_START, function (event) {
+                ok(event.isA(giant.FileEvent), "should trigger file load start event");
                 equal(event.originalPath.toString(), 'file>foo>bar', "should trigger start event on correct path");
                 strictEqual(event.filePath, file.filePath,
                     "should set event's filePath to file's filePath");
             })
-            .subscribeTo(poodle.File.EVENT_FILE_READ_SUCCESS, function (event) {
-                ok(event.isA(poodle.FileEvent), "should trigger file load success event");
+            .subscribeTo(giant.File.EVENT_FILE_READ_SUCCESS, function (event) {
+                ok(event.isA(giant.FileEvent), "should trigger file load success event");
                 equal(event.originalPath.toString(), 'file>foo>bar', "should trigger success event on correct path");
                 strictEqual(event.filePath, file.filePath,
                     "should set event's filePath to file's filePath");
@@ -155,8 +155,8 @@
         });
 
         'foo/bar'.toFilePath()
-            .subscribeTo(poodle.File.EVENT_FILE_READ_FAILURE, function (event) {
-                ok(event.isA(poodle.FileEvent), "should trigger file load success event");
+            .subscribeTo(giant.File.EVENT_FILE_READ_FAILURE, function (event) {
+                ok(event.isA(giant.FileEvent), "should trigger file load success event");
                 equal(event.originalPath.toString(), 'file>foo>bar', "should trigger success event on correct path");
                 strictEqual(event.filePath, file.filePath,
                     "should set event's filePath to file's filePath");

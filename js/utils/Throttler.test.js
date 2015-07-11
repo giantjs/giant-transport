@@ -1,31 +1,31 @@
-/*global dessert, troop, sntls, evan, bookworm, milkman, shoehine, candystore, poodle, Q, $ */
+/*global giant, giant, giant, giant, giant, giant, shoehine, giant, giant, Q, $ */
 /*global module, test, asyncTest, start, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
 
     module("Throttler", {
         setup: function () {
-            poodle.Throttler.promiseRegistry.clear();
+            giant.Throttler.promiseRegistry.clear();
         },
 
         teardown: function () {
-            poodle.Throttler.promiseRegistry.clear();
+            giant.Throttler.promiseRegistry.clear();
         }
     });
 
     test("Instantiation", function () {
         raises(function () {
-            poodle.Throttler.create();
+            giant.Throttler.create();
         }, "should raise exception on missing argument");
 
         raises(function () {
-            poodle.Throttler.create('foo');
+            giant.Throttler.create('foo');
         }, "should raise exception on invalid argument");
 
         function foo() {
         }
 
-        var throttler = poodle.Throttler.create(foo);
+        var throttler = giant.Throttler.create(foo);
 
         strictEqual(throttler.originalFunction, foo, "should set originalFunction property");
     });
@@ -36,7 +36,7 @@
 
         var throttler = foo.toThrottler();
 
-        ok(throttler.isA(poodle.Throttler), "should return Throttler instance");
+        ok(throttler.isA(giant.Throttler), "should return Throttler instance");
         strictEqual(throttler.originalFunction, foo, "should set originalFunction property");
     });
 

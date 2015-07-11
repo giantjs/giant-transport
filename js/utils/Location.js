@@ -1,29 +1,29 @@
-/*global dessert, troop, sntls, evan, poodle */
-troop.postpone(poodle, 'Location', function () {
+/*global giant, giant, giant, giant, giant */
+giant.postpone(giant, 'Location', function () {
     "use strict";
 
-    var base = troop.Base,
+    var base = giant.Base,
         self = base.extend()
-            .addTraitAndExtend(evan.Evented);
+            .addTraitAndExtend(giant.Evented);
 
     /**
      * Creates a Location instance.
      * Do not instantiate Location directly unless there are a surrogate rules set up.
-     * @name poodle.Location.create
+     * @name giant.Location.create
      * @function
-     * @param {sntls.Path} locationPath Path that represents the endpoints.
-     * @returns {poodle.Location}
+     * @param {giant.Path} locationPath Path that represents the endpoints.
+     * @returns {giant.Location}
      */
 
     /**
      * The Location is an abstract base class for URLs on which events can be triggered on and listened to.
      * Extend Location to add event space, or set specific root path as needed.
      * @class
-     * @extends troop.Base
-     * @extends evan.Evented
+     * @extends giant.Base
+     * @extends giant.Evented
      */
-    poodle.Location = self
-        .addConstants(/** @lends poodle.Location */{
+    giant.Location = self
+        .addConstants(/** @lends giant.Location */{
             /**
              * Root path for events triggered on the location.
              * Gets prepended to the `eventPath` of the instance.
@@ -44,17 +44,17 @@ troop.postpone(poodle, 'Location', function () {
              */
             LEADING_TRAILING_SLASHES: /(^\/+)|(\/+$)/g
         })
-        .addMethods(/** @lends poodle.Location# */{
+        .addMethods(/** @lends giant.Location# */{
             /**
-             * @param {sntls.Path} locationPath
+             * @param {giant.Path} locationPath
              * @ignore
              */
             init: function (locationPath) {
-                dessert.isPath(locationPath, "Invalid path");
+                giant.isPath(locationPath, "Invalid path");
 
                 /**
                  * Path associated with endpoint.
-                 * @type {sntls.Path}
+                 * @type {giant.Path}
                  */
                 this.locationPath = locationPath;
 
@@ -67,11 +67,11 @@ troop.postpone(poodle, 'Location', function () {
 
             /**
              * Tells if the specified location is equivalent to the current one.
-             * @param {poodle.Location} location
+             * @param {giant.Location} location
              * @returns {boolean}
              */
             equals: function (location) {
-                dessert
+                giant
                     .isLocationOptional(location, "Invalid location")
                     .assert(!location || this.getBase() === location.getBase(), "Invalid kind of location");
 
@@ -81,22 +81,22 @@ troop.postpone(poodle, 'Location', function () {
             /**
              * Appends specified location to current location.
              * The base class of the returned instance is determined by the current instance.
-             * @param {poodle.Location} location
-             * @returns {poodle.Location}
+             * @param {giant.Location} location
+             * @returns {giant.Location}
              */
             append: function (location) {
-                dessert.isLocation(location, "Invalid location");
+                giant.isLocation(location, "Invalid location");
                 return this.getBase().create(this.locationPath.append(location.locationPath));
             },
 
             /**
              * Prepends specified location to current location.
              * The base class of the returned instance is determined by the current instance.
-             * @param {poodle.Location} location
-             * @returns {poodle.Location}
+             * @param {giant.Location} location
+             * @returns {giant.Location}
              */
             prepend: function (location) {
-                dessert.isLocation(location, "Invalid location");
+                giant.isLocation(location, "Invalid location");
                 return this.getBase().create(this.locationPath.prepend(location.locationPath));
             },
 
@@ -121,16 +121,16 @@ troop.postpone(poodle, 'Location', function () {
 (function () {
     "use strict";
 
-    dessert.addTypes(/** @lends dessert */{
-        /** @param {poodle.Location} expr */
+    giant.addTypes(/** @lends giant */{
+        /** @param {giant.Location} expr */
         isLocation: function (expr) {
-            return poodle.Location.isBaseOf(expr);
+            return giant.Location.isBaseOf(expr);
         },
 
-        /** @param {poodle.Location} [expr] */
+        /** @param {giant.Location} [expr] */
         isLocationOptional: function (expr) {
             return typeof expr === 'undefined' ||
-                   poodle.Location.isBaseOf(expr);
+                   giant.Location.isBaseOf(expr);
         }
     });
 }());

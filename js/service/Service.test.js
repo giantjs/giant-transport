@@ -1,29 +1,29 @@
-/*global dessert, troop, sntls, e$, b$, m$, s$, poodle, c$, $ */
+/*global giant, giant, giant, e$, b$, m$, s$, giant, c$, $ */
 /*global module, test, start, asyncTest, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
 
     module("Service", {
         setup: function () {
-            poodle.Throttler.promiseRegistry.clear();
+            giant.Throttler.promiseRegistry.clear();
         },
 
         teardown: function () {
-            poodle.Throttler.promiseRegistry.clear();
+            giant.Throttler.promiseRegistry.clear();
         }
     });
 
     test("Instantiation", function () {
         raises(function () {
-            poodle.Service.create();
+            giant.Service.create();
         }, "should raise exception on absent argument");
 
         raises(function () {
-            poodle.Service.create('foo');
+            giant.Service.create('foo');
         }, "should raise exception on invalid argument");
 
         var request = 'foo/bar'.toRequest(),
-            service = poodle.Service.create(request);
+            service = giant.Service.create(request);
 
         strictEqual(service.request, request, "should set request property");
         equal(service.retryCount, 0, "should set retryCount property to 0");
@@ -35,7 +35,7 @@
         var request = 'foo/bar'.toRequest(),
             service = request.toService();
 
-        ok(service.isA(poodle.Service), "should return Service instance");
+        ok(service.isA(giant.Service), "should return Service instance");
         strictEqual(service.request, request, "should set request property");
     });
 
@@ -139,7 +139,7 @@
             }
         });
 
-        poodle.PromiseLoop.addMocks({
+        giant.PromiseLoop.addMocks({
             retryOnFail: function (handler, retryCount, retryDelay) {
                 equal(retryCount, 3, "should pass retry count to promise loop");
                 equal(retryDelay, 1000, "should pass retry delay to promise loop");
@@ -147,7 +147,7 @@
             }
         });
 
-        poodle.Throttler.promiseRegistry.addMocks({
+        giant.Throttler.promiseRegistry.addMocks({
             setItem: function (key, value) {
                 equal(key, request.toString(), "should set promise in registry");
                 strictEqual(value, promise, "should pass promise to registry setter");
@@ -156,8 +156,8 @@
 
         strictEqual(service.callService(), promise, "should return promise from ajax call");
 
-        poodle.PromiseLoop.removeMocks();
-        poodle.Throttler.promiseRegistry.removeMocks();
+        giant.PromiseLoop.removeMocks();
+        giant.Throttler.promiseRegistry.removeMocks();
     });
 
     test("Calling service with custom options", function () {
@@ -229,9 +229,9 @@
             }
         });
 
-        poodle.ServiceEvent.addMocks({
+        giant.ServiceEvent.addMocks({
             triggerSync: function () {
-                if (this.eventName === poodle.Service.EVENT_SERVICE_SUCCESS) {
+                if (this.eventName === giant.Service.EVENT_SERVICE_SUCCESS) {
                     ok(true, "should trigger success event");
                     ok(this.currentPath.equals(request.endpoint.eventPath,
                         "should trigger event on endpoint's event path"));
@@ -242,7 +242,7 @@
             }
         });
 
-        poodle.Throttler.promiseRegistry.addMocks({
+        giant.Throttler.promiseRegistry.addMocks({
             deleteItem: function (key) {
                 equal(key, request.toString(), "should remove promise from registry");
             }
@@ -250,8 +250,8 @@
 
         service.callService();
 
-        poodle.ServiceEvent.removeMocks();
-        poodle.Throttler.promiseRegistry.removeMocks();
+        giant.ServiceEvent.removeMocks();
+        giant.Throttler.promiseRegistry.removeMocks();
     });
 
     test("Failed service call", function () {
@@ -271,9 +271,9 @@
             }
         });
 
-        poodle.ServiceEvent.addMocks({
+        giant.ServiceEvent.addMocks({
             triggerSync: function () {
-                if (this.eventName === poodle.Service.EVENT_SERVICE_FAILURE) {
+                if (this.eventName === giant.Service.EVENT_SERVICE_FAILURE) {
                     ok(true, "should trigger failure event");
                     ok(this.currentPath.equals(request.endpoint.eventPath,
                         "should trigger event on endpoint's event path"));
@@ -284,7 +284,7 @@
             }
         });
 
-        poodle.Throttler.promiseRegistry.addMocks({
+        giant.Throttler.promiseRegistry.addMocks({
             deleteItem: function (key) {
                 equal(key, request.toString(), "should remove promise from registry");
             }
@@ -292,8 +292,8 @@
 
         service.callService();
 
-        poodle.ServiceEvent.removeMocks();
-        poodle.Throttler.promiseRegistry.removeMocks();
+        giant.ServiceEvent.removeMocks();
+        giant.Throttler.promiseRegistry.removeMocks();
     });
 
     test("Synchronous service call", function () {

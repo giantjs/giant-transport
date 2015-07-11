@@ -1,4 +1,4 @@
-/*global dessert, troop, sntls, evan, bookworm, milkman, shoehine, candystore, poodle, $ */
+/*global giant, giant, giant, giant, giant, giant, shoehine, giant, giant, $ */
 /*global module, test, asyncTest, start, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
@@ -8,7 +8,7 @@
     test("Successful call", function () {
         expect(2);
 
-        poodle.PromiseLoop
+        giant.PromiseLoop
             .retryOnFail(function () {
                 ok(true, "should call handler");
                 return $.Deferred().resolve('foo');
@@ -21,7 +21,7 @@
     test("Failure with no retries", function () {
         expect(2);
 
-        poodle.PromiseLoop
+        giant.PromiseLoop
             .retryOnFail(function () {
                 ok(true, "should call handler");
                 return $.Deferred().reject('foo');
@@ -34,7 +34,7 @@
     asyncTest("Failure with one retry", function () {
         expect(3);
 
-        poodle.PromiseLoop
+        giant.PromiseLoop
             .retryOnFail(function () {
                 ok(true, "should call handler"); // will be hit 2x
                 return $.Deferred().reject('foo');
@@ -54,7 +54,7 @@
             ],
             i = 0;
 
-        poodle.PromiseLoop
+        giant.PromiseLoop
             .retryOnFail(function () {
                 return promises[i++];
             }, 2)

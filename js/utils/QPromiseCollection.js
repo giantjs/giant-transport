@@ -1,5 +1,5 @@
-/*global dessert, troop, sntls, Q, poodle */
-troop.postpone(poodle, 'QPromiseCollection', function () {
+/*global giant, giant, giant, Q, giant */
+giant.postpone(giant, 'QPromiseCollection', function () {
     "use strict";
 
     var modelPromise = Q.defer().promise;
@@ -16,10 +16,10 @@ troop.postpone(poodle, 'QPromiseCollection', function () {
      * The QPromiseCollection offers a `Collection`-based solution for joining multiple promises.
      * (The joined promise resolves when *all* promises resolve, and reject when *any* of the promises reject.)
      * @class
-     * @extends sntls.Collection
+     * @extends giant.Collection
      * @extends Q.Promise
      */
-    poodle.QPromiseCollection = sntls.Collection.of(modelPromise)
+    giant.QPromiseCollection = giant.Collection.of(modelPromise)
         .addMethods(/** @lends QPromiseCollection# */{
             /**
              * Obtains joined promise for all promises in the collection.
@@ -32,17 +32,17 @@ troop.postpone(poodle, 'QPromiseCollection', function () {
         });
 });
 
-troop.amendPostponed(sntls, 'Hash', function () {
+giant.amendPostponed(giant, 'Hash', function () {
     "use strict";
 
-    sntls.Hash
-        .addMethods(/** @lends sntls.Hash */{
+    giant.Hash
+        .addMethods(/** @lends giant.Hash */{
             /**
              * Converts `Hash` to `QPromiseCollection`.
-             * @returns {poodle.QPromiseCollection}
+             * @returns {giant.QPromiseCollection}
              */
             toQPromiseCollection: function () {
-                return poodle.QPromiseCollection.create(this.items);
+                return giant.QPromiseCollection.create(this.items);
             }
         });
 });
@@ -50,15 +50,15 @@ troop.amendPostponed(sntls, 'Hash', function () {
 (function () {
     "use strict";
 
-    troop.Properties.addProperties.call(
+    giant.Properties.addProperties.call(
         Array.prototype,
         /** @lends Array# */{
             /**
              * Converts `Array` to `QPromiseCollection`.
-             * @returns {poodle.QPromiseCollection}
+             * @returns {giant.QPromiseCollection}
              */
             toQPromiseCollection: function () {
-                return poodle.QPromiseCollection.create(this);
+                return giant.QPromiseCollection.create(this);
             }
         },
         false, false, false

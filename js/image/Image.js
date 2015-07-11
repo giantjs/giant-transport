@@ -1,28 +1,28 @@
-/*global dessert, troop, sntls, evan, jQuery, poodle */
-troop.postpone(poodle, 'Image', function (ns, className, /**jQuery*/$) {
+/*global giant, giant, giant, giant, jQuery, giant */
+giant.postpone(giant, 'Image', function (ns, className, /**jQuery*/$) {
     "use strict";
 
-    var base = troop.Base,
+    var base = giant.Base,
         self = base.extend()
-            .addTrait(evan.Evented);
+            .addTrait(giant.Evented);
 
     /**
      * Creates an Image instance.
-     * @name poodle.Image.create
+     * @name giant.Image.create
      * @function
-     * @param {poodle.ImageUrl} imageUrl Location of image.
-     * @returns {poodle.Image}
+     * @param {giant.ImageUrl} imageUrl Location of image.
+     * @returns {giant.Image}
      */
 
     /**
      * The Image class represents an image file, and manages its dynamic loading via a DOM element.
      * Triggers events upon start, success, and failure of loading an image.
      * @class
-     * @extends troop.Base
-     * @extends evan.Evented
+     * @extends giant.Base
+     * @extends giant.Evented
      */
-    poodle.Image = self
-        .addConstants(/** @lends poodle.ImageUrl */{
+    giant.Image = self
+        .addConstants(/** @lends giant.ImageUrl */{
             /**
              * Signals that image started loading.
              * @constant
@@ -41,7 +41,7 @@ troop.postpone(poodle, 'Image', function (ns, className, /**jQuery*/$) {
              */
             EVENT_IMAGE_LOAD_FAILURE: 'image-load-failure'
         })
-        .addPrivateMethods(/** @lends poodle.Image# */{
+        .addPrivateMethods(/** @lends giant.Image# */{
             /**
              * @returns {HTMLImageElement}
              * @private
@@ -68,21 +68,21 @@ troop.postpone(poodle, 'Image', function (ns, className, /**jQuery*/$) {
                 return deferred.promise();
             }
         })
-        .addMethods(/** @lends poodle.Image# */{
+        .addMethods(/** @lends giant.Image# */{
             /**
-             * @param {poodle.ImageUrl} imageUrl
+             * @param {giant.ImageUrl} imageUrl
              * @ignore
              */
             init: function (imageUrl) {
-                dessert.isLocation(imageUrl, "Invalid image URL");
+                giant.isLocation(imageUrl, "Invalid image URL");
 
-                evan.Evented.init.call(this);
+                giant.Evented.init.call(this);
 
-                /** @type {poodle.ImageUrl} */
+                /** @type {giant.ImageUrl} */
                 this.imageUrl = imageUrl;
 
                 this
-                    .setEventSpace(poodle.imageEventSpace)
+                    .setEventSpace(giant.imageEventSpace)
                     .setEventPath(imageUrl.eventPath);
             },
 
@@ -124,17 +124,17 @@ troop.postpone(poodle, 'Image', function (ns, className, /**jQuery*/$) {
         });
 }, jQuery);
 
-troop.amendPostponed(poodle, 'ImageUrl', function () {
+giant.amendPostponed(giant, 'ImageUrl', function () {
     "use strict";
 
-    poodle.ImageUrl
-        .addMethods(/** @lends poodle.ImageUrl */{
+    giant.ImageUrl
+        .addMethods(/** @lends giant.ImageUrl */{
             /**
              * Converts `ImageUrl` to `Image`.
-             * @returns {poodle.Image}
+             * @returns {giant.Image}
              */
             toImage: function () {
-                return poodle.Image.create(this);
+                return giant.Image.create(this);
             }
         });
 });

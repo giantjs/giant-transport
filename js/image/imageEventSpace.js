@@ -1,10 +1,10 @@
-/*global dessert, troop, sntls, evan, poodle */
-troop.postpone(poodle, 'imageEventSpace', function () {
+/*global giant, giant, giant, giant, giant */
+giant.postpone(giant, 'imageEventSpace', function () {
     "use strict";
 
     /**
      * Event space for image related events.
-     * @type {evan.EventSpace}
+     * @type {giant.EventSpace}
      */
-    poodle.imageEventSpace = evan.EventSpace.create();
+    giant.imageEventSpace = giant.EventSpace.create();
 });

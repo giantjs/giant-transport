@@ -1,10 +1,10 @@
-/*global dessert, troop, sntls, evan, poodle */
-troop.postpone(poodle, 'serviceEventSpace', function () {
+/*global giant, giant, giant, giant, giant */
+giant.postpone(giant, 'serviceEventSpace', function () {
     "use strict";
 
     /**
      * Event space for service related events.
-     * @type {evan.EventSpace}
+     * @type {giant.EventSpace}
      */
-    poodle.serviceEventSpace = evan.EventSpace.create();
+    giant.serviceEventSpace = giant.EventSpace.create();
 });

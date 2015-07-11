@@ -1,4 +1,4 @@
-/*global dessert, troop, sntls, e$, b$, m$, s$, poodle, c$ */
+/*global giant, giant, giant, e$, b$, m$, s$, giant, c$ */
 /*global module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
@@ -6,7 +6,7 @@
     module("Service Event");
 
     test("Instantiation", function () {
-        var serviceEvent = poodle.ServiceEvent.create('foo');
+        var serviceEvent = giant.ServiceEvent.create('foo');
 
         ok(serviceEvent.hasOwnProperty('request'), "should initialize request property");
         equal(serviceEvent.request, undefined, "should set request property to undefined");
@@ -17,16 +17,16 @@
     });
 
     test("Event surrogate", function () {
-        ok(e$.Event.create('foo', poodle.serviceEventSpace).isA(poodle.ServiceEvent), "should return ServiceEvent instance");
+        ok(e$.Event.create('foo', giant.serviceEventSpace).isA(giant.ServiceEvent), "should return ServiceEvent instance");
     });
 
     test("Spawning event", function () {
-        ok(poodle.serviceEventSpace.spawnEvent('foo').isA(poodle.ServiceEvent), "should return ServiceEvent instance");
+        ok(giant.serviceEventSpace.spawnEvent('foo').isA(giant.ServiceEvent), "should return ServiceEvent instance");
     });
 
     test("Request setter", function () {
         var request = 'foo/bar'.toRequest(),
-            serviceEvent = poodle.ServiceEvent.create('foo');
+            serviceEvent = giant.ServiceEvent.create('foo');
 
         raises(function () {
             serviceEvent.setRequest('foo');
@@ -39,7 +39,7 @@
     test("Request parameter getter", function () {
         expect(3);
 
-        var serviceEvent = poodle.ServiceEvent.create('foo'),
+        var serviceEvent = giant.ServiceEvent.create('foo'),
             requestParam = {};
 
         equal(serviceEvent.getRequestParam('bar'), undefined,
@@ -61,7 +61,7 @@
 
     test("Response node setter", function () {
         var responseNode = {},
-            serviceEvent = poodle.ServiceEvent.create('foo');
+            serviceEvent = giant.ServiceEvent.create('foo');
 
         strictEqual(serviceEvent.setResponseNode(responseNode), serviceEvent, "should be chainable");
         strictEqual(serviceEvent.responseNode, responseNode, "should set responseNode property");
@@ -70,7 +70,7 @@
     test("Response node getter", function () {
         expect(5);
 
-        var serviceEvent = poodle.ServiceEvent.create('foo')
+        var serviceEvent = giant.ServiceEvent.create('foo')
                 .setResponseNode({}),
             responseNode = {};
 
@@ -81,7 +81,7 @@
         strictEqual(serviceEvent.getResponseNode(), serviceEvent.responseNode,
             "should return responseNode property when no path is specified");
 
-        sntls.Tree.addMocks({
+        giant.Tree.addMocks({
             getNode: function (path) {
                 strictEqual(this.items, serviceEvent.responseNode, "should fetch node from responseNode");
                 equal(path.toString(), 'foo>bar', "should fetch node from specified path");
@@ -92,13 +92,13 @@
         strictEqual(serviceEvent.getResponseNode('foo>bar'.toPath()), responseNode,
             "should return node fetched from within tha responseNode property");
 
-        sntls.Tree.removeMocks();
+        giant.Tree.removeMocks();
     });
 
     test("Response hash getter", function () {
         expect(7);
 
-        var serviceEvent = poodle.ServiceEvent.create('foo')
+        var serviceEvent = giant.ServiceEvent.create('foo')
                 .setResponseNode({}),
             responseNode = {},
             result;
@@ -108,11 +108,11 @@
         }, "should raise exception on invalid argument");
 
         result = serviceEvent.getResponseNodeAsHash();
-        ok(result.isA(sntls.Hash), "should return a Hash instance");
+        ok(result.isA(giant.Hash), "should return a Hash instance");
         strictEqual(result.items, serviceEvent.responseNode,
             "should return responseNode property when no path is specified");
 
-        sntls.Tree.addMocks({
+        giant.Tree.addMocks({
             getNode: function (path) {
                 strictEqual(this.items, serviceEvent.responseNode, "should fetch node from responseNode");
                 equal(path.toString(), 'foo>bar', "should fetch node from specified path");
@@ -122,15 +122,15 @@
 
         result = serviceEvent.getResponseNodeAsHash('foo>bar'.toPath());
 
-        sntls.Tree.removeMocks();
+        giant.Tree.removeMocks();
 
-        ok(result.isA(sntls.Hash), "should return a Hash instance");
+        ok(result.isA(giant.Hash), "should return a Hash instance");
         strictEqual(result.items, responseNode,
             "should return node fetched from within the responseNode property");
     });
 
     test("Response field getter", function () {
-        var serviceEvent = poodle.ServiceEvent.create('foo');
+        var serviceEvent = giant.ServiceEvent.create('foo');
 
         equal(serviceEvent.getResponseField('hello'), undefined,
             "should return undefined when no responseNode is set");
@@ -146,7 +146,7 @@
 
     test("XHR setter", function () {
         var jqXhr = {},
-            serviceEvent = poodle.ServiceEvent.create('foo');
+            serviceEvent = giant.ServiceEvent.create('foo');
 
         strictEqual(serviceEvent.setJqXhr(jqXhr), serviceEvent, "should be chainable");
         strictEqual(serviceEvent.jqXhr, jqXhr, "should set jqZhr property");
@@ -154,14 +154,14 @@
 
     test("HTTP status getter", function () {
         var jqXhr = {status: 1},
-            serviceEvent = poodle.ServiceEvent.create('foo')
+            serviceEvent = giant.ServiceEvent.create('foo')
                 .setJqXhr(jqXhr);
 
         equal(serviceEvent.getHttpStatus(), 1, "should return jqXHR object's status property");
     });
 
     test("Cloning", function () {
-        var serviceEvent = poodle.ServiceEvent.create('foo')
+        var serviceEvent = giant.ServiceEvent.create('foo')
                 .setRequest('foo/bar'.toRequest())
                 .setResponseNode({})
                 .setJqXhr({}),
@@ -169,7 +169,7 @@
 
         result = serviceEvent.clone('foo>bar'.toPath());
 
-        ok(result.isA(poodle.ServiceEvent), "should return ServiceEvent instance");
+        ok(result.isA(giant.ServiceEvent), "should return ServiceEvent instance");
         notStrictEqual(result, serviceEvent, "should return a different ServiceEvent instance");
         strictEqual(result.request, serviceEvent.request, "should set request property on clone");
         strictEqual(result.responseNode, serviceEvent.responseNode, "should set responseNode property on clone");

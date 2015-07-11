@@ -1,25 +1,25 @@
-/*global dessert, troop, sntls, evan, poodle */
-troop.postpone(poodle, 'Request', function () {
+/*global giant, giant, giant, giant, giant */
+giant.postpone(giant, 'Request', function () {
     "use strict";
 
-    var base = troop.Base,
+    var base = giant.Base,
         self = base.extend();
 
     /**
-     * @name poodle.Request.create
+     * @name giant.Request.create
      * @function
-     * @param {poodle.Endpoint} endpoint
+     * @param {giant.Endpoint} endpoint
      * @param {object} [params]
-     * @returns {poodle.Request}
+     * @returns {giant.Request}
      */
 
     /**
      * The Request class describes a service request.
      * @class
-     * @extends troop.Base
+     * @extends giant.Base
      */
-    poodle.Request = self
-        .addConstants(/** @lends poodle.Request */{
+    giant.Request = self
+        .addConstants(/** @lends giant.Request */{
             /**
              * @type {object}
              * @constant
@@ -43,20 +43,20 @@ troop.postpone(poodle, 'Request', function () {
                 'json'   : 'json'
             }
         })
-        .addMethods(/** @lends poodle.Request# */{
+        .addMethods(/** @lends giant.Request# */{
             /**
-             * @param {poodle.Endpoint} endpoint
+             * @param {giant.Endpoint} endpoint
              * @param {object} [params]
              * @ignore
              */
             init: function (endpoint, params) {
-                dessert
+                giant
                     .isLocation(endpoint, "Invalid endpoint")
                     .isObjectOptional(params, "Invalid parameters");
 
                 /**
                  * Endpoint the request addresses.
-                 * @type {poodle.Endpoint}
+                 * @type {giant.Endpoint}
                  */
                 this.endpoint = endpoint;
 
@@ -68,15 +68,15 @@ troop.postpone(poodle, 'Request', function () {
 
                 /**
                  * Collection of header key-value pairs.
-                 * @type {sntls.Collection}
+                 * @type {giant.Collection}
                  */
-                this.headers = sntls.Collection.create();
+                this.headers = giant.Collection.create();
 
                 /**
                  * Collection of query parameter key-value pairs.
-                 * @type {sntls.Collection}
+                 * @type {giant.Collection}
                  */
-                this.params = sntls.Collection.create(params);
+                this.params = giant.Collection.create(params);
 
                 /**
                  * Request body format.
@@ -88,10 +88,10 @@ troop.postpone(poodle, 'Request', function () {
             /**
              * Sets HTTP method property.
              * @param {string} httpMethod A valid HTTP method string. 'GET', 'POST', 'DELETE', etc.
-             * @returns {poodle.Request}
+             * @returns {giant.Request}
              */
             setHttpMethod: function (httpMethod) {
-                dessert.isHttpMethod(httpMethod, "Invalid HTTP method");
+                giant.isHttpMethod(httpMethod, "Invalid HTTP method");
                 this.httpMethod = httpMethod;
                 return this;
             },
@@ -99,10 +99,10 @@ troop.postpone(poodle, 'Request', function () {
             /**
              * Sets body format property.
              * @param {string} bodyFormat Either 'default' or 'json'.
-             * @returns {poodle.Request}
+             * @returns {giant.Request}
              */
             setBodyFormat: function (bodyFormat) {
-                dessert.isBodyFormat(bodyFormat, "Invalid body format");
+                giant.isBodyFormat(bodyFormat, "Invalid body format");
                 this.bodyFormat = bodyFormat;
                 return this;
             },
@@ -113,10 +113,10 @@ troop.postpone(poodle, 'Request', function () {
              * request.setHeader('Content-Type', 'application/json);
              * @param {string} headerName Name of header entry.
              * @param {string} headerValue Header entry value.
-             * @returns {poodle.Request}
+             * @returns {giant.Request}
              */
             setHeader: function (headerName, headerValue) {
-                dessert
+                giant
                     .isString(headerName, "Invalid header name")
                     .isString(headerValue, "Invalid header value");
                 this.headers.setItem(headerName, headerValue);
@@ -126,14 +126,14 @@ troop.postpone(poodle, 'Request', function () {
             /**
              * Sets multiple header key-value pairs. Overwrites existing header entries having the same keys.
              * @param {object} headers
-             * @returns {poodle.Request}
+             * @returns {giant.Request}
              */
             addHeaders: function (headers) {
-                dessert.isObject(headers, "Invalid headers");
+                giant.isObject(headers, "Invalid headers");
 
                 var that = this;
 
-                sntls.Collection.create(headers)
+                giant.Collection.create(headers)
                     .forEachItem(function (value, key) {
                         that.headers.setItem(key, value);
                     });
@@ -145,10 +145,10 @@ troop.postpone(poodle, 'Request', function () {
              * Sets query parameter key-value pair. Overwrites existing parameter entry by the same `paramName`.
              * @param {string} paramName Name of query parameter.
              * @param {*} paramValue Query parameter value.
-             * @returns {poodle.Request}
+             * @returns {giant.Request}
              */
             setParam: function (paramName, paramValue) {
-                dessert.isString(paramName, "Invalid param name");
+                giant.isString(paramName, "Invalid param name");
                 this.params.setItem(paramName, paramValue);
                 return this;
             },
@@ -157,14 +157,14 @@ troop.postpone(poodle, 'Request', function () {
              * Sets multiple query parameter key-value pairs. Overwrites existing query parameter entries
              * having the same keys.
              * @param {object} params
-             * @returns {poodle.Request}
+             * @returns {giant.Request}
              */
             addParams: function (params) {
-                dessert.isObject(params, "Invalid params");
+                giant.isObject(params, "Invalid params");
 
                 var that = this;
 
-                sntls.Collection.create(params)
+                giant.Collection.create(params)
                     .forEachItem(function (value, key) {
                         that.params.setItem(key, value);
                     });
@@ -195,18 +195,18 @@ troop.postpone(poodle, 'Request', function () {
         });
 });
 
-troop.amendPostponed(poodle, 'Endpoint', function () {
+giant.amendPostponed(giant, 'Endpoint', function () {
     "use strict";
 
-    poodle.Endpoint
-        .addMethods(/** @lends poodle.Endpoint# */{
+    giant.Endpoint
+        .addMethods(/** @lends giant.Endpoint# */{
             /**
              * Converts endpoint to `Request`.
              * @param {object} [params]
-             * @returns {poodle.Request}
+             * @returns {giant.Request}
              */
             toRequest: function (params) {
-                return poodle.Request.create(this, params);
+                return giant.Request.create(this, params);
             }
         });
 });
@@ -214,57 +214,57 @@ troop.amendPostponed(poodle, 'Endpoint', function () {
 (function () {
     "use strict";
 
-    dessert.addTypes(/** @lends dessert */{
+    giant.addTypes(/** @lends giant */{
         /** @param {string} expr */
         isHttpMethod: function (expr) {
-            return expr && poodle.Request.httpMethods[expr] === expr;
+            return expr && giant.Request.httpMethods[expr] === expr;
         },
 
         /** @param {string} expr */
         isBodyFormat: function (expr) {
-            return expr && poodle.Request.bodyFormats[expr] === expr;
+            return expr && giant.Request.bodyFormats[expr] === expr;
         },
 
-        /** @param {poodle.Request} expr */
+        /** @param {giant.Request} expr */
         isRequest: function (expr) {
-            return poodle.Request.isBaseOf(expr);
+            return giant.Request.isBaseOf(expr);
         },
 
-        /** @param {poodle.Request} [expr] */
+        /** @param {giant.Request} [expr] */
         isRequestOptional: function (expr) {
             return typeof expr === 'undefined' ||
-                   poodle.Request.isBaseOf(expr);
+                   giant.Request.isBaseOf(expr);
         }
     });
 
-    troop.Properties.addProperties.call(
+    giant.Properties.addProperties.call(
         Array.prototype,
         /** @lends Array# */{
             /**
              * Converts `Array` to `Request`.
              * @param {object} [params]
-             * @returns {poodle.Request}
+             * @returns {giant.Request}
              * @example
              * ['foo', 'bar'].toRequest()
              */
             toRequest: function (params) {
-                return poodle.Request.create(this.toEndpoint(), params);
+                return giant.Request.create(this.toEndpoint(), params);
             }
         },
         false, false, false);
 
-    troop.Properties.addProperties.call(
+    giant.Properties.addProperties.call(
         String.prototype,
         /** @lends String# */{
             /**
              * Converts `String` to `Request`.
              * @param {object} [params]
-             * @returns {poodle.Request}
+             * @returns {giant.Request}
              * @example
              * 'foo/bar'.toRequest()
              */
             toRequest: function (params) {
-                return poodle.Request.create(this.toEndpoint(), params);
+                return giant.Request.create(this.toEndpoint(), params);
             }
         },
         false, false, false);

@@ -1,4 +1,4 @@
-/*global dessert, troop, sntls, e$, b$, m$, s$, poodle, c$, $ */
+/*global giant, giant, giant, e$, b$, m$, s$, giant, c$, $ */
 /*global module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
@@ -26,7 +26,7 @@
     test("Conversion from array", function () {
         var promiseCollection = promises.toPromiseCollection();
 
-        ok(promiseCollection.isA(poodle.PromiseCollection), "should return a PromiseCollection instance");
+        ok(promiseCollection.isA(giant.PromiseCollection), "should return a PromiseCollection instance");
         strictEqual(promiseCollection.items, promises, "should set items buffer to promises array");
     });
 
@@ -34,7 +34,7 @@
         var promiseHash = promises.toHash(),
             promiseCollection = promiseHash.toPromiseCollection();
 
-        ok(promiseCollection.isA(poodle.PromiseCollection), "should return a PromiseCollection instance");
+        ok(promiseCollection.isA(giant.PromiseCollection), "should return a PromiseCollection instance");
         strictEqual(promiseCollection.items, promises, "should set items buffer to promises array");
     });
 

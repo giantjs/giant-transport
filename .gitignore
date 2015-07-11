@@ -1,6 +1,6 @@
-/out/
-/doc/
-/.idea/
-/node_modules/
-poodle.js
 *.tgz
+/.idea/
+/doc/
+/node_modules/
+/out/
+giant-transport.js

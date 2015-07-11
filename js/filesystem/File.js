@@ -1,19 +1,19 @@
-/*global dessert, troop, sntls, evan, Q, jQuery, poodle */
+/*global giant, giant, giant, giant, Q, jQuery, giant */
 /*jshint node:true */
-troop.postpone(poodle, 'File', function () {
+giant.postpone(giant, 'File', function () {
     "use strict";
 
     var fs = require('fs'),
-        base = troop.Base,
+        base = giant.Base,
         self = base.extend()
-            .addTrait(evan.Evented);
+            .addTrait(giant.Evented);
 
     /**
      * Creates an File instance.
-     * @name poodle.File.create
+     * @name giant.File.create
      * @function
-     * @param {poodle.FilePath} filePath File location.
-     * @returns {poodle.File}
+     * @param {giant.FilePath} filePath File location.
+     * @returns {giant.File}
      */
 
     /**
@@ -21,11 +21,11 @@ troop.postpone(poodle, 'File', function () {
      * New methods should follow the fs naming conventions.
      * TODO: Perhaps throttler could be class-level?
      * @class
-     * @extends troop.Base
-     * @extends evan.Evented
+     * @extends giant.Base
+     * @extends giant.Evented
      */
-    poodle.File = self
-        .addConstants(/** @lends poodle.File */{
+    giant.File = self
+        .addConstants(/** @lends giant.File */{
             /**
              * Signals that file started loading.
              * @constant
@@ -44,7 +44,7 @@ troop.postpone(poodle, 'File', function () {
              */
             EVENT_FILE_READ_FAILURE: 'file-read-failure'
         })
-        .addPrivateMethods(/** @lends poodle.File# */{
+        .addPrivateMethods(/** @lends giant.File# */{
             /**
              * @param {string} filename
              * @param {object} options
@@ -100,29 +100,29 @@ troop.postpone(poodle, 'File', function () {
                 return deferred.promise;
             }
         })
-        .addMethods(/** @lends poodle.File# */{
+        .addMethods(/** @lends giant.File# */{
             /**
-             * @param {poodle.FilePath} filePath
+             * @param {giant.FilePath} filePath
              * @ignore
              */
             init: function (filePath) {
-                dessert.isLocation(filePath, "Invalid image URL");
+                giant.isLocation(filePath, "Invalid image URL");
 
-                evan.Evented.init.call(this);
+                giant.Evented.init.call(this);
 
                 this.elevateMethod('_readFile');
 
                 /**
                  * Local path to the current file.
-                 * @type {poodle.FilePath}
+                 * @type {giant.FilePath}
                  */
                 this.filePath = filePath;
 
-                /** @type {poodle.Throttler} */
+                /** @type {giant.Throttler} */
                 this.readFileThrottler = this._readFile.toThrottler();
 
                 this
-                    .setEventSpace(poodle.fileSystemEventSpace)
+                    .setEventSpace(giant.fileSystemEventSpace)
                     .setEventPath(filePath.eventPath);
             },
 
@@ -165,17 +165,17 @@ troop.postpone(poodle, 'File', function () {
         });
 }, jQuery);
 
-troop.amendPostponed(poodle, 'FilePath', function () {
+giant.amendPostponed(giant, 'FilePath', function () {
     "use strict";
 
-    poodle.FilePath
-        .addMethods(/** @lends poodle.ImageUrl */{
+    giant.FilePath
+        .addMethods(/** @lends giant.ImageUrl */{
             /**
              * Converts `FilePath` to `File`.
-             * @returns {poodle.File}
+             * @returns {giant.File}
              */
             toFile: function () {
-                return poodle.File.create(this);
+                return giant.File.create(this);
             }
         });
 });

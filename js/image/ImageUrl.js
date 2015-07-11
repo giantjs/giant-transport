@@ -1,25 +1,25 @@
-/*global dessert, troop, sntls, evan, jQuery, poodle */
-troop.postpone(poodle, 'ImageUrl', function () {
+/*global giant, giant, giant, giant, jQuery, giant */
+giant.postpone(giant, 'ImageUrl', function () {
     "use strict";
 
-    var base = poodle.Location,
+    var base = giant.Location,
         self = base.extend();
 
     /**
      * Creates an ImageUrl instance.
-     * @name poodle.ImageUrl.create
+     * @name giant.ImageUrl.create
      * @function
-     * @param {sntls.Path} imagePath
-     * @returns {poodle.ImageUrl}
+     * @param {giant.Path} imagePath
+     * @returns {giant.ImageUrl}
      */
 
     /**
      * The ImageUrl is a Location that allows dynamic loading of images via DOM image element.
      * @class
-     * @extends poodle.Location
+     * @extends giant.Location
      */
-    poodle.ImageUrl = self
-        .addConstants(/** @lends poodle.ImageUrl */{
+    giant.ImageUrl = self
+        .addConstants(/** @lends giant.ImageUrl */{
             /**
              * Root path for all image event paths.
              * @constant
@@ -27,14 +27,14 @@ troop.postpone(poodle, 'ImageUrl', function () {
              */
             EVENT_ROOT_PATH: 'image'
         })
-        .addMethods(/** @lends poodle.ImageUrl# */{
+        .addMethods(/** @lends giant.ImageUrl# */{
             /**
-             * @param {sntls.Path} imagePath
+             * @param {giant.Path} imagePath
              * @ignore
              */
             init: function (imagePath) {
                 base.init.call(this, imagePath);
-                this.setEventSpace(poodle.imageEventSpace);
+                this.setEventSpace(giant.imageEventSpace);
             },
 
             /**
@@ -42,21 +42,21 @@ troop.postpone(poodle, 'ImageUrl', function () {
              * @returns {jQuery.Promise}
              */
             loadImage: function () {
-                return poodle.Image.create(this).loadImage();
+                return giant.Image.create(this).loadImage();
             }
         });
 });
 
-troop.amendPostponed(sntls, 'Path', function () {
+giant.amendPostponed(giant, 'Path', function () {
     "use strict";
 
-    sntls.Path.addMethods(/** @lends sntls.Path# */{
+    giant.Path.addMethods(/** @lends giant.Path# */{
         /**
          * Converts `Path` to `ImageUrl`.
-         * @returns {poodle.ImageUrl}
+         * @returns {giant.ImageUrl}
          */
         toImageUrl: function () {
-            return poodle.ImageUrl.create(this);
+            return giant.ImageUrl.create(this);
         }
     });
 });
@@ -64,16 +64,16 @@ troop.amendPostponed(sntls, 'Path', function () {
 (function () {
     "use strict";
 
-    troop.Properties.addProperties.call(
+    giant.Properties.addProperties.call(
         String.prototype,
         /** @lends String# */{
             /**
              * Converts `String` to `ImageUrl`.
-             * @returns {poodle.ImageUrl}
+             * @returns {giant.ImageUrl}
              */
             toImageUrl: function () {
-                return poodle.ImageUrl.create(this
-                    .replace(poodle.Location.LEADING_TRAILING_SLASHES, '') // removing leading & trailing slashes
+                return giant.ImageUrl.create(this
+                    .replace(giant.Location.LEADING_TRAILING_SLASHES, '') // removing leading & trailing slashes
                     .split('/') // splitting up slash-separated path
                     .toPath());
             }
@@ -81,15 +81,15 @@ troop.amendPostponed(sntls, 'Path', function () {
         false, false, false
     );
 
-    troop.Properties.addProperties.call(
+    giant.Properties.addProperties.call(
         Array.prototype,
         /** @lends Array# */{
             /**
              * Converts `Array` to `ImageUrl`.
-             * @returns {poodle.ImageUrl}
+             * @returns {giant.ImageUrl}
              */
             toImageUrl: function () {
-                return poodle.ImageUrl.create(this.toPath());
+                return giant.ImageUrl.create(this.toPath());
             }
         },
         false, false, false

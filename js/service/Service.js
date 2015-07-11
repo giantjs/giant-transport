@@ -1,17 +1,17 @@
-/*global console, dessert, troop, sntls, evan, jQuery, poodle */
-troop.postpone(poodle, 'Service', function (ns, className, /**jQuery*/$) {
+/*global console, giant, giant, giant, giant, jQuery, giant */
+giant.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
     "use strict";
 
-    var base = troop.Base,
+    var base = giant.Base,
         self = base.extend()
-            .addTrait(evan.Evented);
+            .addTrait(giant.Evented);
 
     /**
      * Creates a Service instance.
-     * @name poodle.Service.create
+     * @name giant.Service.create
      * @function
-     * @param {poodle.Request} request
-     * @returns {poodle.Service}
+     * @param {giant.Request} request
+     * @returns {giant.Service}
      */
 
     /**
@@ -21,11 +21,11 @@ troop.postpone(poodle, 'Service', function (ns, className, /**jQuery*/$) {
      * TODO: Replace jQuery promise with Q (0.4.0).
      * TODO: Perhaps throttler could be class-level?
      * @class
-     * @extends troop.Base
-     * @extends evan.Evented
+     * @extends giant.Base
+     * @extends giant.Evented
      */
-    poodle.Service = self
-        .addConstants(/** @lends poodle.Service */{
+    giant.Service = self
+        .addConstants(/** @lends giant.Service */{
             /**
              * Signals the start of a service call.
              * @constant
@@ -67,7 +67,7 @@ troop.postpone(poodle, 'Service', function (ns, className, /**jQuery*/$) {
                 DELETE: 204
             }
         })
-        .addPrivateMethods(/** @lends poodle.Service# */{
+        .addPrivateMethods(/** @lends giant.Service# */{
             /**
              * @param {object} ajaxOptions
              * @returns {jQuery.Promise}
@@ -138,9 +138,9 @@ troop.postpone(poodle, 'Service', function (ns, className, /**jQuery*/$) {
 
                 // merging default ajax options with custom options
                 // custom options taking precedence
-                ajaxOptions = sntls.Collection.create(ajaxOptions)
+                ajaxOptions = giant.Collection.create(ajaxOptions)
                     .mergeWith(this.ajaxOptions)
-                    .mergeWith(sntls.Collection.create({
+                    .mergeWith(giant.Collection.create({
                         dataType: "json",
                         type    : request.httpMethod,
                         url     : request.getUrl(),
@@ -150,7 +150,7 @@ troop.postpone(poodle, 'Service', function (ns, className, /**jQuery*/$) {
                     }))
                     .items;
 
-                var promise = poodle.PromiseLoop
+                var promise = giant.PromiseLoop
                     .retryOnFail(function () {
                         return that._ajaxProxy(ajaxOptions);
                     }, this.retryCount, this.retryDelay)
@@ -168,15 +168,15 @@ troop.postpone(poodle, 'Service', function (ns, className, /**jQuery*/$) {
                 return promise;
             }
         })
-        .addMethods(/** @lends poodle.Service# */{
+        .addMethods(/** @lends giant.Service# */{
             /**
-             * @param {poodle.Request} request
+             * @param {giant.Request} request
              * @ignore
              */
             init: function (request) {
-                dessert.isRequest(request, "Invalid request");
+                giant.isRequest(request, "Invalid request");
 
-                evan.Evented.init.call(this);
+                giant.Evented.init.call(this);
 
                 this.elevateMethods(
                     '_ajaxProxy',
@@ -184,7 +184,7 @@ troop.postpone(poodle, 'Service', function (ns, className, /**jQuery*/$) {
 
                 /**
                  * Request associated with the service call.
-                 * @type {poodle.Request}
+                 * @type {giant.Request}
                  */
                 this.request = request;
 
@@ -203,25 +203,25 @@ troop.postpone(poodle, 'Service', function (ns, className, /**jQuery*/$) {
                 /**
                  * Custom options to be passed to jQuery.ajax().
                  * Options stored in here override the default ajax options, and thus might break the ajax call.
-                 * @type {sntls.Collection}
+                 * @type {giant.Collection}
                  */
-                this.ajaxOptions = sntls.Collection.create();
+                this.ajaxOptions = giant.Collection.create();
 
-                /** @type {poodle.Throttler} */
+                /** @type {giant.Throttler} */
                 this.callServiceThrottler = this._callService.toThrottler();
 
                 // setting event path to endpoint's event path
-                this.setEventSpace(poodle.serviceEventSpace)
+                this.setEventSpace(giant.serviceEventSpace)
                     .setEventPath(request.endpoint.eventPath);
             },
 
             /**
              * Sets how many times a failed service call will be re-attempted.
              * @param {number} retryCount
-             * @returns {poodle.Service}
+             * @returns {giant.Service}
              */
             setRetryCount: function (retryCount) {
-                dessert.isNumber(retryCount, "Invalid retry count");
+                giant.isNumber(retryCount, "Invalid retry count");
                 this.retryCount = retryCount;
                 return this;
             },
@@ -229,10 +229,10 @@ troop.postpone(poodle, 'Service', function (ns, className, /**jQuery*/$) {
             /**
              * Sets delay in milliseconds between consecutive attempts.
              * @param {number} retryDelay
-             * @returns {poodle.Service}
+             * @returns {giant.Service}
              */
             setRetryDelay: function (retryDelay) {
-                dessert.isNumber(retryDelay, "Invalid retry count");
+                giant.isNumber(retryDelay, "Invalid retry count");
                 this.retryDelay = retryDelay;
                 return this;
             },
@@ -241,10 +241,10 @@ troop.postpone(poodle, 'Service', function (ns, className, /**jQuery*/$) {
              * Sets custom ajax option key-value pair. Overwrites existing option entry by the same `optionName`.
              * @param {string} optionName
              * @param {*} optionValue
-             * @returns {poodle.Service}
+             * @returns {giant.Service}
              */
             setAjaxOption: function (optionName, optionValue) {
-                dessert.isString(optionName, "Invalid ajax option name");
+                giant.isString(optionName, "Invalid ajax option name");
                 this.ajaxOptions.setItem(optionName, optionValue);
                 return this;
             },
@@ -253,14 +253,14 @@ troop.postpone(poodle, 'Service', function (ns, className, /**jQuery*/$) {
              * Sets multiple custom ajax option key-value pairs. Overwrites existing ajax option entries
              * having the same keys.
              * @param {object} ajaxOptions
-             * @returns {poodle.Service}
+             * @returns {giant.Service}
              */
             addAjaxOptions: function (ajaxOptions) {
-                dessert.isObject(ajaxOptions, "Invalid ajax options");
+                giant.isObject(ajaxOptions, "Invalid ajax options");
 
                 var that = this;
 
-                sntls.Collection.create(ajaxOptions)
+                giant.Collection.create(ajaxOptions)
                     .forEachItem(function (value, key) {
                         that.ajaxOptions.setItem(key, value);
                     });
@@ -320,7 +320,7 @@ troop.postpone(poodle, 'Service', function (ns, className, /**jQuery*/$) {
              * @returns {jQuery.Promise}
              */
             callService: function (ajaxOptions) {
-                dessert.isObjectOptional(ajaxOptions, "Invalid ajax options");
+                giant.isObjectOptional(ajaxOptions, "Invalid ajax options");
 
                 var request = this.request,
                     requestId = request.toString();
@@ -360,8 +360,8 @@ troop.postpone(poodle, 'Service', function (ns, className, /**jQuery*/$) {
              * @returns {jQuery.Promise}
              */
             callServiceSync: function (ajaxOptions) {
-                ajaxOptions = sntls.Collection.create({async: false})
-                    .mergeWith(sntls.Collection.create(ajaxOptions))
+                ajaxOptions = giant.Collection.create({async: false})
+                    .mergeWith(giant.Collection.create(ajaxOptions))
                     .items;
 
                 return this.callService(ajaxOptions);
@@ -369,37 +369,37 @@ troop.postpone(poodle, 'Service', function (ns, className, /**jQuery*/$) {
         });
 }, jQuery);
 
-troop.amendPostponed(poodle, 'Request', function () {
+giant.amendPostponed(giant, 'Request', function () {
     "use strict";
 
-    poodle.Request
-        .addMethods(/** @lends poodle.Request */{
-            /** @returns {poodle.Service} */
+    giant.Request
+        .addMethods(/** @lends giant.Request */{
+            /** @returns {giant.Service} */
             toService: function () {
-                return poodle.Service.create(this);
+                return giant.Service.create(this);
             }
         });
 });
 
-troop.postpone(poodle, 'logServiceEvents', function () {
+giant.postpone(giant, 'logServiceEvents', function () {
     "use strict";
 
     /**
      * Starts logging all service related events to the console.
      * @type {function}
      */
-    poodle.logServiceEvents = function () {
+    giant.logServiceEvents = function () {
         [].toEndpoint()
-            .subscribeTo(poodle.Service.EVENT_SERVICE_START, function (event) {
+            .subscribeTo(giant.Service.EVENT_SERVICE_START, function (event) {
                 console.info("service start", event.request.endpoint.toString(), event);
             })
-            .subscribeTo(poodle.Service.EVENT_SERVICE_RETRY, function (event) {
+            .subscribeTo(giant.Service.EVENT_SERVICE_RETRY, function (event) {
                 console.warn("service retry", event.request.endpoint.toString(), event);
             })
-            .subscribeTo(poodle.Service.EVENT_SERVICE_SUCCESS, function (event) {
+            .subscribeTo(giant.Service.EVENT_SERVICE_SUCCESS, function (event) {
                 console.info("service success", event.request.endpoint.toString(), event);
             })
-            .subscribeTo(poodle.Service.EVENT_SERVICE_FAILURE, function (event) {
+            .subscribeTo(giant.Service.EVENT_SERVICE_FAILURE, function (event) {
                 console.warn("service failed", event.request.endpoint.toString(), event);
             });
     };

@@ -1,25 +1,25 @@
-/*global dessert, troop, sntls, evan, poodle */
-troop.postpone(poodle, 'Endpoint', function () {
+/*global giant, giant, giant, giant, giant */
+giant.postpone(giant, 'Endpoint', function () {
     "use strict";
 
-    var base = poodle.Location,
+    var base = giant.Location,
         self = base.extend();
 
     /**
      * Creates an Endpoint instance.
-     * @name poodle.Endpoint.create
+     * @name giant.Endpoint.create
      * @function
-     * @param {sntls.Path} endpointPath
-     * @returns {poodle.Endpoint}
+     * @param {giant.Path} endpointPath
+     * @returns {giant.Endpoint}
      */
 
     /**
      * The Endpoint is a Location that represents a service endpoint.
      * @class
-     * @extends poodle.Location
+     * @extends giant.Location
      */
-    poodle.Endpoint = self
-        .addConstants(/** @lends poodle.Endpoint */{
+    giant.Endpoint = self
+        .addConstants(/** @lends giant.Endpoint */{
             /**
              * Event root path specifically for endpoints.
              * @constant
@@ -27,28 +27,28 @@ troop.postpone(poodle, 'Endpoint', function () {
              */
             EVENT_ROOT_PATH: 'endpoint'
         })
-        .addMethods(/** @lends poodle.Endpoint# */{
+        .addMethods(/** @lends giant.Endpoint# */{
             /**
-             * @param {sntls.Path} endpointPath
+             * @param {giant.Path} endpointPath
              * @ignore
              */
             init: function (endpointPath) {
                 base.init.call(this, endpointPath);
-                this.setEventSpace(poodle.serviceEventSpace);
+                this.setEventSpace(giant.serviceEventSpace);
             }
         });
 });
 
-troop.amendPostponed(sntls, 'Path', function () {
+giant.amendPostponed(giant, 'Path', function () {
     "use strict";
 
-    sntls.Path.addMethods(/** @lends sntls.Path# */{
+    giant.Path.addMethods(/** @lends giant.Path# */{
         /**
          * Converts `Path` instance to `Endpoint`
-         * @returns {poodle.Endpoint}
+         * @returns {giant.Endpoint}
          */
         toEndpoint: function () {
-            return poodle.Endpoint.create(this);
+            return giant.Endpoint.create(this);
         }
     });
 });
@@ -56,16 +56,16 @@ troop.amendPostponed(sntls, 'Path', function () {
 (function () {
     "use strict";
 
-    troop.Properties.addProperties.call(
+    giant.Properties.addProperties.call(
         String.prototype,
         /** @lends String# */{
             /**
              * Converts `String` to `Endpoint`
-             * @returns {poodle.Endpoint}
+             * @returns {giant.Endpoint}
              */
             toEndpoint: function () {
-                return poodle.Endpoint.create(this
-                    .replace(poodle.Location.LEADING_TRAILING_SLASHES, '') // removing leading & trailing slashes
+                return giant.Endpoint.create(this
+                    .replace(giant.Location.LEADING_TRAILING_SLASHES, '') // removing leading & trailing slashes
                     .split('/') // splitting up slash-separated path
                     .toPath());
             }
@@ -73,15 +73,15 @@ troop.amendPostponed(sntls, 'Path', function () {
         false, false, false
     );
 
-    troop.Properties.addProperties.call(
+    giant.Properties.addProperties.call(
         Array.prototype,
         /** @lends Array# */{
             /**
              * Converts `Array` to `Endpoint`
-             * @returns {poodle.Endpoint}
+             * @returns {giant.Endpoint}
              */
             toEndpoint: function () {
-                return poodle.Endpoint.create(this.toPath());
+                return giant.Endpoint.create(this.toPath());
             }
         },
         false, false, false

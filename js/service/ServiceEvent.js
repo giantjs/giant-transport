@@ -1,16 +1,16 @@
-/*global dessert, troop, sntls, evan, poodle */
-troop.postpone(poodle, 'ServiceEvent', function () {
+/*global giant, giant, giant, giant, giant */
+giant.postpone(giant, 'ServiceEvent', function () {
     "use strict";
 
-    var base = evan.Event,
+    var base = giant.Event,
         self = base.extend();
 
     /**
      * Creates a ServiceEvent instance.
-     * @name poodle.ServiceEvent.create
+     * @name giant.ServiceEvent.create
      * @function
      * @param {string} eventName Event name
-     * @returns {poodle.ServiceEvent}
+     * @returns {giant.ServiceEvent}
      */
 
     /**
@@ -18,20 +18,20 @@ troop.postpone(poodle, 'ServiceEvent', function () {
      * of relevant properties, eg. the response node of the service that triggered the event.
      * Service events are usually triggered at different stages of a service call.
      * @class
-     * @extends evan.Event
+     * @extends giant.Event
      */
-    poodle.ServiceEvent = self
-        .addMethods(/** @lends poodle.ServiceEvent# */{
+    giant.ServiceEvent = self
+        .addMethods(/** @lends giant.ServiceEvent# */{
             /**
              * @param {string} eventName Event name
              * @ignore
              */
             init: function (eventName) {
-                base.init.call(this, eventName, poodle.serviceEventSpace);
+                base.init.call(this, eventName, giant.serviceEventSpace);
 
                 /**
                  * Request associated with the event.
-                 * @type {poodle.Request}
+                 * @type {giant.Request}
                  */
                 this.request = undefined;
 
@@ -50,11 +50,11 @@ troop.postpone(poodle, 'ServiceEvent', function () {
 
             /**
              * Sets request property.
-             * @param {poodle.Request} request
-             * @returns {poodle.ServiceEvent}
+             * @param {giant.Request} request
+             * @returns {giant.ServiceEvent}
              */
             setRequest: function (request) {
-                dessert.isRequest(request, "Invalid request");
+                giant.isRequest(request, "Invalid request");
                 this.request = request;
                 return this;
             },
@@ -73,7 +73,7 @@ troop.postpone(poodle, 'ServiceEvent', function () {
             /**
              * Sets the response data node property.
              * @param {*} responseNode
-             * @returns {poodle.ServiceEvent}
+             * @returns {giant.ServiceEvent}
              */
             setResponseNode: function (responseNode) {
                 this.responseNode = responseNode;
@@ -85,29 +85,29 @@ troop.postpone(poodle, 'ServiceEvent', function () {
              * Treats the response node as a `Tree` instance.
              * @example
              * var node = event.getResponseNode('foo>bar'.toPath());
-             * @param {sntls.Path} [path] Path pointing to the node to be fetched. When absent,
+             * @param {giant.Path} [path] Path pointing to the node to be fetched. When absent,
              * the entire `responseNode` will be returned.
              * @returns {*}
              */
             getResponseNode: function (path) {
-                dessert.isPathOptional(path, "Invalid path");
+                giant.isPathOptional(path, "Invalid path");
                 return path ?
-                    sntls.Tree.create(this.responseNode).getNode(path) :
+                    giant.Tree.create(this.responseNode).getNode(path) :
                     this.responseNode;
             },
 
             /**
              * Fetches data node from the response node, wrapped in a `Hash` instance.
-             * @param {sntls.Path} [path] Path pointing to the node to be fetched. When absent,
+             * @param {giant.Path} [path] Path pointing to the node to be fetched. When absent,
              * the entire `responseNode` will be returned.
-             * @returns {sntls.Hash}
-             * @see poodle.ServiceEvent#getResponseNode
+             * @returns {giant.Hash}
+             * @see giant.ServiceEvent#getResponseNode
              */
             getResponseNodeAsHash: function (path) {
-                dessert.isPathOptional(path, "Invalid path");
+                giant.isPathOptional(path, "Invalid path");
                 return path ?
-                    sntls.Tree.create(this.responseNode).getNodeAsHash(path) :
-                    sntls.Hash.create(this.responseNode);
+                    giant.Tree.create(this.responseNode).getNodeAsHash(path) :
+                    giant.Hash.create(this.responseNode);
             },
 
             /**
@@ -121,7 +121,7 @@ troop.postpone(poodle, 'ServiceEvent', function () {
              * @returns {*}
              */
             getResponseField: function (fieldName) {
-                dessert.isString(fieldName, "Invalid field name");
+                giant.isString(fieldName, "Invalid field name");
                 var responseNode = this.responseNode;
                 return responseNode ?
                     responseNode[fieldName] :
@@ -131,7 +131,7 @@ troop.postpone(poodle, 'ServiceEvent', function () {
             /**
              * Sets jQuery XHR property.
              * @param {jQuery.jqXHR} jqXhr
-             * @returns {poodle.ServiceEvent}
+             * @returns {giant.ServiceEvent}
              */
             setJqXhr: function (jqXhr) {
                 this.jqXhr = jqXhr;
@@ -148,14 +148,14 @@ troop.postpone(poodle, 'ServiceEvent', function () {
             },
 
             /**
-             * Clones event instance. In addition to `evan.Event.clone()`, also copies service-specific properties
+             * Clones event instance. In addition to `giant.Event.clone()`, also copies service-specific properties
              * (by reference).
-             * @param {sntls.Path} [currentPath]
-             * @returns {poodle.ServiceEvent}
-             * @see evan.Event#clone
+             * @param {giant.Path} [currentPath]
+             * @returns {giant.ServiceEvent}
+             * @see giant.Event#clone
              */
             clone: function (currentPath) {
-                var clone = /** @type {poodle.ServiceEvent} */base.clone.call(this, currentPath);
+                var clone = /** @type {giant.ServiceEvent} */base.clone.call(this, currentPath);
 
                 return clone
                     .setRequest(this.request)
@@ -165,11 +165,11 @@ troop.postpone(poodle, 'ServiceEvent', function () {
         });
 });
 
-troop.amendPostponed(evan, 'Event', function () {
+giant.amendPostponed(giant, 'Event', function () {
     "use strict";
 
-    evan.Event
-        .addSurrogate(poodle, 'ServiceEvent', function (eventName, eventSpace) {
-            return eventSpace === poodle.serviceEventSpace;
+    giant.Event
+        .addSurrogate(giant, 'ServiceEvent', function (eventName, eventSpace) {
+            return eventSpace === giant.serviceEventSpace;
         });
 });

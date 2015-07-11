@@ -1,4 +1,4 @@
-/*global dessert, troop, sntls, evan, bookworm, milkman, shoehine, candystore, poodle, Q, app */
+/*global giant, giant, giant, giant, giant, giant, shoehine, giant, giant, Q, app */
 /*global module, test, asyncTest, start, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
@@ -6,10 +6,10 @@
     module("QPromiseCollection");
 
     test("Conversion from Hash", function () {
-        var hash = sntls.Hash.create(),
+        var hash = giant.Hash.create(),
             promiseCollection = hash.toQPromiseCollection();
 
-        ok(promiseCollection.isA(poodle.QPromiseCollection), "should return poodle.QPromiseCollection instance");
+        ok(promiseCollection.isA(giant.QPromiseCollection), "should return giant.QPromiseCollection instance");
     });
 
     test("Conversion from Array", function () {
@@ -18,7 +18,7 @@
             array = [promise1, promise2],
             promiseCollection = array.toQPromiseCollection();
 
-        ok(promiseCollection.isA(poodle.QPromiseCollection), "should return poodle.QPromiseCollection instance");
+        ok(promiseCollection.isA(giant.QPromiseCollection), "should return giant.QPromiseCollection instance");
         deepEqual(promiseCollection.items, [promise1, promise2], "should set collection contents");
     });
 

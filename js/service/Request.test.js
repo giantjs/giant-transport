@@ -1,4 +1,4 @@
-/*global dessert, troop, sntls, e$, b$, m$, s$, poodle, c$ */
+/*global giant, giant, giant, e$, b$, m$, s$, giant, c$ */
 /*global module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
@@ -7,26 +7,26 @@
 
     test("Instantiation", function () {
         raises(function () {
-            poodle.Request.create();
+            giant.Request.create();
         }, "should raise exception on absent arguments");
 
         raises(function () {
-            poodle.Request.create('foo');
+            giant.Request.create('foo');
         }, "should raise exception on invalid endpoint argument");
 
         raises(function () {
-            poodle.Request.create('foo/bar'.toEndpoint(), 'foo');
+            giant.Request.create('foo/bar'.toEndpoint(), 'foo');
         }, "should raise exception on invalid parameters argument");
 
         var endpoint = 'foo/bar'.toEndpoint(),
             params = {},
-            request = poodle.Request.create(endpoint, params);
+            request = giant.Request.create(endpoint, params);
 
         strictEqual(request.endpoint, endpoint, "should set endpoint property to the one specified");
         equal(request.httpMethod, 'GET', "should set HTTP method property to 'GET'");
-        ok(request.headers.isA(sntls.Collection), "should initialize headers property as Collection instance");
+        ok(request.headers.isA(giant.Collection), "should initialize headers property as Collection instance");
         equal(request.headers.getKeyCount(), 0, "should set headers property to an empty Collection");
-        ok(request.params.isA(sntls.Collection), "should initialize params property as Collection instance");
+        ok(request.params.isA(giant.Collection), "should initialize params property as Collection instance");
         strictEqual(request.params.items, params, "should set params buffer to the one specified");
     });
 
@@ -34,7 +34,7 @@
         var params = {},
             request = 'foo/bar'.toRequest(params);
 
-        ok(request.isA(poodle.Request), "should return a Request instance");
+        ok(request.isA(giant.Request), "should return a Request instance");
         equal(request.endpoint.toString(), 'foo/bar', "should set endpoint to one based on the string");
         strictEqual(request.params.items, params, "should set params to the one specified");
     });
@@ -43,7 +43,7 @@
         var params = {},
             request = ['foo', 'bar'].toRequest(params);
 
-        ok(request.isA(poodle.Request), "should return a Request instance");
+        ok(request.isA(giant.Request), "should return a Request instance");
         equal(request.endpoint.toString(), 'foo/bar', "should set endpoint to one based on the array");
         strictEqual(request.params.items, params, "should set params to the one specified");
     });
@@ -53,7 +53,7 @@
             endpoint = 'foo/bar'.toEndpoint(),
             request = endpoint.toRequest(params);
 
-        ok(request.isA(poodle.Request), "should return a Request instance");
+        ok(request.isA(giant.Request), "should return a Request instance");
         strictEqual(request.endpoint, endpoint, "should set endpoint property to the endpoint converted");
         strictEqual(request.params.items, params, "should set params to the one specified");
     });

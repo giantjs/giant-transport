@@ -1,7 +1,7 @@
 /**
  * Library exports
  */
-/*global poodle, module */
+/*global giant, module */
 if (typeof module === 'object') {
-    module.exports = poodle;
+    module.exports = giant;
 }

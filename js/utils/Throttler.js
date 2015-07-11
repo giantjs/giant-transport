@@ -1,39 +1,39 @@
-/*global dessert, troop, sntls, evan, shoeshine, poodle */
-troop.postpone(poodle, 'Throttler', function () {
+/*global giant, giant, giant, giant, giant, giant */
+giant.postpone(giant, 'Throttler', function () {
     "use strict";
 
-    var base = troop.Base,
+    var base = giant.Base,
         self = base.extend(),
         slice = Array.prototype.slice;
 
     /**
-     * @name poodle.Throttler.create
+     * @name giant.Throttler.create
      * @function
      * @param {function} originalFunction
-     * @returns {poodle.Throttler}
+     * @returns {giant.Throttler}
      */
 
     /**
      * Throttles a function call. The original function is expected to return a promise. (Q or jQuery).
      * TODO: Eliminate jQuery promises (0.4.0).
      * @class
-     * @extends troop.Base
+     * @extends giant.Base
      */
-    poodle.Throttler = self
-        .addConstants(/** @lends poodle.Throttler */{
+    giant.Throttler = self
+        .addConstants(/** @lends giant.Throttler */{
             /**
-             * @type {sntls.Collection}
+             * @type {giant.Collection}
              * @constant
              */
-            promiseRegistry: sntls.Collection.create()
+            promiseRegistry: giant.Collection.create()
         })
-        .addMethods(/** @lends poodle.Throttler# */{
+        .addMethods(/** @lends giant.Throttler# */{
             /**
              * @param {function} originalFunction
              * @ignore
              */
             init: function (originalFunction) {
-                dessert.isFunction(originalFunction, "Invalid original function");
+                giant.isFunction(originalFunction, "Invalid original function");
 
                 /** @type {Function} */
                 this.originalFunction = originalFunction;
@@ -76,15 +76,15 @@ troop.postpone(poodle, 'Throttler', function () {
 (function () {
     "use strict";
 
-    troop.Properties.addProperties.call(
+    giant.Properties.addProperties.call(
         Function.prototype,
         /** @lends Function# */{
             /**
              * Converts `Function` to `Throttler`.
-             * @returns {poodle.Throttler}
+             * @returns {giant.Throttler}
              */
             toThrottler: function () {
-                return poodle.Throttler.create(this);
+                return giant.Throttler.create(this);
             }
         },
         false, false, false

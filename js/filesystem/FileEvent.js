@@ -1,33 +1,33 @@
-/*global dessert, troop, sntls, evan, jQuery, poodle */
+/*global giant, giant, giant, giant, jQuery, giant */
 /*jshint node:true */
-troop.postpone(poodle, 'FileEvent', function () {
+giant.postpone(giant, 'FileEvent', function () {
     "use strict";
 
-    var base = evan.Event,
+    var base = giant.Event,
         self = base.extend();
 
     /**
      * Creates an FileEvent instance.
-     * @name poodle.FileEvent.create
+     * @name giant.FileEvent.create
      * @function
      * @param {string} eventName Event name
-     * @returns {poodle.FileEvent}
+     * @returns {giant.FileEvent}
      */
 
     /**
      * @class
-     * @extends evan.Event
+     * @extends giant.Event
      */
-    poodle.FileEvent = self
-        .addMethods(/** @lends poodle.FileEvent# */{
+    giant.FileEvent = self
+        .addMethods(/** @lends giant.FileEvent# */{
             /**
              * @param {string} eventName Event name
              * @ignore
              */
             init: function (eventName) {
-                base.init.call(this, eventName, poodle.fileSystemEventSpace);
+                base.init.call(this, eventName, giant.fileSystemEventSpace);
 
-                /** @type {poodle.FilePath} */
+                /** @type {giant.FilePath} */
                 this.filePath = undefined;
 
                 /** @type {Error} */
@@ -38,28 +38,28 @@ troop.postpone(poodle, 'FileEvent', function () {
             },
 
             /**
-             * @param {poodle.FilePath} filePath
-             * @returns {poodle.FileEvent}
+             * @param {giant.FilePath} filePath
+             * @returns {giant.FileEvent}
              */
             setFilePath: function (filePath) {
-                dessert.isLocation(filePath, "Invalid location");
+                giant.isLocation(filePath, "Invalid location");
                 this.filePath = filePath;
                 return this;
             },
 
             /**
              * @param {Error} fileError
-             * @returns {poodle.FileEvent}
+             * @returns {giant.FileEvent}
              */
             setFileError: function (fileError) {
-                dessert.assert(fileError instanceof Error, "Invalid file error");
+                giant.assert(fileError instanceof Error, "Invalid file error");
                 this.fileError = fileError;
                 return this;
             },
 
             /**
              * @param {string} fileData
-             * @returns {poodle.FileEvent}
+             * @returns {giant.FileEvent}
              */
             setFileData: function (fileData) {
                 this.fileData = fileData;
@@ -67,13 +67,13 @@ troop.postpone(poodle, 'FileEvent', function () {
             },
 
             /**
-             * Clones event instance. In addition to `evan.Event.clone()`, also copies file-specific properties
+             * Clones event instance. In addition to `giant.Event.clone()`, also copies file-specific properties
              * (by reference).
-             * @param {sntls.Path} [currentPath]
-             * @returns {poodle.FileEvent}
+             * @param {giant.Path} [currentPath]
+             * @returns {giant.FileEvent}
              */
             clone: function (currentPath) {
-                var clone = /** @type {poodle.FileEvent} */base.clone.call(this, currentPath);
+                var clone = /** @type {giant.FileEvent} */base.clone.call(this, currentPath);
 
                 return clone
                     .setFilePath(this.filePath)
@@ -83,11 +83,11 @@ troop.postpone(poodle, 'FileEvent', function () {
         });
 });
 
-troop.amendPostponed(evan, 'Event', function () {
+giant.amendPostponed(giant, 'Event', function () {
     "use strict";
 
-    evan.Event
-        .addSurrogate(poodle, 'FileEvent', function (eventName, eventSpace) {
-            return eventSpace === poodle.fileSystemEventSpace;
+    giant.Event
+        .addSurrogate(giant, 'FileEvent', function (eventName, eventSpace) {
+            return eventSpace === giant.fileSystemEventSpace;
         });
 });
