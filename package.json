@@ -1,7 +1,7 @@
 {
     "name"           : "giant-transport",
     "version"        : "0.0.3",
-    "description"    : "Transport framework",
+    "description"    : "Transport module for Giant",
     "keywords"       : [
         "service",
         "transport",
