@@ -1,4 +1,4 @@
-/*global giant, e$, b$, m$, s$, c$ */
+/*global giant */
 /*global module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
@@ -15,7 +15,7 @@
     });
 
     test("Event surrogate", function () {
-        ok(e$.Event.create('foo', giant.imageEventSpace).isA(giant.ImageEvent), "should return ImageEvent instance");
+        ok(giant.Event.create('foo', giant.imageEventSpace).isA(giant.ImageEvent), "should return ImageEvent instance");
     });
 
     test("Spawning event", function () {

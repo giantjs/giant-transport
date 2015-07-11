@@ -1,4 +1,4 @@
-/*global giant, e$, b$, m$, s$, c$ */
+/*global giant */
 /*global module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
@@ -17,7 +17,7 @@
     });
 
     test("Event surrogate", function () {
-        ok(e$.Event.create('foo', giant.serviceEventSpace).isA(giant.ServiceEvent), "should return ServiceEvent instance");
+        ok(giant.Event.create('foo', giant.serviceEventSpace).isA(giant.ServiceEvent), "should return ServiceEvent instance");
     });
 
     test("Spawning event", function () {
