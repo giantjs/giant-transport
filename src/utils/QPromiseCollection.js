@@ -1,4 +1,4 @@
-/*global giant, giant, giant, Q, giant */
+/*global giant, Q */
 giant.postpone(giant, 'QPromiseCollection', function () {
     "use strict";
 

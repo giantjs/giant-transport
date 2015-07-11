@@ -1,4 +1,4 @@
-/*global giant, giant, giant, jQuery, giant */
+/*global giant, jQuery */
 giant.postpone(giant, 'PromiseCollection', function (ns, className, /**jQuery*/$) {
     "use strict";
 

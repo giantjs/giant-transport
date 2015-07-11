@@ -1,4 +1,4 @@
-/*global giant, giant, giant, giant, jQuery, giant */
+/*global giant, jQuery */
 /*jshint node:true */
 giant.postpone(giant, 'FileEvent', function () {
     "use strict";
