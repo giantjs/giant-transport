@@ -20,7 +20,7 @@ module.exports = function (grunt) {
             'src/image/imageEventSpace.js',
             'src/image/ImageUrl.js',
             'src/image/ImageEvent.js',
-            'src/image/Image.js',
+            'src/image/ImageLoader.js',
             'src/filesystem/fileSystemEventSpace.js',
             'src/filesystem/FilePath.js',
             'src/filesystem/FileEvent.js',

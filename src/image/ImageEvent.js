@@ -16,7 +16,7 @@ giant.postpone(giant, 'ImageEvent', function () {
     /**
      * The ImageEvent class pertains to dynamic loading of images. The purpose of such events is to carry information
      * about the image being / having been loaded.
-     * Image events are usually triggered at various stages of the loading process.
+     * ImageLoader events are usually triggered at various stages of the loading process.
      * @class
      * @extends giant.Event
      */
@@ -36,7 +36,7 @@ giant.postpone(giant, 'ImageEvent', function () {
                 this.imageUrl = undefined;
 
                 /**
-                 * Image DOM element associated with event.
+                 * ImageLoader DOM element associated with event.
                  * @type {HTMLImageElement}
                  */
                 this.imageElement = undefined;

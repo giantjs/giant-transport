@@ -3,7 +3,7 @@
 (function () {
     "use strict";
 
-    module("Image Url");
+    module("ImageUrl");
 
     test("Conversion from string", function () {
         var imageUrl = 'foo/bar'.toImageUrl();
@@ -33,21 +33,21 @@
             "should set locationPath to the one that was converted");
     });
 
-    test("Image loading", function () {
+    test("ImageLoader loading", function () {
         expect(2);
 
         var imageUrl = 'foo/bar'.toImageUrl(),
             promise = {};
 
-        giant.Image.addMocks({
+        giant.ImageLoader.addMocks({
             loadImage: function () {
                 strictEqual(this.imageUrl, imageUrl, "should load image for specified URL");
                 return promise;
             }
         });
 
-        strictEqual(imageUrl.loadImage(), promise, "should return promise from Image.loadImage");
+        strictEqual(imageUrl.loadImage(), promise, "should return promise from ImageLoader.loadImage");
 
-        giant.Image.removeMocks();
+        giant.ImageLoader.removeMocks();
     });
 }());

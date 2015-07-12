@@ -7,15 +7,15 @@
 
     test("Instantiation", function () {
         raises(function () {
-            giant.Image.create();
+            giant.ImageLoader.create();
         }, "should raise exception on no arguments");
 
         raises(function () {
-            giant.Image.create('foo');
+            giant.ImageLoader.create('foo');
         }, "should raise exception on invalid argument");
 
         var imageUrl = 'foo/bar'.toImageUrl(),
-            image = giant.Image.create(imageUrl);
+            image = giant.ImageLoader.create(imageUrl);
 
         strictEqual(image.imageUrl, imageUrl, "should set imageUrl property");
         strictEqual(image.eventPath, imageUrl.eventPath, "should set eventPath property");
@@ -23,16 +23,16 @@
 
     test("Conversion from ImageUrl", function () {
         var imageUrl = 'foo/bar'.toImageUrl(),
-            image = imageUrl.toImage();
+            image = imageUrl.toImageLoader();
 
-        ok(image.isA(giant.Image), "should return an Image instance");
+        ok(image.isA(giant.ImageLoader), "should return an ImageLoader instance");
         strictEqual(image.imageUrl, imageUrl, "should set imageUrl property to self");
     });
 
     test("Successful image loading", function () {
         expect(14);
 
-        var image = 'foo/bar'.toImageUrl().toImage(),
+        var image = 'foo/bar'.toImageUrl().toImageLoader(),
             imageElement = document.createElement('img'),
             deferred = $.Deferred();
 
@@ -51,7 +51,7 @@
         });
 
         'foo/bar'.toImageUrl()
-            .subscribeTo(giant.Image.EVENT_IMAGE_LOAD_START, function (event) {
+            .subscribeTo(giant.ImageLoader.EVENT_IMAGE_LOAD_START, function (event) {
                 ok(event.isA(giant.ImageEvent), "should trigger image load start event");
                 equal(event.originalPath.toString(), 'image>foo>bar', "should trigger start event on correct path");
                 strictEqual(event.imageUrl, image.imageUrl,
@@ -59,7 +59,7 @@
                 strictEqual(event.imageElement, imageElement,
                     "should set event's imageElement to created image element");
             })
-            .subscribeTo(giant.Image.EVENT_IMAGE_LOAD_SUCCESS, function (event) {
+            .subscribeTo(giant.ImageLoader.EVENT_IMAGE_LOAD_SUCCESS, function (event) {
                 ok(event.isA(giant.ImageEvent), "should trigger image load success event");
                 equal(event.originalPath.toString(), 'image>foo>bar', "should trigger success event on correct path");
                 strictEqual(event.imageUrl, image.imageUrl,
@@ -85,7 +85,7 @@
     test("Failed image loading", function () {
         expect(14);
 
-        var image = 'foo/bar'.toImageUrl().toImage(),
+        var image = 'foo/bar'.toImageUrl().toImageLoader(),
             imageElement = document.createElement('img'),
             deferred = $.Deferred();
 
@@ -104,7 +104,7 @@
         });
 
         'foo/bar'.toImageUrl()
-            .subscribeTo(giant.Image.EVENT_IMAGE_LOAD_START, function (event) {
+            .subscribeTo(giant.ImageLoader.EVENT_IMAGE_LOAD_START, function (event) {
                 ok(event.isA(giant.ImageEvent), "should trigger image load start event");
                 equal(event.originalPath.toString(), 'image>foo>bar', "should trigger start event on correct path");
                 strictEqual(event.imageUrl, image.imageUrl,
@@ -112,7 +112,7 @@
                 strictEqual(event.imageElement, imageElement,
                     "should set event's imageElement to created image element");
             })
-            .subscribeTo(giant.Image.EVENT_IMAGE_LOAD_FAILURE, function (event) {
+            .subscribeTo(giant.ImageLoader.EVENT_IMAGE_LOAD_FAILURE, function (event) {
                 ok(event.isA(giant.ImageEvent), "should trigger image load failure event");
                 equal(event.originalPath.toString(), 'image>foo>bar', "should trigger failure event on correct path");
                 strictEqual(event.imageUrl, image.imageUrl,

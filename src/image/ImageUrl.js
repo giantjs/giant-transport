@@ -42,7 +42,7 @@ giant.postpone(giant, 'ImageUrl', function () {
              * @returns {jQuery.Promise}
              */
             loadImage: function () {
-                return giant.Image.create(this).loadImage();
+                return giant.ImageLoader.create(this).loadImage();
             }
         });
 });

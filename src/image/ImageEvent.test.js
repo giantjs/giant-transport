@@ -3,7 +3,7 @@
 (function () {
     "use strict";
 
-    module("Image Event");
+    module("ImageEvent");
 
     test("Instantiation", function () {
         var serviceEvent = giant.ImageEvent.create('foo');
@@ -22,7 +22,7 @@
         ok(giant.imageEventSpace.spawnEvent('foo').isA(giant.ImageEvent), "should return ImageEvent instance");
     });
 
-    test("Image location setter", function () {
+    test("ImageLoader location setter", function () {
         var imageUrl = 'foo/bar'.toImageUrl(),
             imageEvent = giant.ImageEvent.create('foo');
 
@@ -34,7 +34,7 @@
         strictEqual(imageEvent.imageUrl, imageUrl, "should set imageUrl property");
     });
 
-    test("Image element setter", function () {
+    test("ImageLoader element setter", function () {
         var imageElement = document.createElement('img'),
             imageEvent = giant.ImageEvent.create('foo');
 

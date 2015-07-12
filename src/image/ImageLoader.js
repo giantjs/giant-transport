@@ -1,5 +1,5 @@
 /*global giant, jQuery */
-giant.postpone(giant, 'Image', function (ns, className, /**jQuery*/$) {
+giant.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
     "use strict";
 
     var base = giant.Base,
@@ -7,21 +7,21 @@ giant.postpone(giant, 'Image', function (ns, className, /**jQuery*/$) {
             .addTrait(giant.Evented);
 
     /**
-     * Creates an Image instance.
-     * @name giant.Image.create
+     * Creates an ImageLoader instance.
+     * @name giant.ImageLoader.create
      * @function
      * @param {giant.ImageUrl} imageUrl Location of image.
-     * @returns {giant.Image}
+     * @returns {giant.ImageLoader}
      */
 
     /**
-     * The Image class represents an image file, and manages its dynamic loading via a DOM element.
+     * The ImageLoader class represents an image file, and manages its dynamic loading via a DOM element.
      * Triggers events upon start, success, and failure of loading an image.
      * @class
      * @extends giant.Base
      * @extends giant.Evented
      */
-    giant.Image = self
+    giant.ImageLoader = self
         .addConstants(/** @lends giant.ImageUrl */{
             /**
              * Signals that image started loading.
@@ -41,7 +41,7 @@ giant.postpone(giant, 'Image', function (ns, className, /**jQuery*/$) {
              */
             EVENT_IMAGE_LOAD_FAILURE: 'image-load-failure'
         })
-        .addPrivateMethods(/** @lends giant.Image# */{
+        .addPrivateMethods(/** @lends giant.ImageLoader# */{
             /**
              * @returns {HTMLImageElement}
              * @private
@@ -68,7 +68,7 @@ giant.postpone(giant, 'Image', function (ns, className, /**jQuery*/$) {
                 return deferred.promise();
             }
         })
-        .addMethods(/** @lends giant.Image# */{
+        .addMethods(/** @lends giant.ImageLoader# */{
             /**
              * @param {giant.ImageUrl} imageUrl
              * @ignore
@@ -130,11 +130,11 @@ giant.amendPostponed(giant, 'ImageUrl', function () {
     giant.ImageUrl
         .addMethods(/** @lends giant.ImageUrl */{
             /**
-             * Converts `ImageUrl` to `Image`.
-             * @returns {giant.Image}
+             * Converts `ImageUrl` to `ImageLoader`.
+             * @returns {giant.ImageLoader}
              */
-            toImage: function () {
-                return giant.Image.create(this);
+            toImageLoader: function () {
+                return giant.ImageLoader.create(this);
             }
         });
 });
