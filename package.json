@@ -1,6 +1,6 @@
 {
     "name"           : "giant-transport",
-    "version"        : "0.0.4",
+    "version"        : "0.0.5",
     "description"    : "Transport module for Giant",
     "keywords"       : [
         "service",
@@ -17,11 +17,11 @@
         "url" : "git@github.com:giantjs/giant-transport.git"
     },
     "dependencies"   : {
-        "giant-assertion": "0.0.4",
-        "giant-data"     : "0.0.4",
-        "giant-event"    : "0.0.4",
-        "giant-namespace": "0.0.4",
-        "giant-oop"      : "0.0.4",
+        "giant-assertion": "0.0.5",
+        "giant-data"     : "0.0.5",
+        "giant-event"    : "0.0.5",
+        "giant-namespace": "0.0.5",
+        "giant-oop"      : "0.0.5",
         "jquery"         : "~2.1.0",
         "q"              : "^1.4.0"
     },
