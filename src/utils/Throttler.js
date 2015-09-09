@@ -76,17 +76,13 @@ giant.postpone(giant, 'Throttler', function () {
 (function () {
     "use strict";
 
-    giant.Properties.addProperties.call(
-        Function.prototype,
-        /** @lends Function# */{
-            /**
-             * Converts `Function` to `Throttler`.
-             * @returns {giant.Throttler}
-             */
-            toThrottler: function () {
-                return giant.Throttler.create(this);
-            }
-        },
-        false, false, false
-    );
+    giant.extendBuiltIn(Function.prototype, /** @lends Function# */{
+        /**
+         * Converts `Function` to `Throttler`.
+         * @returns {giant.Throttler}
+         */
+        toThrottler: function () {
+            return giant.Throttler.create(this);
+        }
+    });
 }());

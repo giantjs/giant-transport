@@ -50,17 +50,13 @@ giant.amendPostponed(giant, 'Hash', function () {
 (function () {
     "use strict";
 
-    giant.Properties.addProperties.call(
-        Array.prototype,
-        /** @lends Array# */{
-            /**
-             * Converts `Array` to `PromiseCollection`.
-             * @returns {giant.PromiseCollection}
-             */
-            toPromiseCollection: function () {
-                return giant.PromiseCollection.create(this);
-            }
-        },
-        false, false, false
-    );
+    giant.extendBuiltIn(Array.prototype, /** @lends Array# */{
+        /**
+         * Converts `Array` to `PromiseCollection`.
+         * @returns {giant.PromiseCollection}
+         */
+        toPromiseCollection: function () {
+            return giant.PromiseCollection.create(this);
+        }
+    });
 }());

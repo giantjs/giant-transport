@@ -64,34 +64,26 @@ giant.amendPostponed(giant, 'Path', function () {
 (function () {
     "use strict";
 
-    giant.Properties.addProperties.call(
-        String.prototype,
-        /** @lends String# */{
-            /**
-             * Converts `String` to `ImageUrl`.
-             * @returns {giant.ImageUrl}
-             */
-            toImageUrl: function () {
-                return giant.ImageUrl.create(this
-                    .replace(giant.Location.LEADING_TRAILING_SLASHES, '') // removing leading & trailing slashes
-                    .split('/') // splitting up slash-separated path
-                    .toPath());
-            }
-        },
-        false, false, false
-    );
+    giant.extendBuiltIn(String.prototype, /** @lends String# */{
+        /**
+         * Converts `String` to `ImageUrl`.
+         * @returns {giant.ImageUrl}
+         */
+        toImageUrl: function () {
+            return giant.ImageUrl.create(this
+                .replace(giant.Location.LEADING_TRAILING_SLASHES, '') // removing leading & trailing slashes
+                .split('/') // splitting up slash-separated path
+                .toPath());
+        }
+    });
 
-    giant.Properties.addProperties.call(
-        Array.prototype,
-        /** @lends Array# */{
-            /**
-             * Converts `Array` to `ImageUrl`.
-             * @returns {giant.ImageUrl}
-             */
-            toImageUrl: function () {
-                return giant.ImageUrl.create(this.toPath());
-            }
-        },
-        false, false, false
-    );
+    giant.extendBuiltIn(Array.prototype, /** @lends Array# */{
+        /**
+         * Converts `Array` to `ImageUrl`.
+         * @returns {giant.ImageUrl}
+         */
+        toImageUrl: function () {
+            return giant.ImageUrl.create(this.toPath());
+        }
+    });
 }());

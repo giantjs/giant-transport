@@ -233,39 +233,33 @@ giant.amendPostponed(giant, 'Endpoint', function () {
         /** @param {giant.Request} [expr] */
         isRequestOptional: function (expr) {
             return typeof expr === 'undefined' ||
-                   giant.Request.isBaseOf(expr);
+                giant.Request.isBaseOf(expr);
         }
     });
 
-    giant.Properties.addProperties.call(
-        Array.prototype,
-        /** @lends Array# */{
-            /**
-             * Converts `Array` to `Request`.
-             * @param {object} [params]
-             * @returns {giant.Request}
-             * @example
-             * ['foo', 'bar'].toRequest()
-             */
-            toRequest: function (params) {
-                return giant.Request.create(this.toEndpoint(), params);
-            }
-        },
-        false, false, false);
+    giant.extendBuiltIn(Array.prototype, /** @lends Array# */{
+        /**
+         * Converts `Array` to `Request`.
+         * @param {object} [params]
+         * @returns {giant.Request}
+         * @example
+         * ['foo', 'bar'].toRequest()
+         */
+        toRequest: function (params) {
+            return giant.Request.create(this.toEndpoint(), params);
+        }
+    });
 
-    giant.Properties.addProperties.call(
-        String.prototype,
-        /** @lends String# */{
-            /**
-             * Converts `String` to `Request`.
-             * @param {object} [params]
-             * @returns {giant.Request}
-             * @example
-             * 'foo/bar'.toRequest()
-             */
-            toRequest: function (params) {
-                return giant.Request.create(this.toEndpoint(), params);
-            }
-        },
-        false, false, false);
+    giant.extendBuiltIn(String.prototype, /** @lends String# */{
+        /**
+         * Converts `String` to `Request`.
+         * @param {object} [params]
+         * @returns {giant.Request}
+         * @example
+         * 'foo/bar'.toRequest()
+         */
+        toRequest: function (params) {
+            return giant.Request.create(this.toEndpoint(), params);
+        }
+    });
 }());
