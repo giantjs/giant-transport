@@ -1,4 +1,4 @@
-/*global console, jQuery */
+/*global giant, console, jQuery */
 giant.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
     "use strict";
 
