@@ -23,7 +23,7 @@
         var filePath = 'foo/bar'.toFilePath(),
             fileEvent = giant.FileEvent.create('foo');
 
-        raises(function () {
+        throws(function () {
             fileEvent.setFilePath('foo');
         }, "should raise exception on invalid argument");
 
@@ -35,7 +35,7 @@
         var fileError = new Error(),
             fileEvent = giant.FileEvent.create('foo');
 
-        raises(function () {
+        throws(function () {
             fileEvent.setFileError('foo');
         }, "should raise exception on invalid argument");
 

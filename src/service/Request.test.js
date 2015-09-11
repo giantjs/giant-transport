@@ -5,15 +5,15 @@
     module("Request");
 
     test("Instantiation", function () {
-        raises(function () {
+        throws(function () {
             giant.Request.create();
         }, "should raise exception on absent arguments");
 
-        raises(function () {
+        throws(function () {
             giant.Request.create('foo');
         }, "should raise exception on invalid endpoint argument");
 
-        raises(function () {
+        throws(function () {
             giant.Request.create('foo/bar'.toEndpoint(), 'foo');
         }, "should raise exception on invalid parameters argument");
 
@@ -60,7 +60,7 @@
     test("HTTP method setter", function () {
         var request = 'foo/bar'.toRequest();
 
-        raises(function () {
+        throws(function () {
             request.setHttpMethod('foo');
         }, "should raise exception on invalid HTTP method name");
 
@@ -71,7 +71,7 @@
     test("Request body format setter", function () {
         var request = 'foo/bar'.toRequest();
 
-        raises(function () {
+        throws(function () {
             request.setBodyFormat('foo');
         }, "should raise exception on invalid body format");
 
@@ -84,7 +84,7 @@
 
         var request = 'foo/bar'.toRequest();
 
-        raises(function () {
+        throws(function () {
             request.setHeader({});
         }, "should raise exception on invalid arguments");
 
@@ -124,7 +124,7 @@
 
         var request = 'foo/bar'.toRequest();
 
-        raises(function () {
+        throws(function () {
             request.addParam({});
         }, "should raise exception on invalid arguments");
 

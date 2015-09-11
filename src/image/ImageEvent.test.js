@@ -25,7 +25,7 @@
         var imageUrl = 'foo/bar'.toImageUrl(),
             imageEvent = giant.ImageEvent.create('foo');
 
-        raises(function () {
+        throws(function () {
             imageEvent.setImageLocation('foo');
         }, "should raise exception on invalid argument");
 
@@ -37,7 +37,7 @@
         var imageElement = document.createElement('img'),
             imageEvent = giant.ImageEvent.create('foo');
 
-        raises(function () {
+        throws(function () {
             imageEvent.setImageElement('foo');
         }, "should raise exception on invalid argument");
 

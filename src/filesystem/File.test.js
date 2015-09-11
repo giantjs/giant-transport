@@ -5,11 +5,11 @@
     module("File");
 
     test("Instantiation", function () {
-        raises(function () {
+        throws(function () {
             giant.File.create();
         }, "should raise exception on no arguments");
 
-        raises(function () {
+        throws(function () {
             giant.File.create('foo');
         }, "should raise exception on invalid argument");
 

@@ -27,7 +27,7 @@
         var request = 'foo/bar'.toRequest(),
             serviceEvent = giant.ServiceEvent.create('foo');
 
-        raises(function () {
+        throws(function () {
             serviceEvent.setRequest('foo');
         }, "should raise exception on invalid argument");
 
@@ -73,7 +73,7 @@
                 .setResponseNode({}),
             responseNode = {};
 
-        raises(function () {
+        throws(function () {
             serviceEvent.getResponseNode('foo');
         }, "should raise exception on invalid argument");
 
@@ -102,7 +102,7 @@
             responseNode = {},
             result;
 
-        raises(function () {
+        throws(function () {
             serviceEvent.getResponseNode('foo');
         }, "should raise exception on invalid argument");
 

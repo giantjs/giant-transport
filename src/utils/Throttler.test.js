@@ -13,11 +13,11 @@
     });
 
     test("Instantiation", function () {
-        raises(function () {
+        throws(function () {
             giant.Throttler.create();
         }, "should raise exception on missing argument");
 
-        raises(function () {
+        throws(function () {
             giant.Throttler.create('foo');
         }, "should raise exception on invalid argument");
 
