@@ -28,7 +28,7 @@
   },
   "devDependencies": {},
   "files": [
-    "giant-transport.js"
+    "lib"
   ],
-  "main": "giant-transport.js"
+  "main": "lib/giant-transport.js"
 }

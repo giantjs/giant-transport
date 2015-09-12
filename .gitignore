@@ -1,6 +1,4 @@
-*.tgz
+/*.tgz
 /.idea/
-/doc/
 /node_modules/
-/out/
-giant-transport.js
+/lib/
