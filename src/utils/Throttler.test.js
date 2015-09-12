@@ -82,8 +82,8 @@
         strictEqual(throttler.runThrottled('hello', 'foo'), promise, "should return same promise for same promise ID");
         notStrictEqual(throttler.runThrottled('world', 'foo'), promise, "should return different promise for different promise ID");
 
-        deferreds[0].promise
-            .then(function () {
+        promise
+            .finally(function () {
                 notStrictEqual(throttler.runThrottled('hello', 'foo'), promise,
                     "should return different promise for same promise ID once previous promise has been resolved");
                 start();

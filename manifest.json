@@ -1,0 +1,30 @@
+{
+  "main": {
+    "assets": {
+      "js": [
+        "src/namespace.js",
+        "src/utils/Deferred.def.js",
+        "src/utils/Promise.def.js",
+        "src/utils/PromiseCollection.def.js",
+        "src/utils/QPromiseCollection.def.js",
+        "src/utils/PromiseLoop.def.js",
+        "src/utils/Location.def.js",
+        "src/utils/Throttler.def.js",
+        "src/service/serviceEventSpace.def.js",
+        "src/service/Endpoint.def.js",
+        "src/service/Request.def.js",
+        "src/service/ServiceEvent.def.js",
+        "src/service/Service.def.js",
+        "src/image/imageEventSpace.def.js",
+        "src/image/ImageUrl.def.js",
+        "src/image/ImageEvent.def.js",
+        "src/image/ImageLoader.def.js",
+        "src/filesystem/fileSystemEventSpace.def.js",
+        "src/filesystem/FilePath.def.js",
+        "src/filesystem/FileEvent.def.js",
+        "src/filesystem/File.def.js",
+        "src/exports.js"
+      ]
+    }
+  }
+}

@@ -130,7 +130,7 @@
                 equal(event.originalPath.toString(), 'file>foo>bar', "should trigger success event on correct path");
                 strictEqual(event.filePath, file.filePath,
                     "should set event's filePath to file's filePath");
-                strictEqual(event.fileData, 'fileContents',
+                strictEqual(event.fileData, 'HELLO',
                     "should set event's fileData to fetched contents");
             });
 
