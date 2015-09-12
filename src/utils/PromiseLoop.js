@@ -21,7 +21,7 @@ giant.postpone(giant, 'PromiseLoop', function (ns, className, /**jQuery*/$) {
              * @param {function} handler Expected to return a jQuery promise.
              * @param {number} [retryCount] Number of attempts after first failure.
              * @param {number} [retryDelay] Delay between retries in ms.
-             * @return {jQuery.Promise}
+             * @returns {jQuery.Promise}
              */
             retryOnFail: function (handler, retryCount, retryDelay) {
                 retryDelay = retryDelay || 0;
