@@ -1,5 +1,4 @@
 /*global giant, $ */
-/*global module, test, start, asyncTest, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
 
@@ -14,11 +13,11 @@
     });
 
     test("Instantiation", function () {
-        raises(function () {
+        throws(function () {
             giant.Service.create();
         }, "should raise exception on absent argument");
 
-        raises(function () {
+        throws(function () {
             giant.Service.create('foo');
         }, "should raise exception on invalid argument");
 
@@ -42,11 +41,11 @@
     test("Retry count setter", function () {
         var service = 'foo/bar'.toRequest().toService();
 
-        raises(function () {
+        throws(function () {
             service.setRetryCount();
         }, "should raise exception on missing arguments");
 
-        raises(function () {
+        throws(function () {
             service.setRetryCount('foo');
         }, "should raise exception on invalid arguments");
 
@@ -57,11 +56,11 @@
     test("Retry count setter", function () {
         var service = 'foo/bar'.toRequest().toService();
 
-        raises(function () {
+        throws(function () {
             service.setRetryDelay();
         }, "should raise exception on missing arguments");
 
-        raises(function () {
+        throws(function () {
             service.setRetryDelay('foo');
         }, "should raise exception on invalid arguments");
 
@@ -74,7 +73,7 @@
 
         var service = 'foo/bar'.toRequest().toService();
 
-        raises(function () {
+        throws(function () {
             service.setAjaxOption({});
         }, "should raise exception on invalid arguments");
 
@@ -117,7 +116,7 @@
                 .setRetryCount(3),
             promise = $.Deferred().promise();
 
-        raises(function () {
+        throws(function () {
             service.callService('foo');
         }, "should raise exception on invalid custom ajax options");
 

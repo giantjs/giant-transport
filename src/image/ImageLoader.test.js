@@ -1,16 +1,15 @@
 /*global giant, $ */
-/*global module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
 
     module("Image");
 
     test("Instantiation", function () {
-        raises(function () {
+        throws(function () {
             giant.ImageLoader.create();
         }, "should raise exception on no arguments");
 
-        raises(function () {
+        throws(function () {
             giant.ImageLoader.create('foo');
         }, "should raise exception on invalid argument");
 

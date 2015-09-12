@@ -1,5 +1,4 @@
 /*global giant */
-/*global module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
 
@@ -8,11 +7,11 @@
     test("Instantiation", function () {
         expect(4);
 
-        raises(function () {
+        throws(function () {
             giant.Location.create();
         }, "should raise exception on absent argument");
 
-        raises(function () {
+        throws(function () {
             giant.Location.create('foo>bar');
         }, "should raise exception on invalid argument");
 
@@ -31,13 +30,13 @@
     });
 
     test("Equality tester", function () {
-        raises(function () {
+        throws(function () {
             giant.Location.create('foo/bar'.toPath()).equals('foo');
         }, "should raise exception on invalid argument");
 
         var MyLocation = giant.Location.extend();
 
-        raises(function () {
+        throws(function () {
             giant.Location.create('foo/bar'.toPath()).equals(MyLocation.create());
         }, "should raise exception on base mismatch");
 

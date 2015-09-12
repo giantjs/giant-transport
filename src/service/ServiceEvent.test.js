@@ -1,5 +1,4 @@
 /*global giant */
-/*global module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
 
@@ -28,7 +27,7 @@
         var request = 'foo/bar'.toRequest(),
             serviceEvent = giant.ServiceEvent.create('foo');
 
-        raises(function () {
+        throws(function () {
             serviceEvent.setRequest('foo');
         }, "should raise exception on invalid argument");
 
@@ -74,7 +73,7 @@
                 .setResponseNode({}),
             responseNode = {};
 
-        raises(function () {
+        throws(function () {
             serviceEvent.getResponseNode('foo');
         }, "should raise exception on invalid argument");
 
@@ -103,7 +102,7 @@
             responseNode = {},
             result;
 
-        raises(function () {
+        throws(function () {
             serviceEvent.getResponseNode('foo');
         }, "should raise exception on invalid argument");
 
