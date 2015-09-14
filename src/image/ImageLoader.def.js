@@ -27,19 +27,19 @@ giant.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
              * Signals that image started loading.
              * @constant
              */
-            EVENT_IMAGE_LOAD_START: 'image-load-start',
+            EVENT_IMAGE_LOAD_START: 'giant.Image.load.start',
 
             /**
              * Signals that image has finished loading.
              * @constant
              */
-            EVENT_IMAGE_LOAD_SUCCESS: 'image-load-success',
+            EVENT_IMAGE_LOAD_SUCCESS: 'giant.Image.load.success',
 
             /**
              * Signals that image failed to load.
              * @constant
              */
-            EVENT_IMAGE_LOAD_FAILURE: 'image-load-failure'
+            EVENT_IMAGE_LOAD_FAILURE: 'giant.Image.load.failure'
         })
         .addPrivateMethods(/** @lends giant.ImageLoader# */{
             /**
@@ -96,14 +96,14 @@ giant.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
                     imageElement = this._createImageElementProxy(),
                     deferred = $.Deferred();
 
-                this.spawnEvent(this.EVENT_IMAGE_LOAD_START)
+                this.spawnEvent(self.EVENT_IMAGE_LOAD_START)
                     .setImageLocation(imageUrl)
                     .setImageElement(imageElement)
                     .triggerSync();
 
                 this._loadImage(imageElement, imageUrl.toString())
                     .done(function () {
-                        that.spawnEvent(that.EVENT_IMAGE_LOAD_SUCCESS)
+                        that.spawnEvent(self.EVENT_IMAGE_LOAD_SUCCESS)
                             .setImageLocation(imageUrl)
                             .setImageElement(imageElement)
                             .triggerSync();
@@ -111,7 +111,7 @@ giant.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
                         deferred.resolve(imageUrl, imageElement);
                     })
                     .fail(function () {
-                        that.spawnEvent(that.EVENT_IMAGE_LOAD_FAILURE)
+                        that.spawnEvent(self.EVENT_IMAGE_LOAD_FAILURE)
                             .setImageLocation(imageUrl)
                             .setImageElement(imageElement)
                             .triggerSync();
