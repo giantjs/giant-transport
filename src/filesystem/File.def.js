@@ -25,25 +25,6 @@ giant.postpone(giant, 'File', function () {
      * @extends giant.Evented
      */
     giant.File = self
-        .addConstants(/** @lends giant.File */{
-            /**
-             * Signals that file started loading.
-             * @constant
-             */
-            EVENT_FILE_READ_START: 'giant.File.read.start',
-
-            /**
-             * Signals that image has finished loading.
-             * @constant
-             */
-            EVENT_FILE_READ_SUCCESS: 'giant.File.read.success',
-
-            /**
-             * Signals that image failed to load.
-             * @constant
-             */
-            EVENT_FILE_READ_FAILURE: 'giant.File.read.failure'
-        })
         .addPrivateMethods(/** @lends giant.File# */{
             /**
              * @param {string} filename
@@ -77,20 +58,20 @@ giant.postpone(giant, 'File', function () {
                     deferred = Q.defer(),
                     event;
 
-                this.spawnEvent(self.EVENT_FILE_READ_START)
+                this.spawnEvent(giant.EVENT_FILE_READ_START)
                     .setFilePath(filePath)
                     .triggerSync();
 
                 this._readFileProxy(filePath.toString(), null, function (err, data) {
                     if (err) {
-                        event = that.spawnEvent(self.EVENT_FILE_READ_FAILURE)
+                        event = that.spawnEvent(giant.EVENT_FILE_READ_FAILURE)
                             .setFilePath(filePath)
                             .setFileError(err)
                             .triggerSync();
 
                         deferred.reject(event);
                     } else {
-                        event = that.spawnEvent(self.EVENT_FILE_READ_SUCCESS)
+                        event = that.spawnEvent(giant.EVENT_FILE_READ_SUCCESS)
                             .setFilePath(filePath)
                             .setFileData(data)
                             .triggerSync();
@@ -144,19 +125,19 @@ giant.postpone(giant, 'File', function () {
                 var filePath = this.filePath,
                     data;
 
-                this.spawnEvent(self.EVENT_FILE_READ_START)
+                this.spawnEvent(giant.EVENT_FILE_READ_START)
                     .setFilePath(filePath)
                     .triggerSync();
 
                 try {
                     data = this._readFileSyncProxy(filePath.toString(), null);
 
-                    this.spawnEvent(self.EVENT_FILE_READ_SUCCESS)
+                    this.spawnEvent(giant.EVENT_FILE_READ_SUCCESS)
                         .setFilePath(filePath)
                         .setFileData(data)
                         .triggerSync();
                 } catch (e) {
-                    this.spawnEvent(self.EVENT_FILE_READ_FAILURE)
+                    this.spawnEvent(giant.EVENT_FILE_READ_FAILURE)
                         .setFilePath(filePath)
                         .setFileError(e)
                         .triggerSync();
@@ -166,6 +147,28 @@ giant.postpone(giant, 'File', function () {
             }
         });
 }, jQuery);
+
+(function () {
+    "use strict";
+
+    /**
+     * Signals that a File has started loading.
+     * @constant
+     */
+    giant.EVENT_FILE_READ_START = 'giant.File.read.start';
+
+    /**
+     * Signals that a File has finished loading.
+     * @constant
+     */
+    giant.EVENT_FILE_READ_SUCCESS = 'giant.File.read.success';
+
+    /**
+     * Signals that a File failed to load.
+     * @constant
+     */
+    giant.EVENT_FILE_READ_FAILURE = 'giant.File.read.failure';
+}());
 
 giant.amendPostponed(giant, 'FilePath', function () {
     "use strict";

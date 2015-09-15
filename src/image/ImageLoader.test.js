@@ -50,7 +50,7 @@
         });
 
         'foo/bar'.toImageUrl()
-            .subscribeTo(giant.ImageLoader.EVENT_IMAGE_LOAD_START, function (event) {
+            .subscribeTo(giant.EVENT_IMAGE_LOAD_START, function (event) {
                 ok(event.isA(giant.ImageEvent), "should trigger image load start event");
                 equal(event.originalPath.toString(), 'image>foo>bar', "should trigger start event on correct path");
                 strictEqual(event.imageUrl, image.imageUrl,
@@ -58,7 +58,7 @@
                 strictEqual(event.imageElement, imageElement,
                     "should set event's imageElement to created image element");
             })
-            .subscribeTo(giant.ImageLoader.EVENT_IMAGE_LOAD_SUCCESS, function (event) {
+            .subscribeTo(giant.EVENT_IMAGE_LOAD_SUCCESS, function (event) {
                 ok(event.isA(giant.ImageEvent), "should trigger image load success event");
                 equal(event.originalPath.toString(), 'image>foo>bar', "should trigger success event on correct path");
                 strictEqual(event.imageUrl, image.imageUrl,
@@ -103,7 +103,7 @@
         });
 
         'foo/bar'.toImageUrl()
-            .subscribeTo(giant.ImageLoader.EVENT_IMAGE_LOAD_START, function (event) {
+            .subscribeTo(giant.EVENT_IMAGE_LOAD_START, function (event) {
                 ok(event.isA(giant.ImageEvent), "should trigger image load start event");
                 equal(event.originalPath.toString(), 'image>foo>bar', "should trigger start event on correct path");
                 strictEqual(event.imageUrl, image.imageUrl,
@@ -111,7 +111,7 @@
                 strictEqual(event.imageElement, imageElement,
                     "should set event's imageElement to created image element");
             })
-            .subscribeTo(giant.ImageLoader.EVENT_IMAGE_LOAD_FAILURE, function (event) {
+            .subscribeTo(giant.EVENT_IMAGE_LOAD_FAILURE, function (event) {
                 ok(event.isA(giant.ImageEvent), "should trigger image load failure event");
                 equal(event.originalPath.toString(), 'image>foo>bar', "should trigger failure event on correct path");
                 strictEqual(event.imageUrl, image.imageUrl,

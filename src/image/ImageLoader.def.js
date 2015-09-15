@@ -22,25 +22,6 @@ giant.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
      * @extends giant.Evented
      */
     giant.ImageLoader = self
-        .addConstants(/** @lends giant.ImageUrl */{
-            /**
-             * Signals that image started loading.
-             * @constant
-             */
-            EVENT_IMAGE_LOAD_START: 'giant.Image.load.start',
-
-            /**
-             * Signals that image has finished loading.
-             * @constant
-             */
-            EVENT_IMAGE_LOAD_SUCCESS: 'giant.Image.load.success',
-
-            /**
-             * Signals that image failed to load.
-             * @constant
-             */
-            EVENT_IMAGE_LOAD_FAILURE: 'giant.Image.load.failure'
-        })
         .addPrivateMethods(/** @lends giant.ImageLoader# */{
             /**
              * @returns {HTMLImageElement}
@@ -96,14 +77,14 @@ giant.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
                     imageElement = this._createImageElementProxy(),
                     deferred = $.Deferred();
 
-                this.spawnEvent(self.EVENT_IMAGE_LOAD_START)
+                this.spawnEvent(giant.EVENT_IMAGE_LOAD_START)
                     .setImageLocation(imageUrl)
                     .setImageElement(imageElement)
                     .triggerSync();
 
                 this._loadImage(imageElement, imageUrl.toString())
                     .done(function () {
-                        that.spawnEvent(self.EVENT_IMAGE_LOAD_SUCCESS)
+                        that.spawnEvent(giant.EVENT_IMAGE_LOAD_SUCCESS)
                             .setImageLocation(imageUrl)
                             .setImageElement(imageElement)
                             .triggerSync();
@@ -111,7 +92,7 @@ giant.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
                         deferred.resolve(imageUrl, imageElement);
                     })
                     .fail(function () {
-                        that.spawnEvent(self.EVENT_IMAGE_LOAD_FAILURE)
+                        that.spawnEvent(giant.EVENT_IMAGE_LOAD_FAILURE)
                             .setImageLocation(imageUrl)
                             .setImageElement(imageElement)
                             .triggerSync();
@@ -123,6 +104,28 @@ giant.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
             }
         });
 }, jQuery);
+
+(function () {
+    "use strict";
+
+    /**
+     * Signals that an Image started loading.
+     * @constant
+     */
+    giant.EVENT_IMAGE_LOAD_START = 'giant.Image.load.start';
+
+    /**
+     * Signals that an Image has finished loading.
+     * @constant
+     */
+    giant.EVENT_IMAGE_LOAD_SUCCESS = 'giant.Image.load.success';
+
+    /**
+     * Signals that an Image failed to load.
+     * @constant
+     */
+    giant.EVENT_IMAGE_LOAD_FAILURE = 'giant.Image.load.failure';
+}());
 
 giant.amendPostponed(giant, 'ImageUrl', function () {
     "use strict";

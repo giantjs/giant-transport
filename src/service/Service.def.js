@@ -27,30 +27,6 @@ giant.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
     giant.Service = self
         .addConstants(/** @lends giant.Service */{
             /**
-             * Signals the start of a service call.
-             * @constant
-             */
-            EVENT_SERVICE_START: 'giant.Service.start',
-
-            /**
-             * Signals that a service call was attempted after failure.
-             * @constant
-             */
-            EVENT_SERVICE_RETRY: 'giant.Service.retry',
-
-            /**
-             * Signals the successful return of a service call.
-             * @constant
-             */
-            EVENT_SERVICE_SUCCESS: 'giant.Service.success',
-
-            /**
-             * Signals a failed service call. The reason for failure is included in the event.
-             * @constant
-             */
-            EVENT_SERVICE_FAILURE: 'giant.Service.failure',
-
-            /**
              * Default timeout for service calls in [ms].
              * @constant
              */
@@ -88,21 +64,21 @@ giant.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
                     request = this.request;
 
                 // sending notification about starting the service
-                this.spawnEvent(self.EVENT_SERVICE_START)
+                this.spawnEvent(giant.EVENT_SERVICE_START)
                     .setRequest(request)
                     .triggerSync();
 
                 // adding handlers
                 ajaxPromise
                     .done(function (responseNode, textStatus, jqXHR) {
-                        that.spawnEvent(self.EVENT_SERVICE_SUCCESS)
+                        that.spawnEvent(giant.EVENT_SERVICE_SUCCESS)
                             .setRequest(request)
                             .setResponseNode(responseNode)
                             .setJqXhr(jqXHR)
                             .triggerSync();
                     })
                     .fail(function (jqXHR, textStatus, errorThrown) {
-                        that.spawnEvent(self.EVENT_SERVICE_FAILURE)
+                        that.spawnEvent(giant.EVENT_SERVICE_FAILURE)
                             .setRequest(request)
                             .setResponseNode(errorThrown)
                             .setJqXhr(jqXHR)
@@ -155,7 +131,7 @@ giant.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
                         return that._ajaxProxy(ajaxOptions);
                     }, this.retryCount, this.retryDelay)
                     .progress(function (stop, jqXHR, textStatus, errorThrown) {
-                        that.spawnEvent(self.EVENT_SERVICE_RETRY)
+                        that.spawnEvent(giant.EVENT_SERVICE_RETRY)
                             .setRequest(request)
                             .setResponseNode(errorThrown)
                             .setJqXhr(jqXHR)
@@ -369,6 +345,35 @@ giant.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
         });
 }, jQuery);
 
+(function () {
+    "use strict";
+
+    /**
+     * Signals the start of a Service call.
+     * @constant
+     */
+    giant.EVENT_SERVICE_START = 'giant.Service.start';
+
+    /**
+     * Signals that a Service call was attempted after failure.
+     * @constant
+     */
+    giant.EVENT_SERVICE_RETRY = 'giant.Service.retry';
+
+    /**
+     * Signals the successful return of a Service call.
+     * @constant
+     */
+    giant.EVENT_SERVICE_SUCCESS = 'giant.Service.success';
+
+    /**
+     * Signals a failed Service call. The reason for failure is included in the event.
+     * @constant
+     */
+    giant.EVENT_SERVICE_FAILURE = 'giant.Service.failure';
+
+}());
+
 giant.amendPostponed(giant, 'Request', function () {
     "use strict";
 
@@ -390,16 +395,16 @@ giant.postpone(giant, 'logServiceEvents', function () {
      */
     giant.logServiceEvents = function () {
         [].toEndpoint()
-            .subscribeTo(giant.Service.EVENT_SERVICE_START, function (event) {
+            .subscribeTo(giant.EVENT_SERVICE_START, function (event) {
                 console.info("service start", event.request.endpoint.toString(), event);
             })
-            .subscribeTo(giant.Service.EVENT_SERVICE_RETRY, function (event) {
+            .subscribeTo(giant.EVENT_SERVICE_RETRY, function (event) {
                 console.warn("service retry", event.request.endpoint.toString(), event);
             })
-            .subscribeTo(giant.Service.EVENT_SERVICE_SUCCESS, function (event) {
+            .subscribeTo(giant.EVENT_SERVICE_SUCCESS, function (event) {
                 console.info("service success", event.request.endpoint.toString(), event);
             })
-            .subscribeTo(giant.Service.EVENT_SERVICE_FAILURE, function (event) {
+            .subscribeTo(giant.EVENT_SERVICE_FAILURE, function (event) {
                 console.warn("service failed", event.request.endpoint.toString(), event);
             });
     };

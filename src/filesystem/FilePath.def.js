@@ -1,4 +1,4 @@
-/*global giant, jQuery */
+/*global giant */
 giant.postpone(giant, 'FilePath', function () {
     "use strict";
 

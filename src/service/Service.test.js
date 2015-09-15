@@ -230,7 +230,7 @@
 
         giant.ServiceEvent.addMocks({
             triggerSync: function () {
-                if (this.eventName === giant.Service.EVENT_SERVICE_SUCCESS) {
+                if (this.eventName === giant.EVENT_SERVICE_SUCCESS) {
                     ok(true, "should trigger success event");
                     ok(this.currentPath.equals(request.endpoint.eventPath,
                         "should trigger event on endpoint's event path"));
@@ -272,7 +272,7 @@
 
         giant.ServiceEvent.addMocks({
             triggerSync: function () {
-                if (this.eventName === giant.Service.EVENT_SERVICE_FAILURE) {
+                if (this.eventName === giant.EVENT_SERVICE_FAILURE) {
                     ok(true, "should trigger failure event");
                     ok(this.currentPath.equals(request.endpoint.eventPath,
                         "should trigger event on endpoint's event path"));
