@@ -151,23 +151,25 @@ giant.postpone(giant, 'File', function () {
 (function () {
     "use strict";
 
-    /**
-     * Signals that a File has started loading.
-     * @constant
-     */
-    giant.EVENT_FILE_READ_START = 'giant.File.read.start';
+    giant.addGlobalConstants(/** @lends giant */{
+        /**
+         * Signals that a File has started loading.
+         * @constant
+         */
+        EVENT_FILE_READ_START: 'giant.File.read.start',
 
-    /**
-     * Signals that a File has finished loading.
-     * @constant
-     */
-    giant.EVENT_FILE_READ_SUCCESS = 'giant.File.read.success';
+        /**
+         * Signals that a File has finished loading.
+         * @constant
+         */
+        EVENT_FILE_READ_SUCCESS: 'giant.File.read.success',
 
-    /**
-     * Signals that a File failed to load.
-     * @constant
-     */
-    giant.EVENT_FILE_READ_FAILURE = 'giant.File.read.failure';
+        /**
+         * Signals that a File failed to load.
+         * @constant
+         */
+        EVENT_FILE_READ_FAILURE: 'giant.File.read.failure'
+    });
 }());
 
 giant.amendPostponed(giant, 'FilePath', function () {

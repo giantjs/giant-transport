@@ -348,30 +348,31 @@ giant.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
 (function () {
     "use strict";
 
-    /**
-     * Signals the start of a Service call.
-     * @constant
-     */
-    giant.EVENT_SERVICE_START = 'giant.Service.start';
+    giant.addGlobalConstants(/** @lends giant */{
+        /**
+         * Signals the start of a Service call.
+         * @constant
+         */
+        EVENT_SERVICE_START: 'giant.Service.start',
 
-    /**
-     * Signals that a Service call was attempted after failure.
-     * @constant
-     */
-    giant.EVENT_SERVICE_RETRY = 'giant.Service.retry';
+        /**
+         * Signals that a Service call was attempted after failure.
+         * @constant
+         */
+        EVENT_SERVICE_RETRY: 'giant.Service.retry',
 
-    /**
-     * Signals the successful return of a Service call.
-     * @constant
-     */
-    giant.EVENT_SERVICE_SUCCESS = 'giant.Service.success';
+        /**
+         * Signals the successful return of a Service call.
+         * @constant
+         */
+        EVENT_SERVICE_SUCCESS: 'giant.Service.success',
 
-    /**
-     * Signals a failed Service call. The reason for failure is included in the event.
-     * @constant
-     */
-    giant.EVENT_SERVICE_FAILURE = 'giant.Service.failure';
-
+        /**
+         * Signals a failed Service call. The reason for failure is included in the event.
+         * @constant
+         */
+        EVENT_SERVICE_FAILURE: 'giant.Service.failure'
+    });
 }());
 
 giant.amendPostponed(giant, 'Request', function () {
