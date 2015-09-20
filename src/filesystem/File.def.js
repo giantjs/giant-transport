@@ -156,19 +156,19 @@ giant.postpone(giant, 'File', function () {
          * Signals that a File has started loading.
          * @constant
          */
-        EVENT_FILE_READ_START: 'giant.File.read.start',
+        EVENT_FILE_READ_START: 'transport.load.start.file',
 
         /**
          * Signals that a File has finished loading.
          * @constant
          */
-        EVENT_FILE_READ_SUCCESS: 'giant.File.read.success',
+        EVENT_FILE_READ_SUCCESS: 'transport.load.success.file',
 
         /**
          * Signals that a File failed to load.
          * @constant
          */
-        EVENT_FILE_READ_FAILURE: 'giant.File.read.failure'
+        EVENT_FILE_READ_FAILURE: 'transport.load.failure.file'
     });
 }());
 

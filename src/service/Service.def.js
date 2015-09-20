@@ -353,25 +353,25 @@ giant.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
          * Signals the start of a Service call.
          * @constant
          */
-        EVENT_SERVICE_START: 'giant.Service.start',
+        EVENT_SERVICE_START: 'service.start',
 
         /**
          * Signals that a Service call was attempted after failure.
          * @constant
          */
-        EVENT_SERVICE_RETRY: 'giant.Service.retry',
+        EVENT_SERVICE_RETRY: 'service.retry',
 
         /**
          * Signals the successful return of a Service call.
          * @constant
          */
-        EVENT_SERVICE_SUCCESS: 'giant.Service.success',
+        EVENT_SERVICE_SUCCESS: 'service.success',
 
         /**
          * Signals a failed Service call. The reason for failure is included in the event.
          * @constant
          */
-        EVENT_SERVICE_FAILURE: 'giant.Service.failure'
+        EVENT_SERVICE_FAILURE: 'service.failure'
     });
 }());
 

@@ -113,19 +113,19 @@ giant.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
          * Signals that an Image started loading.
          * @constant
          */
-        EVENT_IMAGE_LOAD_START: 'giant.Image.load.start',
+        EVENT_IMAGE_LOAD_START: 'transport.load.start.image',
 
         /**
          * Signals that an Image has finished loading.
          * @constant
          */
-        EVENT_IMAGE_LOAD_SUCCESS: 'giant.Image.load.success',
+        EVENT_IMAGE_LOAD_SUCCESS: 'transport.load.success.image',
 
         /**
          * Signals that an Image failed to load.
          * @constant
          */
-        EVENT_IMAGE_LOAD_FAILURE: 'giant.Image.load.failure'
+        EVENT_IMAGE_LOAD_FAILURE: 'transport.load.failure.image'
     });
 }());
 
