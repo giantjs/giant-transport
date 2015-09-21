@@ -169,7 +169,8 @@ giant.amendPostponed(giant, 'Event', function () {
     "use strict";
 
     giant.Event
-        .addSurrogate(giant, 'ServiceEvent', function (eventName, eventSpace) {
-            return eventSpace === giant.serviceEventSpace;
+        .addSurrogate(giant, 'ServiceEvent', function (eventName) {
+            var prefix = 'service';
+            return eventName.substr(0, prefix.length) === prefix;
         });
 });

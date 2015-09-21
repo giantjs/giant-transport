@@ -14,11 +14,11 @@
     });
 
     test("Event surrogate", function () {
-        ok(giant.Event.create('foo', giant.imageEventSpace).isA(giant.ImageEvent), "should return ImageEvent instance");
+        ok(giant.Event.create('image.foo', giant.imageEventSpace).isA(giant.ImageEvent), "should return ImageEvent instance");
     });
 
     test("Spawning event", function () {
-        ok(giant.imageEventSpace.spawnEvent('foo').isA(giant.ImageEvent), "should return ImageEvent instance");
+        ok(giant.imageEventSpace.spawnEvent('image.foo').isA(giant.ImageEvent), "should return ImageEvent instance");
     });
 
     test("ImageLoader location setter", function () {

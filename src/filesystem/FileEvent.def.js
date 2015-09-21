@@ -87,7 +87,8 @@ giant.amendPostponed(giant, 'Event', function () {
     "use strict";
 
     giant.Event
-        .addSurrogate(giant, 'FileEvent', function (eventName, eventSpace) {
-            return eventSpace === giant.fileSystemEventSpace;
+        .addSurrogate(giant, 'FileEvent', function (eventName) {
+            var prefix = 'file';
+            return eventName.substr(0, prefix.length) === prefix;
         });
 });

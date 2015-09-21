@@ -16,11 +16,11 @@
     });
 
     test("Event surrogate", function () {
-        ok(giant.Event.create('foo', giant.serviceEventSpace).isA(giant.ServiceEvent), "should return ServiceEvent instance");
+        ok(giant.Event.create('service.foo', giant.serviceEventSpace).isA(giant.ServiceEvent), "should return ServiceEvent instance");
     });
 
     test("Spawning event", function () {
-        ok(giant.serviceEventSpace.spawnEvent('foo').isA(giant.ServiceEvent), "should return ServiceEvent instance");
+        ok(giant.serviceEventSpace.spawnEvent('service.foo').isA(giant.ServiceEvent), "should return ServiceEvent instance");
     });
 
     test("Request setter", function () {

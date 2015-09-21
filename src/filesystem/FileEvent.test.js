@@ -12,11 +12,11 @@
     });
 
     test("Event surrogate", function () {
-        ok(giant.Event.create('foo', giant.fileSystemEventSpace).isA(giant.FileEvent), "should return FileEvent instance");
+        ok(giant.Event.create('file.foo', giant.fileSystemEventSpace).isA(giant.FileEvent), "should return FileEvent instance");
     });
 
     test("Spawning event", function () {
-        ok(giant.fileSystemEventSpace.spawnEvent('foo').isA(giant.FileEvent), "should return FileEvent instance");
+        ok(giant.fileSystemEventSpace.spawnEvent('file.foo').isA(giant.FileEvent), "should return FileEvent instance");
     });
 
     test("File path setter", function () {
