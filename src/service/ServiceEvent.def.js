@@ -10,6 +10,7 @@ giant.postpone(giant, 'ServiceEvent', function () {
      * @name giant.ServiceEvent.create
      * @function
      * @param {string} eventName Event name
+     * @param {giant.EventSpace} eventSpace Event space
      * @returns {giant.ServiceEvent}
      */
 
@@ -24,10 +25,11 @@ giant.postpone(giant, 'ServiceEvent', function () {
         .addMethods(/** @lends giant.ServiceEvent# */{
             /**
              * @param {string} eventName Event name
+             * @param {giant.EventSpace} eventSpace Event space
              * @ignore
              */
-            init: function (eventName) {
-                base.init.call(this, eventName, giant.serviceEventSpace);
+            init: function (eventName, eventSpace) {
+                base.init.call(this, eventName, eventSpace);
 
                 /**
                  * Request associated with the event.

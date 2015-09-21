@@ -11,6 +11,7 @@ giant.postpone(giant, 'FileEvent', function () {
      * @name giant.FileEvent.create
      * @function
      * @param {string} eventName Event name
+     * @param {giant.EventSpace} eventSpace Event space
      * @returns {giant.FileEvent}
      */
 
@@ -22,10 +23,11 @@ giant.postpone(giant, 'FileEvent', function () {
         .addMethods(/** @lends giant.FileEvent# */{
             /**
              * @param {string} eventName Event name
+             * @param {giant.EventSpace} eventSpace Event space
              * @ignore
              */
-            init: function (eventName) {
-                base.init.call(this, eventName, giant.fileSystemEventSpace);
+            init: function (eventName, eventSpace) {
+                base.init.call(this, eventName, eventSpace);
 
                 /** @type {giant.FilePath} */
                 this.filePath = undefined;

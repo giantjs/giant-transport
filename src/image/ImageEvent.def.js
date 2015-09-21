@@ -10,6 +10,7 @@ giant.postpone(giant, 'ImageEvent', function () {
      * @name giant.ImageEvent.create
      * @function
      * @param {string} eventName Event name
+     * @param {giant.EventSpace} eventSpace Event space
      * @returns {giant.ImageEvent}
      */
 
@@ -24,10 +25,11 @@ giant.postpone(giant, 'ImageEvent', function () {
         .addMethods(/** @lends giant.ImageEvent# */{
             /**
              * @param {string} eventName Event name
+             * @param {giant.EventSpace} eventSpace Event space
              * @ignore
              */
-            init: function (eventName) {
-                base.init.call(this, eventName, giant.imageEventSpace);
+            init: function (eventName, eventSpace) {
+                base.init.call(this, eventName, eventSpace);
 
                 /**
                  * Location of image associated with event.

@@ -22,6 +22,7 @@ giant.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
      * @extends giant.Evented
      */
     giant.ImageLoader = self
+        .setEventSpace(giant.eventSpace)
         .addPrivateMethods(/** @lends giant.ImageLoader# */{
             /**
              * @returns {HTMLImageElement}
@@ -62,9 +63,7 @@ giant.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
                 /** @type {giant.ImageUrl} */
                 this.imageUrl = imageUrl;
 
-                this
-                    .setEventSpace(giant.imageEventSpace)
-                    .setEventPath(imageUrl.eventPath);
+                this.setEventPath(imageUrl.eventPath);
             },
 
             /**

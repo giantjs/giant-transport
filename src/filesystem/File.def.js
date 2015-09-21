@@ -25,6 +25,7 @@ giant.postpone(giant, 'File', function () {
      * @extends giant.Evented
      */
     giant.File = self
+        .setEventSpace(giant.eventSpace)
         .addPrivateMethods(/** @lends giant.File# */{
             /**
              * @param {string} filename
@@ -104,9 +105,7 @@ giant.postpone(giant, 'File', function () {
                 /** @type {giant.Throttler} */
                 this.readFileThrottler = this._readFile.toThrottler();
 
-                this
-                    .setEventSpace(giant.fileSystemEventSpace)
-                    .setEventPath(filePath.eventPath);
+                this.setEventPath(filePath.eventPath);
             },
 
             /**

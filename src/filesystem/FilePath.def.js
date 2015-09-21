@@ -29,15 +29,6 @@ giant.postpone(giant, 'FilePath', function () {
         })
         .addMethods(/** @lends giant.FilePath# */{
             /**
-             * @param {giant.Path} filePath
-             * @ignore
-             */
-            init: function (filePath) {
-                base.init.call(this, filePath);
-                this.setEventSpace(giant.fileSystemEventSpace);
-            },
-
-            /**
              * Reads the file at the current path.
              * @returns {Q.Promise}
              */

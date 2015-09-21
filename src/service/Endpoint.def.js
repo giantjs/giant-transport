@@ -26,16 +26,6 @@ giant.postpone(giant, 'Endpoint', function () {
              * @type {string}
              */
             EVENT_ROOT_PATH: 'endpoint'
-        })
-        .addMethods(/** @lends giant.Endpoint# */{
-            /**
-             * @param {giant.Path} endpointPath
-             * @ignore
-             */
-            init: function (endpointPath) {
-                base.init.call(this, endpointPath);
-                this.setEventSpace(giant.serviceEventSpace);
-            }
         });
 });
 

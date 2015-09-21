@@ -23,6 +23,7 @@ giant.postpone(giant, 'Location', function () {
      * @extends giant.Evented
      */
     giant.Location = self
+        .setEventSpace(giant.eventSpace)
         .addConstants(/** @lends giant.Location */{
             /**
              * Root path for events triggered on the location.

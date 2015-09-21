@@ -25,6 +25,7 @@ giant.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
      * @extends giant.Evented
      */
     giant.Service = self
+        .setEventSpace(giant.eventSpace)
         .addConstants(/** @lends giant.Service */{
             /**
              * Default timeout for service calls in [ms].
@@ -187,8 +188,7 @@ giant.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
                 this.callServiceThrottler = this._callService.toThrottler();
 
                 // setting event path to endpoint's event path
-                this.setEventSpace(giant.serviceEventSpace)
-                    .setEventPath(request.endpoint.eventPath);
+                this.setEventPath(request.endpoint.eventPath);
             },
 
             /**

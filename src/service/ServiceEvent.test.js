@@ -5,7 +5,7 @@
     module("Service Event");
 
     test("Instantiation", function () {
-        var serviceEvent = giant.ServiceEvent.create('foo');
+        var serviceEvent = giant.ServiceEvent.create('foo', giant.eventSpace);
 
         ok(serviceEvent.hasOwnProperty('request'), "should initialize request property");
         equal(serviceEvent.request, undefined, "should set request property to undefined");
@@ -16,16 +16,16 @@
     });
 
     test("Event surrogate", function () {
-        ok(giant.Event.create('service.foo', giant.serviceEventSpace).isA(giant.ServiceEvent), "should return ServiceEvent instance");
+        ok(giant.Event.create('service.foo', giant.eventSpace).isA(giant.ServiceEvent), "should return ServiceEvent instance");
     });
 
     test("Spawning event", function () {
-        ok(giant.serviceEventSpace.spawnEvent('service.foo').isA(giant.ServiceEvent), "should return ServiceEvent instance");
+        ok(giant.eventSpace.spawnEvent('service.foo').isA(giant.ServiceEvent), "should return ServiceEvent instance");
     });
 
     test("Request setter", function () {
         var request = 'foo/bar'.toRequest(),
-            serviceEvent = giant.ServiceEvent.create('foo');
+            serviceEvent = giant.ServiceEvent.create('foo', giant.eventSpace);
 
         throws(function () {
             serviceEvent.setRequest('foo');
@@ -38,7 +38,7 @@
     test("Request parameter getter", function () {
         expect(3);
 
-        var serviceEvent = giant.ServiceEvent.create('foo'),
+        var serviceEvent = giant.ServiceEvent.create('foo', giant.eventSpace),
             requestParam = {};
 
         equal(serviceEvent.getRequestParam('bar'), undefined,
@@ -60,7 +60,7 @@
 
     test("Response node setter", function () {
         var responseNode = {},
-            serviceEvent = giant.ServiceEvent.create('foo');
+            serviceEvent = giant.ServiceEvent.create('foo', giant.eventSpace);
 
         strictEqual(serviceEvent.setResponseNode(responseNode), serviceEvent, "should be chainable");
         strictEqual(serviceEvent.responseNode, responseNode, "should set responseNode property");
@@ -69,7 +69,7 @@
     test("Response node getter", function () {
         expect(5);
 
-        var serviceEvent = giant.ServiceEvent.create('foo')
+        var serviceEvent = giant.ServiceEvent.create('foo', giant.eventSpace)
                 .setResponseNode({}),
             responseNode = {};
 
@@ -97,7 +97,7 @@
     test("Response hash getter", function () {
         expect(7);
 
-        var serviceEvent = giant.ServiceEvent.create('foo')
+        var serviceEvent = giant.ServiceEvent.create('foo', giant.eventSpace)
                 .setResponseNode({}),
             responseNode = {},
             result;
@@ -129,7 +129,7 @@
     });
 
     test("Response field getter", function () {
-        var serviceEvent = giant.ServiceEvent.create('foo');
+        var serviceEvent = giant.ServiceEvent.create('foo', giant.eventSpace);
 
         equal(serviceEvent.getResponseField('hello'), undefined,
             "should return undefined when no responseNode is set");
@@ -145,7 +145,7 @@
 
     test("XHR setter", function () {
         var jqXhr = {},
-            serviceEvent = giant.ServiceEvent.create('foo');
+            serviceEvent = giant.ServiceEvent.create('foo', giant.eventSpace);
 
         strictEqual(serviceEvent.setJqXhr(jqXhr), serviceEvent, "should be chainable");
         strictEqual(serviceEvent.jqXhr, jqXhr, "should set jqZhr property");
@@ -153,14 +153,14 @@
 
     test("HTTP status getter", function () {
         var jqXhr = {status: 1},
-            serviceEvent = giant.ServiceEvent.create('foo')
+            serviceEvent = giant.ServiceEvent.create('foo', giant.eventSpace)
                 .setJqXhr(jqXhr);
 
         equal(serviceEvent.getHttpStatus(), 1, "should return jqXHR object's status property");
     });
 
     test("Cloning", function () {
-        var serviceEvent = giant.ServiceEvent.create('foo')
+        var serviceEvent = giant.ServiceEvent.create('foo', giant.eventSpace)
                 .setRequest('foo/bar'.toRequest())
                 .setResponseNode({})
                 .setJqXhr({}),

@@ -29,15 +29,6 @@ giant.postpone(giant, 'ImageUrl', function () {
         })
         .addMethods(/** @lends giant.ImageUrl# */{
             /**
-             * @param {giant.Path} imagePath
-             * @ignore
-             */
-            init: function (imagePath) {
-                base.init.call(this, imagePath);
-                this.setEventSpace(giant.imageEventSpace);
-            },
-
-            /**
              * Initiates loading of image.
              * @returns {jQuery.Promise}
              */
