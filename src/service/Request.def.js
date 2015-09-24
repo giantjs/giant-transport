@@ -50,7 +50,7 @@ giant.postpone(giant, 'Request', function () {
              * @ignore
              */
             init: function (endpoint, params) {
-                giant
+                $assertion
                     .isLocation(endpoint, "Invalid endpoint")
                     .isObjectOptional(params, "Invalid parameters");
 
@@ -91,7 +91,7 @@ giant.postpone(giant, 'Request', function () {
              * @returns {giant.Request}
              */
             setHttpMethod: function (httpMethod) {
-                giant.isHttpMethod(httpMethod, "Invalid HTTP method");
+                $assertion.isHttpMethod(httpMethod, "Invalid HTTP method");
                 this.httpMethod = httpMethod;
                 return this;
             },
@@ -102,7 +102,7 @@ giant.postpone(giant, 'Request', function () {
              * @returns {giant.Request}
              */
             setBodyFormat: function (bodyFormat) {
-                giant.isBodyFormat(bodyFormat, "Invalid body format");
+                $assertion.isBodyFormat(bodyFormat, "Invalid body format");
                 this.bodyFormat = bodyFormat;
                 return this;
             },
@@ -116,7 +116,7 @@ giant.postpone(giant, 'Request', function () {
              * @returns {giant.Request}
              */
             setHeader: function (headerName, headerValue) {
-                giant
+                $assertion
                     .isString(headerName, "Invalid header name")
                     .isString(headerValue, "Invalid header value");
                 this.headers.setItem(headerName, headerValue);
@@ -129,7 +129,7 @@ giant.postpone(giant, 'Request', function () {
              * @returns {giant.Request}
              */
             addHeaders: function (headers) {
-                giant.isObject(headers, "Invalid headers");
+                $assertion.isObject(headers, "Invalid headers");
 
                 var that = this;
 
@@ -148,7 +148,7 @@ giant.postpone(giant, 'Request', function () {
              * @returns {giant.Request}
              */
             setParam: function (paramName, paramValue) {
-                giant.isString(paramName, "Invalid param name");
+                $assertion.isString(paramName, "Invalid param name");
                 this.params.setItem(paramName, paramValue);
                 return this;
             },
@@ -160,7 +160,7 @@ giant.postpone(giant, 'Request', function () {
              * @returns {giant.Request}
              */
             addParams: function (params) {
-                giant.isObject(params, "Invalid params");
+                $assertion.isObject(params, "Invalid params");
 
                 var that = this;
 
@@ -214,7 +214,7 @@ giant.amendPostponed(giant, 'Endpoint', function () {
 (function () {
     "use strict";
 
-    giant.addTypes(/** @lends giant */{
+    $assertion.addTypes(/** @lends giant */{
         /** @param {string} expr */
         isHttpMethod: function (expr) {
             return expr && giant.Request.httpMethods[expr] === expr;

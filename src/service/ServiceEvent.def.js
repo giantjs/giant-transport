@@ -56,7 +56,7 @@ giant.postpone(giant, 'ServiceEvent', function () {
              * @returns {giant.ServiceEvent}
              */
             setRequest: function (request) {
-                giant.isRequest(request, "Invalid request");
+                $assertion.isRequest(request, "Invalid request");
                 this.request = request;
                 return this;
             },
@@ -92,7 +92,7 @@ giant.postpone(giant, 'ServiceEvent', function () {
              * @returns {*}
              */
             getResponseNode: function (path) {
-                giant.isPathOptional(path, "Invalid path");
+                $assertion.isPathOptional(path, "Invalid path");
                 return path ?
                     giant.Tree.create(this.responseNode).getNode(path) :
                     this.responseNode;
@@ -106,7 +106,7 @@ giant.postpone(giant, 'ServiceEvent', function () {
              * @see giant.ServiceEvent#getResponseNode
              */
             getResponseNodeAsHash: function (path) {
-                giant.isPathOptional(path, "Invalid path");
+                $assertion.isPathOptional(path, "Invalid path");
                 return path ?
                     giant.Tree.create(this.responseNode).getNodeAsHash(path) :
                     giant.Hash.create(this.responseNode);
@@ -123,7 +123,7 @@ giant.postpone(giant, 'ServiceEvent', function () {
              * @returns {*}
              */
             getResponseField: function (fieldName) {
-                giant.isString(fieldName, "Invalid field name");
+                $assertion.isString(fieldName, "Invalid field name");
                 var responseNode = this.responseNode;
                 return responseNode ?
                     responseNode[fieldName] :

@@ -56,7 +56,7 @@ giant.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
              * @ignore
              */
             init: function (imageUrl) {
-                giant.isLocation(imageUrl, "Invalid image URL");
+                $assertion.isLocation(imageUrl, "Invalid image URL");
 
                 giant.Evented.init.call(this);
 

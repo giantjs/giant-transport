@@ -44,7 +44,7 @@ giant.postpone(giant, 'FileEvent', function () {
              * @returns {giant.FileEvent}
              */
             setFilePath: function (filePath) {
-                giant.isLocation(filePath, "Invalid location");
+                $assertion.isLocation(filePath, "Invalid location");
                 this.filePath = filePath;
                 return this;
             },
@@ -54,7 +54,7 @@ giant.postpone(giant, 'FileEvent', function () {
              * @returns {giant.FileEvent}
              */
             setFileError: function (fileError) {
-                giant.assert(fileError instanceof Error, "Invalid file error");
+                $assertion.assert(fileError instanceof Error, "Invalid file error");
                 this.fileError = fileError;
                 return this;
             },

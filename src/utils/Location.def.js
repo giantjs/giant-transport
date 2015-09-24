@@ -51,7 +51,7 @@ giant.postpone(giant, 'Location', function () {
              * @ignore
              */
             init: function (locationPath) {
-                giant.isPath(locationPath, "Invalid path");
+                $assertion.isPath(locationPath, "Invalid path");
 
                 /**
                  * Path associated with endpoint.
@@ -72,7 +72,7 @@ giant.postpone(giant, 'Location', function () {
              * @returns {boolean}
              */
             equals: function (location) {
-                giant
+                $assertion
                     .isLocationOptional(location, "Invalid location")
                     .assert(!location || this.getBase() === location.getBase(), "Invalid kind of location");
 
@@ -86,7 +86,7 @@ giant.postpone(giant, 'Location', function () {
              * @returns {giant.Location}
              */
             append: function (location) {
-                giant.isLocation(location, "Invalid location");
+                $assertion.isLocation(location, "Invalid location");
                 return this.getBase().create(this.locationPath.append(location.locationPath));
             },
 
@@ -97,7 +97,7 @@ giant.postpone(giant, 'Location', function () {
              * @returns {giant.Location}
              */
             prepend: function (location) {
-                giant.isLocation(location, "Invalid location");
+                $assertion.isLocation(location, "Invalid location");
                 return this.getBase().create(this.locationPath.prepend(location.locationPath));
             },
 
@@ -122,7 +122,7 @@ giant.postpone(giant, 'Location', function () {
 (function () {
     "use strict";
 
-    giant.addTypes(/** @lends giant */{
+    $assertion.addTypes(/** @lends giant */{
         /** @param {giant.Location} expr */
         isLocation: function (expr) {
             return giant.Location.isBaseOf(expr);

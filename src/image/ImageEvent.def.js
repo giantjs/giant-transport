@@ -50,7 +50,7 @@ giant.postpone(giant, 'ImageEvent', function () {
              * @returns {giant.ImageEvent}
              */
             setImageLocation: function (imageUrl) {
-                giant.isLocation(imageUrl, "Invalid location");
+                $assertion.isLocation(imageUrl, "Invalid location");
                 this.imageUrl = imageUrl;
                 return this;
             },
@@ -60,7 +60,7 @@ giant.postpone(giant, 'ImageEvent', function () {
              * @param {HTMLImageElement} imageElement
              */
             setImageElement: function (imageElement) {
-                giant.isImageElement(imageElement, "Invalid image element");
+                $assertion.isImageElement(imageElement, "Invalid image element");
                 this.imageElement = imageElement;
                 return this;
             },
@@ -94,7 +94,7 @@ giant.amendPostponed(giant, 'Event', function () {
 (function () {
     "use strict";
 
-    giant.addTypes(/** @lends giant */{
+    $assertion.addTypes(/** @lends giant */{
         /** @param {HTMLImageElement} expr */
         isImageElement: function (expr) {
             return expr instanceof HTMLImageElement;

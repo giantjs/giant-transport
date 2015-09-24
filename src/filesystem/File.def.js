@@ -90,7 +90,7 @@ giant.postpone(giant, 'File', function () {
              * @ignore
              */
             init: function (filePath) {
-                giant.isLocation(filePath, "Invalid image URL");
+                $assertion.isLocation(filePath, "Invalid image URL");
 
                 giant.Evented.init.call(this);
 

@@ -33,7 +33,7 @@ giant.postpone(giant, 'Throttler', function () {
              * @ignore
              */
             init: function (originalFunction) {
-                giant.isFunction(originalFunction, "Invalid original function");
+                $assertion.isFunction(originalFunction, "Invalid original function");
 
                 /** @type {Function} */
                 this.originalFunction = originalFunction;

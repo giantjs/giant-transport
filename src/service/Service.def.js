@@ -151,7 +151,7 @@ giant.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
              * @ignore
              */
             init: function (request) {
-                giant.isRequest(request, "Invalid request");
+                $assertion.isRequest(request, "Invalid request");
 
                 giant.Evented.init.call(this);
 
@@ -197,7 +197,7 @@ giant.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
              * @returns {giant.Service}
              */
             setRetryCount: function (retryCount) {
-                giant.isNumber(retryCount, "Invalid retry count");
+                $assertion.isNumber(retryCount, "Invalid retry count");
                 this.retryCount = retryCount;
                 return this;
             },
@@ -208,7 +208,7 @@ giant.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
              * @returns {giant.Service}
              */
             setRetryDelay: function (retryDelay) {
-                giant.isNumber(retryDelay, "Invalid retry count");
+                $assertion.isNumber(retryDelay, "Invalid retry count");
                 this.retryDelay = retryDelay;
                 return this;
             },
@@ -220,7 +220,7 @@ giant.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
              * @returns {giant.Service}
              */
             setAjaxOption: function (optionName, optionValue) {
-                giant.isString(optionName, "Invalid ajax option name");
+                $assertion.isString(optionName, "Invalid ajax option name");
                 this.ajaxOptions.setItem(optionName, optionValue);
                 return this;
             },
@@ -232,7 +232,7 @@ giant.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
              * @returns {giant.Service}
              */
             addAjaxOptions: function (ajaxOptions) {
-                giant.isObject(ajaxOptions, "Invalid ajax options");
+                $assertion.isObject(ajaxOptions, "Invalid ajax options");
 
                 var that = this;
 
@@ -296,7 +296,7 @@ giant.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
              * @returns {jQuery.Promise}
              */
             callService: function (ajaxOptions) {
-                giant.isObjectOptional(ajaxOptions, "Invalid ajax options");
+                $assertion.isObjectOptional(ajaxOptions, "Invalid ajax options");
 
                 var request = this.request,
                     requestId = request.toString();
