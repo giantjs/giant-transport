@@ -4,7 +4,7 @@ $oop.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
 
     var base = $oop.Base,
         self = base.extend()
-            .addTrait(giant.Evented);
+            .addTrait($event.Evented);
 
     /**
      * Creates an ImageLoader instance.
@@ -19,10 +19,10 @@ $oop.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
      * Triggers events upon start, success, and failure of loading an image.
      * @class
      * @extends $oop.Base
-     * @extends giant.Evented
+     * @extends $event.Evented
      */
     giant.ImageLoader = self
-        .setEventSpace(giant.eventSpace)
+        .setEventSpace($event.eventSpace)
         .addPrivateMethods(/** @lends giant.ImageLoader# */{
             /**
              * @returns {HTMLImageElement}
@@ -58,7 +58,7 @@ $oop.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
             init: function (imageUrl) {
                 $assertion.isLocation(imageUrl, "Invalid image URL");
 
-                giant.Evented.init.call(this);
+                $event.Evented.init.call(this);
 
                 /** @type {giant.ImageUrl} */
                 this.imageUrl = imageUrl;

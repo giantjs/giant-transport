@@ -2,7 +2,7 @@
 $oop.postpone(giant, 'ImageEvent', function () {
     "use strict";
 
-    var base = giant.Event,
+    var base = $event.Event,
         self = base.extend();
 
     /**
@@ -10,7 +10,7 @@ $oop.postpone(giant, 'ImageEvent', function () {
      * @name giant.ImageEvent.create
      * @function
      * @param {string} eventName Event name
-     * @param {giant.EventSpace} eventSpace Event space
+     * @param {$event.EventSpace} eventSpace Event space
      * @returns {giant.ImageEvent}
      */
 
@@ -19,13 +19,13 @@ $oop.postpone(giant, 'ImageEvent', function () {
      * about the image being / having been loaded.
      * ImageLoader events are usually triggered at various stages of the loading process.
      * @class
-     * @extends giant.Event
+     * @extends $event.Event
      */
     giant.ImageEvent = self
         .addMethods(/** @lends giant.ImageEvent# */{
             /**
              * @param {string} eventName Event name
-             * @param {giant.EventSpace} eventSpace Event space
+             * @param {$event.EventSpace} eventSpace Event space
              * @ignore
              */
             init: function (eventName, eventSpace) {
@@ -66,7 +66,7 @@ $oop.postpone(giant, 'ImageEvent', function () {
             },
 
             /**
-             * Clones event instance. In addition to `giant.Event.clone()`, also copies image-specific properties
+             * Clones event instance. In addition to `$event.Event.clone()`, also copies image-specific properties
              * (by reference).
              * @param {$data.Path} [currentPath]
              * @returns {giant.ImageEvent}
@@ -81,10 +81,10 @@ $oop.postpone(giant, 'ImageEvent', function () {
         });
 });
 
-$oop.amendPostponed(giant, 'Event', function () {
+$oop.amendPostponed($event, 'Event', function () {
     "use strict";
 
-    giant.Event
+    $event.Event
         .addSurrogate(giant, 'ImageEvent', function (eventName) {
             var prefix = 'image';
             return eventName.substr(0, prefix.length) === prefix;

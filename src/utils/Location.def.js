@@ -4,7 +4,7 @@ $oop.postpone(giant, 'Location', function () {
 
     var base = $oop.Base,
         self = base.extend()
-            .addTraitAndExtend(giant.Evented);
+            .addTraitAndExtend($event.Evented);
 
     /**
      * Creates a Location instance.
@@ -20,10 +20,10 @@ $oop.postpone(giant, 'Location', function () {
      * Extend Location to add event space, or set specific root path as needed.
      * @class
      * @extends $oop.Base
-     * @extends giant.Evented
+     * @extends $event.Evented
      */
     giant.Location = self
-        .setEventSpace(giant.eventSpace)
+        .setEventSpace($event.eventSpace)
         .addConstants(/** @lends giant.Location */{
             /**
              * Root path for events triggered on the location.

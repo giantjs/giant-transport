@@ -2,7 +2,7 @@
 $oop.postpone(giant, 'ServiceEvent', function () {
     "use strict";
 
-    var base = giant.Event,
+    var base = $event.Event,
         self = base.extend();
 
     /**
@@ -10,7 +10,7 @@ $oop.postpone(giant, 'ServiceEvent', function () {
      * @name giant.ServiceEvent.create
      * @function
      * @param {string} eventName Event name
-     * @param {giant.EventSpace} eventSpace Event space
+     * @param {$event.EventSpace} eventSpace Event space
      * @returns {giant.ServiceEvent}
      */
 
@@ -19,13 +19,13 @@ $oop.postpone(giant, 'ServiceEvent', function () {
      * of relevant properties, eg. the response node of the service that triggered the event.
      * Service events are usually triggered at different stages of a service call.
      * @class
-     * @extends giant.Event
+     * @extends $event.Event
      */
     giant.ServiceEvent = self
         .addMethods(/** @lends giant.ServiceEvent# */{
             /**
              * @param {string} eventName Event name
-             * @param {giant.EventSpace} eventSpace Event space
+             * @param {$event.EventSpace} eventSpace Event space
              * @ignore
              */
             init: function (eventName, eventSpace) {
@@ -150,11 +150,11 @@ $oop.postpone(giant, 'ServiceEvent', function () {
             },
 
             /**
-             * Clones event instance. In addition to `giant.Event.clone()`, also copies service-specific properties
+             * Clones event instance. In addition to `$event.Event.clone()`, also copies service-specific properties
              * (by reference).
              * @param {$data.Path} [currentPath]
              * @returns {giant.ServiceEvent}
-             * @see giant.Event#clone
+             * @see $event.Event#clone
              */
             clone: function (currentPath) {
                 var clone = /** @type {giant.ServiceEvent} */base.clone.call(this, currentPath);
@@ -167,10 +167,10 @@ $oop.postpone(giant, 'ServiceEvent', function () {
         });
 });
 
-$oop.amendPostponed(giant, 'Event', function () {
+$oop.amendPostponed($event, 'Event', function () {
     "use strict";
 
-    giant.Event
+    $event.Event
         .addSurrogate(giant, 'ServiceEvent', function (eventName) {
             var prefix = 'service';
             return eventName.substr(0, prefix.length) === prefix;

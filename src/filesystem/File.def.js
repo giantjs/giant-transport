@@ -5,7 +5,7 @@ $oop.postpone(giant, 'File', function () {
 
     var base = $oop.Base,
         self = base.extend()
-            .addTrait(giant.Evented),
+            .addTrait($event.Evented),
         fs;
 
     /**
@@ -22,10 +22,10 @@ $oop.postpone(giant, 'File', function () {
      * TODO: Perhaps throttler could be class-level?
      * @class
      * @extends $oop.Base
-     * @extends giant.Evented
+     * @extends $event.Evented
      */
     giant.File = self
-        .setEventSpace(giant.eventSpace)
+        .setEventSpace($event.eventSpace)
         .addPrivateMethods(/** @lends giant.File# */{
             /**
              * @param {string} filename
@@ -92,7 +92,7 @@ $oop.postpone(giant, 'File', function () {
             init: function (filePath) {
                 $assertion.isLocation(filePath, "Invalid image URL");
 
-                giant.Evented.init.call(this);
+                $event.Evented.init.call(this);
 
                 this.elevateMethod('_readFile');
 

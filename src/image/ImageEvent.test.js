@@ -5,7 +5,7 @@
     module("ImageEvent");
 
     test("Instantiation", function () {
-        var serviceEvent = giant.ImageEvent.create('foo', giant.eventSpace);
+        var serviceEvent = giant.ImageEvent.create('foo', $event.eventSpace);
 
         ok(serviceEvent.hasOwnProperty('imageUrl'), "should initialize imageUrl property");
         equal(serviceEvent.imageUrl, undefined, "should set imageUrl property to undefined");
@@ -14,16 +14,16 @@
     });
 
     test("Event surrogate", function () {
-        ok(giant.Event.create('image.foo', giant.eventSpace).isA(giant.ImageEvent), "should return ImageEvent instance");
+        ok($event.Event.create('image.foo', $event.eventSpace).isA(giant.ImageEvent), "should return ImageEvent instance");
     });
 
     test("Spawning event", function () {
-        ok(giant.eventSpace.spawnEvent('image.foo').isA(giant.ImageEvent), "should return ImageEvent instance");
+        ok($event.eventSpace.spawnEvent('image.foo').isA(giant.ImageEvent), "should return ImageEvent instance");
     });
 
     test("ImageLoader location setter", function () {
         var imageUrl = 'foo/bar'.toImageUrl(),
-            imageEvent = giant.ImageEvent.create('foo', giant.eventSpace);
+            imageEvent = giant.ImageEvent.create('foo', $event.eventSpace);
 
         throws(function () {
             imageEvent.setImageLocation('foo');
@@ -35,7 +35,7 @@
 
     test("ImageLoader element setter", function () {
         var imageElement = document.createElement('img'),
-            imageEvent = giant.ImageEvent.create('foo', giant.eventSpace);
+            imageEvent = giant.ImageEvent.create('foo', $event.eventSpace);
 
         throws(function () {
             imageEvent.setImageElement('foo');
@@ -46,7 +46,7 @@
     });
 
     test("Cloning", function () {
-        var imageEvent = giant.ImageEvent.create('foo', giant.eventSpace)
+        var imageEvent = giant.ImageEvent.create('foo', $event.eventSpace)
                 .setImageLocation('foo/bar'.toImageUrl())
                 .setImageElement(document.createElement('img')),
             result;

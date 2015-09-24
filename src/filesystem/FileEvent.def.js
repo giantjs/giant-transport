@@ -3,7 +3,7 @@
 $oop.postpone(giant, 'FileEvent', function () {
     "use strict";
 
-    var base = giant.Event,
+    var base = $event.Event,
         self = base.extend();
 
     /**
@@ -11,19 +11,19 @@ $oop.postpone(giant, 'FileEvent', function () {
      * @name giant.FileEvent.create
      * @function
      * @param {string} eventName Event name
-     * @param {giant.EventSpace} eventSpace Event space
+     * @param {$event.EventSpace} eventSpace Event space
      * @returns {giant.FileEvent}
      */
 
     /**
      * @class
-     * @extends giant.Event
+     * @extends $event.Event
      */
     giant.FileEvent = self
         .addMethods(/** @lends giant.FileEvent# */{
             /**
              * @param {string} eventName Event name
-             * @param {giant.EventSpace} eventSpace Event space
+             * @param {$event.EventSpace} eventSpace Event space
              * @ignore
              */
             init: function (eventName, eventSpace) {
@@ -69,7 +69,7 @@ $oop.postpone(giant, 'FileEvent', function () {
             },
 
             /**
-             * Clones event instance. In addition to `giant.Event.clone()`, also copies file-specific properties
+             * Clones event instance. In addition to `$event.Event.clone()`, also copies file-specific properties
              * (by reference).
              * @param {$data.Path} [currentPath]
              * @returns {giant.FileEvent}
@@ -85,10 +85,10 @@ $oop.postpone(giant, 'FileEvent', function () {
         });
 });
 
-$oop.amendPostponed(giant, 'Event', function () {
+$oop.amendPostponed($event, 'Event', function () {
     "use strict";
 
-    giant.Event
+    $event.Event
         .addSurrogate(giant, 'FileEvent', function (eventName) {
             var prefix = 'file';
             return eventName.substr(0, prefix.length) === prefix;

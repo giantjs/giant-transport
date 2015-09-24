@@ -4,7 +4,7 @@ $oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
 
     var base = $oop.Base,
         self = base.extend()
-            .addTrait(giant.Evented);
+            .addTrait($event.Evented);
 
     /**
      * Creates a Service instance.
@@ -22,10 +22,10 @@ $oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
      * TODO: Perhaps throttler could be class-level?
      * @class
      * @extends $oop.Base
-     * @extends giant.Evented
+     * @extends $event.Evented
      */
     giant.Service = self
-        .setEventSpace(giant.eventSpace)
+        .setEventSpace($event.eventSpace)
         .addConstants(/** @lends giant.Service */{
             /**
              * Default timeout for service calls in [ms].
@@ -153,7 +153,7 @@ $oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
             init: function (request) {
                 $assertion.isRequest(request, "Invalid request");
 
-                giant.Evented.init.call(this);
+                $event.Evented.init.call(this);
 
                 this.elevateMethods(
                     '_ajaxProxy',
