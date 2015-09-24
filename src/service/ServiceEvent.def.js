@@ -1,5 +1,5 @@
 /*global giant */
-giant.postpone(giant, 'ServiceEvent', function () {
+$oop.postpone(giant, 'ServiceEvent', function () {
     "use strict";
 
     var base = giant.Event,
@@ -167,7 +167,7 @@ giant.postpone(giant, 'ServiceEvent', function () {
         });
 });
 
-giant.amendPostponed(giant, 'Event', function () {
+$oop.amendPostponed(giant, 'Event', function () {
     "use strict";
 
     giant.Event

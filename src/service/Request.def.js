@@ -1,8 +1,8 @@
 /*global giant */
-giant.postpone(giant, 'Request', function () {
+$oop.postpone(giant, 'Request', function () {
     "use strict";
 
-    var base = giant.Base,
+    var base = $oop.Base,
         self = base.extend();
 
     /**
@@ -16,7 +16,7 @@ giant.postpone(giant, 'Request', function () {
     /**
      * The Request class describes a service request.
      * @class
-     * @extends giant.Base
+     * @extends $oop.Base
      */
     giant.Request = self
         .addConstants(/** @lends giant.Request */{
@@ -195,7 +195,7 @@ giant.postpone(giant, 'Request', function () {
         });
 });
 
-giant.amendPostponed(giant, 'Endpoint', function () {
+$oop.amendPostponed(giant, 'Endpoint', function () {
     "use strict";
 
     giant.Endpoint
@@ -237,7 +237,7 @@ giant.amendPostponed(giant, 'Endpoint', function () {
         }
     });
 
-    giant.extendBuiltIn(Array.prototype, /** @lends Array# */{
+    $oop.extendBuiltIn(Array.prototype, /** @lends Array# */{
         /**
          * Converts `Array` to `Request`.
          * @param {object} [params]
@@ -250,7 +250,7 @@ giant.amendPostponed(giant, 'Endpoint', function () {
         }
     });
 
-    giant.extendBuiltIn(String.prototype, /** @lends String# */{
+    $oop.extendBuiltIn(String.prototype, /** @lends String# */{
         /**
          * Converts `String` to `Request`.
          * @param {object} [params]

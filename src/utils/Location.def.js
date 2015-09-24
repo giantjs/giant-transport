@@ -1,8 +1,8 @@
 /*global giant */
-giant.postpone(giant, 'Location', function () {
+$oop.postpone(giant, 'Location', function () {
     "use strict";
 
-    var base = giant.Base,
+    var base = $oop.Base,
         self = base.extend()
             .addTraitAndExtend(giant.Evented);
 
@@ -19,7 +19,7 @@ giant.postpone(giant, 'Location', function () {
      * The Location is an abstract base class for URLs on which events can be triggered on and listened to.
      * Extend Location to add event space, or set specific root path as needed.
      * @class
-     * @extends giant.Base
+     * @extends $oop.Base
      * @extends giant.Evented
      */
     giant.Location = self

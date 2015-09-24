@@ -1,5 +1,5 @@
 /*global giant, Q */
-giant.postpone(giant, 'QPromiseCollection', function () {
+$oop.postpone(giant, 'QPromiseCollection', function () {
     "use strict";
 
     var modelPromise = Q.defer().promise;
@@ -32,7 +32,7 @@ giant.postpone(giant, 'QPromiseCollection', function () {
         });
 });
 
-giant.amendPostponed(giant, 'Hash', function () {
+$oop.amendPostponed(giant, 'Hash', function () {
     "use strict";
 
     giant.Hash
@@ -50,7 +50,7 @@ giant.amendPostponed(giant, 'Hash', function () {
 (function () {
     "use strict";
 
-    giant.extendBuiltIn(Array.prototype, /** @lends Array# */{
+    $oop.extendBuiltIn(Array.prototype, /** @lends Array# */{
         /**
          * Converts `Array` to `QPromiseCollection`.
          * @returns {giant.QPromiseCollection}

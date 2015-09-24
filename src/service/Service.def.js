@@ -1,8 +1,8 @@
 /*global giant, console, jQuery */
-giant.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
+$oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
     "use strict";
 
-    var base = giant.Base,
+    var base = $oop.Base,
         self = base.extend()
             .addTrait(giant.Evented);
 
@@ -21,7 +21,7 @@ giant.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
      * TODO: Replace jQuery promise with Q (0.4.0).
      * TODO: Perhaps throttler could be class-level?
      * @class
-     * @extends giant.Base
+     * @extends $oop.Base
      * @extends giant.Evented
      */
     giant.Service = self
@@ -348,7 +348,7 @@ giant.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
 (function () {
     "use strict";
 
-    giant.addGlobalConstants(/** @lends giant */{
+    $oop.addGlobalConstants.call(giant, /** @lends giant */{
         /**
          * Signals the start of a Service call.
          * @constant
@@ -375,7 +375,7 @@ giant.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
     });
 }());
 
-giant.amendPostponed(giant, 'Request', function () {
+$oop.amendPostponed(giant, 'Request', function () {
     "use strict";
 
     giant.Request
@@ -387,7 +387,7 @@ giant.amendPostponed(giant, 'Request', function () {
         });
 });
 
-giant.postpone(giant, 'logServiceEvents', function () {
+$oop.postpone(giant, 'logServiceEvents', function () {
     "use strict";
 
     /**

@@ -1,5 +1,5 @@
 /*global giant */
-giant.postpone(giant, 'FilePath', function () {
+$oop.postpone(giant, 'FilePath', function () {
     "use strict";
 
     var base = giant.Location,
@@ -45,7 +45,7 @@ giant.postpone(giant, 'FilePath', function () {
         });
 });
 
-giant.amendPostponed(giant, 'Path', function () {
+$oop.amendPostponed(giant, 'Path', function () {
     "use strict";
 
     giant.Path.addMethods(/** @lends giant.Path# */{
@@ -62,7 +62,7 @@ giant.amendPostponed(giant, 'Path', function () {
 (function () {
     "use strict";
 
-    giant.extendBuiltIn(String.prototype, /** @lends String# */{
+    $oop.extendBuiltIn(String.prototype, /** @lends String# */{
         /**
          * Converts `String` to `FilePath`.
          * @returns {giant.FilePath}
@@ -75,7 +75,7 @@ giant.amendPostponed(giant, 'Path', function () {
         }
     });
 
-    giant.extendBuiltIn(Array.prototype, /** @lends Array# */{
+    $oop.extendBuiltIn(Array.prototype, /** @lends Array# */{
         /**
          * Converts `Array` to `FilePath`.
          * @returns {giant.FilePath}

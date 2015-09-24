@@ -1,14 +1,14 @@
 /*global giant, jQuery */
-giant.postpone(giant, 'PromiseLoop', function (ns, className, /**jQuery*/$) {
+$oop.postpone(giant, 'PromiseLoop', function (ns, className, /**jQuery*/$) {
     "use strict";
 
-    var base = giant.Base,
+    var base = $oop.Base,
         self = base.extend(),
         slice = Array.prototype.slice;
 
     /**
      * @class
-     * @extends giant.Base
+     * @extends $oop.Base
      */
     giant.PromiseLoop = self
         .addConstants(/** @lends giant.PromiseLoop */{

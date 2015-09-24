@@ -1,5 +1,5 @@
 /*global giant, jQuery */
-giant.postpone(giant, 'ImageEvent', function () {
+$oop.postpone(giant, 'ImageEvent', function () {
     "use strict";
 
     var base = giant.Event,
@@ -81,7 +81,7 @@ giant.postpone(giant, 'ImageEvent', function () {
         });
 });
 
-giant.amendPostponed(giant, 'Event', function () {
+$oop.amendPostponed(giant, 'Event', function () {
     "use strict";
 
     giant.Event

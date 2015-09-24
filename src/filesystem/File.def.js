@@ -1,9 +1,9 @@
 /*global giant, Q, jQuery */
 /*jshint node:true */
-giant.postpone(giant, 'File', function () {
+$oop.postpone(giant, 'File', function () {
     "use strict";
 
-    var base = giant.Base,
+    var base = $oop.Base,
         self = base.extend()
             .addTrait(giant.Evented),
         fs;
@@ -21,7 +21,7 @@ giant.postpone(giant, 'File', function () {
      * New methods should follow the fs naming conventions.
      * TODO: Perhaps throttler could be class-level?
      * @class
-     * @extends giant.Base
+     * @extends $oop.Base
      * @extends giant.Evented
      */
     giant.File = self
@@ -150,7 +150,7 @@ giant.postpone(giant, 'File', function () {
 (function () {
     "use strict";
 
-    giant.addGlobalConstants(/** @lends giant */{
+    $oop.addGlobalConstants.call(giant, /** @lends giant */{
         /**
          * Signals that a File has started loading.
          * @constant
@@ -171,7 +171,7 @@ giant.postpone(giant, 'File', function () {
     });
 }());
 
-giant.amendPostponed(giant, 'FilePath', function () {
+$oop.amendPostponed(giant, 'FilePath', function () {
     "use strict";
 
     giant.FilePath

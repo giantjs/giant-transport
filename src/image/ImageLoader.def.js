@@ -1,8 +1,8 @@
 /*global giant, jQuery */
-giant.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
+$oop.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
     "use strict";
 
-    var base = giant.Base,
+    var base = $oop.Base,
         self = base.extend()
             .addTrait(giant.Evented);
 
@@ -18,7 +18,7 @@ giant.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
      * The ImageLoader class represents an image file, and manages its dynamic loading via a DOM element.
      * Triggers events upon start, success, and failure of loading an image.
      * @class
-     * @extends giant.Base
+     * @extends $oop.Base
      * @extends giant.Evented
      */
     giant.ImageLoader = self
@@ -107,7 +107,7 @@ giant.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
 (function () {
     "use strict";
 
-    giant.addGlobalConstants(/** @lends giant */{
+    $oop.addGlobalConstants.call(giant, /** @lends giant */{
         /**
          * Signals that an Image started loading.
          * @constant
@@ -128,7 +128,7 @@ giant.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
     });
 }());
 
-giant.amendPostponed(giant, 'ImageUrl', function () {
+$oop.amendPostponed(giant, 'ImageUrl', function () {
     "use strict";
 
     giant.ImageUrl

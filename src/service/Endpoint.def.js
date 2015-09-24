@@ -1,5 +1,5 @@
 /*global giant */
-giant.postpone(giant, 'Endpoint', function () {
+$oop.postpone(giant, 'Endpoint', function () {
     "use strict";
 
     var base = giant.Location,
@@ -29,7 +29,7 @@ giant.postpone(giant, 'Endpoint', function () {
         });
 });
 
-giant.amendPostponed(giant, 'Path', function () {
+$oop.amendPostponed(giant, 'Path', function () {
     "use strict";
 
     giant.Path.addMethods(/** @lends giant.Path# */{
@@ -46,7 +46,7 @@ giant.amendPostponed(giant, 'Path', function () {
 (function () {
     "use strict";
 
-    giant.extendBuiltIn(String.prototype, /** @lends String# */{
+    $oop.extendBuiltIn(String.prototype, /** @lends String# */{
         /**
          * Converts `String` to `Endpoint`
          * @returns {giant.Endpoint}
@@ -59,7 +59,7 @@ giant.amendPostponed(giant, 'Path', function () {
         }
     });
 
-    giant.extendBuiltIn(Array.prototype, /** @lends Array# */{
+    $oop.extendBuiltIn(Array.prototype, /** @lends Array# */{
         /**
          * Converts `Array` to `Endpoint`
          * @returns {giant.Endpoint}

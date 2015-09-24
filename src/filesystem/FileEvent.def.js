@@ -1,6 +1,6 @@
 /*global giant, jQuery */
 /*jshint node:true */
-giant.postpone(giant, 'FileEvent', function () {
+$oop.postpone(giant, 'FileEvent', function () {
     "use strict";
 
     var base = giant.Event,
@@ -85,7 +85,7 @@ giant.postpone(giant, 'FileEvent', function () {
         });
 });
 
-giant.amendPostponed(giant, 'Event', function () {
+$oop.amendPostponed(giant, 'Event', function () {
     "use strict";
 
     giant.Event

@@ -1,5 +1,5 @@
 /*global giant, jQuery */
-giant.postpone(giant, 'ImageUrl', function () {
+$oop.postpone(giant, 'ImageUrl', function () {
     "use strict";
 
     var base = giant.Location,
@@ -38,7 +38,7 @@ giant.postpone(giant, 'ImageUrl', function () {
         });
 });
 
-giant.amendPostponed(giant, 'Path', function () {
+$oop.amendPostponed(giant, 'Path', function () {
     "use strict";
 
     giant.Path.addMethods(/** @lends giant.Path# */{
@@ -55,7 +55,7 @@ giant.amendPostponed(giant, 'Path', function () {
 (function () {
     "use strict";
 
-    giant.extendBuiltIn(String.prototype, /** @lends String# */{
+    $oop.extendBuiltIn(String.prototype, /** @lends String# */{
         /**
          * Converts `String` to `ImageUrl`.
          * @returns {giant.ImageUrl}
@@ -68,7 +68,7 @@ giant.amendPostponed(giant, 'Path', function () {
         }
     });
 
-    giant.extendBuiltIn(Array.prototype, /** @lends Array# */{
+    $oop.extendBuiltIn(Array.prototype, /** @lends Array# */{
         /**
          * Converts `Array` to `ImageUrl`.
          * @returns {giant.ImageUrl}

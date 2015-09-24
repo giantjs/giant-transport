@@ -1,5 +1,5 @@
 /*global giant, jQuery */
-giant.postpone(giant, 'PromiseCollection', function (ns, className, /**jQuery*/$) {
+$oop.postpone(giant, 'PromiseCollection', function (ns, className, /**jQuery*/$) {
     "use strict";
 
     var modelPromise = $.Deferred().promise();
@@ -32,7 +32,7 @@ giant.postpone(giant, 'PromiseCollection', function (ns, className, /**jQuery*/$
         });
 }, jQuery);
 
-giant.amendPostponed(giant, 'Hash', function () {
+$oop.amendPostponed(giant, 'Hash', function () {
     "use strict";
 
     giant.Hash
@@ -50,7 +50,7 @@ giant.amendPostponed(giant, 'Hash', function () {
 (function () {
     "use strict";
 
-    giant.extendBuiltIn(Array.prototype, /** @lends Array# */{
+    $oop.extendBuiltIn(Array.prototype, /** @lends Array# */{
         /**
          * Converts `Array` to `PromiseCollection`.
          * @returns {giant.PromiseCollection}

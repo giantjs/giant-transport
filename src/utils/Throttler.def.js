@@ -1,8 +1,8 @@
 /*global giant */
-giant.postpone(giant, 'Throttler', function () {
+$oop.postpone(giant, 'Throttler', function () {
     "use strict";
 
-    var base = giant.Base,
+    var base = $oop.Base,
         self = base.extend(),
         slice = Array.prototype.slice;
 
@@ -17,7 +17,7 @@ giant.postpone(giant, 'Throttler', function () {
      * Throttles a function call. The original function is expected to return a promise. (Q or jQuery).
      * TODO: Eliminate jQuery promises (0.4.0).
      * @class
-     * @extends giant.Base
+     * @extends $oop.Base
      */
     giant.Throttler = self
         .addConstants(/** @lends giant.Throttler */{
@@ -76,7 +76,7 @@ giant.postpone(giant, 'Throttler', function () {
 (function () {
     "use strict";
 
-    giant.extendBuiltIn(Function.prototype, /** @lends Function# */{
+    $oop.extendBuiltIn(Function.prototype, /** @lends Function# */{
         /**
          * Converts `Function` to `Throttler`.
          * @returns {giant.Throttler}
