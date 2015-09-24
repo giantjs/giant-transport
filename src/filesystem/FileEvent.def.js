@@ -71,7 +71,7 @@ $oop.postpone(giant, 'FileEvent', function () {
             /**
              * Clones event instance. In addition to `giant.Event.clone()`, also copies file-specific properties
              * (by reference).
-             * @param {giant.Path} [currentPath]
+             * @param {$data.Path} [currentPath]
              * @returns {giant.FileEvent}
              */
             clone: function (currentPath) {

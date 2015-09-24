@@ -22,10 +22,10 @@ $oop.postpone(giant, 'Throttler', function () {
     giant.Throttler = self
         .addConstants(/** @lends giant.Throttler */{
             /**
-             * @type {giant.Collection}
+             * @type {$data.Collection}
              * @constant
              */
-            promiseRegistry: giant.Collection.create()
+            promiseRegistry: $data.Collection.create()
         })
         .addMethods(/** @lends giant.Throttler# */{
             /**

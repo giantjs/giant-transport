@@ -9,7 +9,7 @@ $oop.postpone(giant, 'Endpoint', function () {
      * Creates an Endpoint instance.
      * @name giant.Endpoint.create
      * @function
-     * @param {giant.Path} endpointPath
+     * @param {$data.Path} endpointPath
      * @returns {giant.Endpoint}
      */
 
@@ -29,10 +29,10 @@ $oop.postpone(giant, 'Endpoint', function () {
         });
 });
 
-$oop.amendPostponed(giant, 'Path', function () {
+$oop.amendPostponed($data, 'Path', function () {
     "use strict";
 
-    giant.Path.addMethods(/** @lends giant.Path# */{
+    $data.Path.addMethods(/** @lends $data.Path# */{
         /**
          * Converts `Path` instance to `Endpoint`
          * @returns {giant.Endpoint}

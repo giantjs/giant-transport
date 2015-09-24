@@ -11,7 +11,7 @@ $oop.postpone(giant, 'Location', function () {
      * Do not instantiate Location directly unless there are a surrogate rules set up.
      * @name giant.Location.create
      * @function
-     * @param {giant.Path} locationPath Path that represents the endpoints.
+     * @param {$data.Path} locationPath Path that represents the endpoints.
      * @returns {giant.Location}
      */
 
@@ -47,7 +47,7 @@ $oop.postpone(giant, 'Location', function () {
         })
         .addMethods(/** @lends giant.Location# */{
             /**
-             * @param {giant.Path} locationPath
+             * @param {$data.Path} locationPath
              * @ignore
              */
             init: function (locationPath) {
@@ -55,7 +55,7 @@ $oop.postpone(giant, 'Location', function () {
 
                 /**
                  * Path associated with endpoint.
-                 * @type {giant.Path}
+                 * @type {$data.Path}
                  */
                 this.locationPath = locationPath;
 

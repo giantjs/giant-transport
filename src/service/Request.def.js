@@ -68,15 +68,15 @@ $oop.postpone(giant, 'Request', function () {
 
                 /**
                  * Collection of header key-value pairs.
-                 * @type {giant.Collection}
+                 * @type {$data.Collection}
                  */
-                this.headers = giant.Collection.create();
+                this.headers = $data.Collection.create();
 
                 /**
                  * Collection of query parameter key-value pairs.
-                 * @type {giant.Collection}
+                 * @type {$data.Collection}
                  */
-                this.params = giant.Collection.create(params);
+                this.params = $data.Collection.create(params);
 
                 /**
                  * Request body format.
@@ -133,7 +133,7 @@ $oop.postpone(giant, 'Request', function () {
 
                 var that = this;
 
-                giant.Collection.create(headers)
+                $data.Collection.create(headers)
                     .forEachItem(function (value, key) {
                         that.headers.setItem(key, value);
                     });
@@ -164,7 +164,7 @@ $oop.postpone(giant, 'Request', function () {
 
                 var that = this;
 
-                giant.Collection.create(params)
+                $data.Collection.create(params)
                     .forEachItem(function (value, key) {
                         that.params.setItem(key, value);
                     });

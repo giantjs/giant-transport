@@ -80,7 +80,7 @@
         strictEqual(serviceEvent.getResponseNode(), serviceEvent.responseNode,
             "should return responseNode property when no path is specified");
 
-        giant.Tree.addMocks({
+        $data.Tree.addMocks({
             getNode: function (path) {
                 strictEqual(this.items, serviceEvent.responseNode, "should fetch node from responseNode");
                 equal(path.toString(), 'foo>bar', "should fetch node from specified path");
@@ -91,7 +91,7 @@
         strictEqual(serviceEvent.getResponseNode('foo>bar'.toPath()), responseNode,
             "should return node fetched from within tha responseNode property");
 
-        giant.Tree.removeMocks();
+        $data.Tree.removeMocks();
     });
 
     test("Response hash getter", function () {
@@ -107,11 +107,11 @@
         }, "should raise exception on invalid argument");
 
         result = serviceEvent.getResponseNodeAsHash();
-        ok(result.isA(giant.Hash), "should return a Hash instance");
+        ok(result.isA($data.Hash), "should return a Hash instance");
         strictEqual(result.items, serviceEvent.responseNode,
             "should return responseNode property when no path is specified");
 
-        giant.Tree.addMocks({
+        $data.Tree.addMocks({
             getNode: function (path) {
                 strictEqual(this.items, serviceEvent.responseNode, "should fetch node from responseNode");
                 equal(path.toString(), 'foo>bar', "should fetch node from specified path");
@@ -121,9 +121,9 @@
 
         result = serviceEvent.getResponseNodeAsHash('foo>bar'.toPath());
 
-        giant.Tree.removeMocks();
+        $data.Tree.removeMocks();
 
-        ok(result.isA(giant.Hash), "should return a Hash instance");
+        ok(result.isA($data.Hash), "should return a Hash instance");
         strictEqual(result.items, responseNode,
             "should return node fetched from within the responseNode property");
     });

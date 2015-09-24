@@ -87,29 +87,29 @@ $oop.postpone(giant, 'ServiceEvent', function () {
              * Treats the response node as a `Tree` instance.
              * @example
              * var node = event.getResponseNode('foo>bar'.toPath());
-             * @param {giant.Path} [path] Path pointing to the node to be fetched. When absent,
+             * @param {$data.Path} [path] Path pointing to the node to be fetched. When absent,
              * the entire `responseNode` will be returned.
              * @returns {*}
              */
             getResponseNode: function (path) {
                 $assertion.isPathOptional(path, "Invalid path");
                 return path ?
-                    giant.Tree.create(this.responseNode).getNode(path) :
+                    $data.Tree.create(this.responseNode).getNode(path) :
                     this.responseNode;
             },
 
             /**
              * Fetches data node from the response node, wrapped in a `Hash` instance.
-             * @param {giant.Path} [path] Path pointing to the node to be fetched. When absent,
+             * @param {$data.Path} [path] Path pointing to the node to be fetched. When absent,
              * the entire `responseNode` will be returned.
-             * @returns {giant.Hash}
+             * @returns {$data.Hash}
              * @see giant.ServiceEvent#getResponseNode
              */
             getResponseNodeAsHash: function (path) {
                 $assertion.isPathOptional(path, "Invalid path");
                 return path ?
-                    giant.Tree.create(this.responseNode).getNodeAsHash(path) :
-                    giant.Hash.create(this.responseNode);
+                    $data.Tree.create(this.responseNode).getNodeAsHash(path) :
+                    $data.Hash.create(this.responseNode);
             },
 
             /**
@@ -152,7 +152,7 @@ $oop.postpone(giant, 'ServiceEvent', function () {
             /**
              * Clones event instance. In addition to `giant.Event.clone()`, also copies service-specific properties
              * (by reference).
-             * @param {giant.Path} [currentPath]
+             * @param {$data.Path} [currentPath]
              * @returns {giant.ServiceEvent}
              * @see giant.Event#clone
              */

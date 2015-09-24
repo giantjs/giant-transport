@@ -23,9 +23,9 @@
 
         strictEqual(request.endpoint, endpoint, "should set endpoint property to the one specified");
         equal(request.httpMethod, 'GET', "should set HTTP method property to 'GET'");
-        ok(request.headers.isA(giant.Collection), "should initialize headers property as Collection instance");
+        ok(request.headers.isA($data.Collection), "should initialize headers property as Collection instance");
         equal(request.headers.getKeyCount(), 0, "should set headers property to an empty Collection");
-        ok(request.params.isA(giant.Collection), "should initialize params property as Collection instance");
+        ok(request.params.isA($data.Collection), "should initialize params property as Collection instance");
         strictEqual(request.params.items, params, "should set params buffer to the one specified");
     });
 

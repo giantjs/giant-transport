@@ -16,10 +16,10 @@ $oop.postpone(giant, 'QPromiseCollection', function () {
      * The QPromiseCollection offers a `Collection`-based solution for joining multiple promises.
      * (The joined promise resolves when *all* promises resolve, and reject when *any* of the promises reject.)
      * @class
-     * @extends giant.Collection
+     * @extends $data.Collection
      * @extends Q.Promise
      */
-    giant.QPromiseCollection = giant.Collection.of(modelPromise)
+    giant.QPromiseCollection = $data.Collection.of(modelPromise)
         .addMethods(/** @lends QPromiseCollection# */{
             /**
              * Obtains joined promise for all promises in the collection.
@@ -32,11 +32,11 @@ $oop.postpone(giant, 'QPromiseCollection', function () {
         });
 });
 
-$oop.amendPostponed(giant, 'Hash', function () {
+$oop.amendPostponed($data, 'Hash', function () {
     "use strict";
 
-    giant.Hash
-        .addMethods(/** @lends giant.Hash */{
+    $data.Hash
+        .addMethods(/** @lends $data.Hash */{
             /**
              * Converts `Hash` to `QPromiseCollection`.
              * @returns {giant.QPromiseCollection}

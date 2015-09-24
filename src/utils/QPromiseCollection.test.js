@@ -5,7 +5,7 @@
     module("QPromiseCollection");
 
     test("Conversion from Hash", function () {
-        var hash = giant.Hash.create(),
+        var hash = $data.Hash.create(),
             promiseCollection = hash.toQPromiseCollection();
 
         ok(promiseCollection.isA(giant.QPromiseCollection), "should return giant.QPromiseCollection instance");

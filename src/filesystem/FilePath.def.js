@@ -9,7 +9,7 @@ $oop.postpone(giant, 'FilePath', function () {
      * Creates an FilePath instance.
      * @name giant.FilePath.create
      * @function
-     * @param {giant.Path} imagePath
+     * @param {$data.Path} imagePath
      * @returns {giant.FilePath}
      */
 
@@ -45,10 +45,10 @@ $oop.postpone(giant, 'FilePath', function () {
         });
 });
 
-$oop.amendPostponed(giant, 'Path', function () {
+$oop.amendPostponed($data, 'Path', function () {
     "use strict";
 
-    giant.Path.addMethods(/** @lends giant.Path# */{
+    $data.Path.addMethods(/** @lends $data.Path# */{
         /**
          * Converts `Path` to `FilePath`.
          * @returns {giant.FilePath}

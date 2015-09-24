@@ -115,9 +115,9 @@ $oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
 
                 // merging default ajax options with custom options
                 // custom options taking precedence
-                ajaxOptions = giant.Collection.create(ajaxOptions)
+                ajaxOptions = $data.Collection.create(ajaxOptions)
                     .mergeWith(this.ajaxOptions)
-                    .mergeWith(giant.Collection.create({
+                    .mergeWith($data.Collection.create({
                         dataType: "json",
                         type    : request.httpMethod,
                         url     : request.getUrl(),
@@ -180,9 +180,9 @@ $oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
                 /**
                  * Custom options to be passed to jQuery.ajax().
                  * Options stored in here override the default ajax options, and thus might break the ajax call.
-                 * @type {giant.Collection}
+                 * @type {$data.Collection}
                  */
-                this.ajaxOptions = giant.Collection.create();
+                this.ajaxOptions = $data.Collection.create();
 
                 /** @type {giant.Throttler} */
                 this.callServiceThrottler = this._callService.toThrottler();
@@ -236,7 +236,7 @@ $oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
 
                 var that = this;
 
-                giant.Collection.create(ajaxOptions)
+                $data.Collection.create(ajaxOptions)
                     .forEachItem(function (value, key) {
                         that.ajaxOptions.setItem(key, value);
                     });
@@ -336,8 +336,8 @@ $oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
              * @returns {jQuery.Promise}
              */
             callServiceSync: function (ajaxOptions) {
-                ajaxOptions = giant.Collection.create({async: false})
-                    .mergeWith(giant.Collection.create(ajaxOptions))
+                ajaxOptions = $data.Collection.create({async: false})
+                    .mergeWith($data.Collection.create(ajaxOptions))
                     .items;
 
                 return this.callService(ajaxOptions);

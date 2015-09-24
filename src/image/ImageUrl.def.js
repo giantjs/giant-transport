@@ -9,7 +9,7 @@ $oop.postpone(giant, 'ImageUrl', function () {
      * Creates an ImageUrl instance.
      * @name giant.ImageUrl.create
      * @function
-     * @param {giant.Path} imagePath
+     * @param {$data.Path} imagePath
      * @returns {giant.ImageUrl}
      */
 
@@ -38,10 +38,10 @@ $oop.postpone(giant, 'ImageUrl', function () {
         });
 });
 
-$oop.amendPostponed(giant, 'Path', function () {
+$oop.amendPostponed($data, 'Path', function () {
     "use strict";
 
-    giant.Path.addMethods(/** @lends giant.Path# */{
+    $data.Path.addMethods(/** @lends $data.Path# */{
         /**
          * Converts `Path` to `ImageUrl`.
          * @returns {giant.ImageUrl}
