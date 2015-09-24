@@ -1,5 +1,5 @@
-/*global giant, Q */
-$oop.postpone(giant, 'QPromiseCollection', function () {
+/*global $transport, Q */
+$oop.postpone($transport, 'QPromiseCollection', function () {
     "use strict";
 
     var modelPromise = Q.defer().promise;
@@ -19,7 +19,7 @@ $oop.postpone(giant, 'QPromiseCollection', function () {
      * @extends $data.Collection
      * @extends Q.Promise
      */
-    giant.QPromiseCollection = $data.Collection.of(modelPromise)
+    $transport.QPromiseCollection = $data.Collection.of(modelPromise)
         .addMethods(/** @lends QPromiseCollection# */{
             /**
              * Obtains joined promise for all promises in the collection.
@@ -39,10 +39,10 @@ $oop.amendPostponed($data, 'Hash', function () {
         .addMethods(/** @lends $data.Hash */{
             /**
              * Converts `Hash` to `QPromiseCollection`.
-             * @returns {giant.QPromiseCollection}
+             * @returns {$transport.QPromiseCollection}
              */
             toQPromiseCollection: function () {
-                return giant.QPromiseCollection.create(this.items);
+                return $transport.QPromiseCollection.create(this.items);
             }
         });
 });
@@ -53,10 +53,10 @@ $oop.amendPostponed($data, 'Hash', function () {
     $oop.extendBuiltIn(Array.prototype, /** @lends Array# */{
         /**
          * Converts `Array` to `QPromiseCollection`.
-         * @returns {giant.QPromiseCollection}
+         * @returns {$transport.QPromiseCollection}
          */
         toQPromiseCollection: function () {
-            return giant.QPromiseCollection.create(this);
+            return $transport.QPromiseCollection.create(this);
         }
     });
 }());

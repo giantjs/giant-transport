@@ -1,5 +1,5 @@
-/*global giant, jQuery */
-$oop.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
+/*global $transport, jQuery */
+$oop.postpone($transport, 'ImageLoader', function (ns, className, /**jQuery*/$) {
     "use strict";
 
     var base = $oop.Base,
@@ -8,10 +8,10 @@ $oop.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
 
     /**
      * Creates an ImageLoader instance.
-     * @name giant.ImageLoader.create
+     * @name $transport.ImageLoader.create
      * @function
-     * @param {giant.ImageUrl} imageUrl Location of image.
-     * @returns {giant.ImageLoader}
+     * @param {$transport.ImageUrl} imageUrl Location of image.
+     * @returns {$transport.ImageLoader}
      */
 
     /**
@@ -21,9 +21,9 @@ $oop.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
      * @extends $oop.Base
      * @extends $event.Evented
      */
-    giant.ImageLoader = self
+    $transport.ImageLoader = self
         .setEventSpace($event.eventSpace)
-        .addPrivateMethods(/** @lends giant.ImageLoader# */{
+        .addPrivateMethods(/** @lends $transport.ImageLoader# */{
             /**
              * @returns {HTMLImageElement}
              * @private
@@ -50,9 +50,9 @@ $oop.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
                 return deferred.promise();
             }
         })
-        .addMethods(/** @lends giant.ImageLoader# */{
+        .addMethods(/** @lends $transport.ImageLoader# */{
             /**
-             * @param {giant.ImageUrl} imageUrl
+             * @param {$transport.ImageUrl} imageUrl
              * @ignore
              */
             init: function (imageUrl) {
@@ -60,7 +60,7 @@ $oop.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
 
                 $event.Evented.init.call(this);
 
-                /** @type {giant.ImageUrl} */
+                /** @type {$transport.ImageUrl} */
                 this.imageUrl = imageUrl;
 
                 this.setEventPath(imageUrl.eventPath);
@@ -76,14 +76,14 @@ $oop.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
                     imageElement = this._createImageElementProxy(),
                     deferred = $.Deferred();
 
-                this.spawnEvent(giant.EVENT_IMAGE_LOAD_START)
+                this.spawnEvent($transport.EVENT_IMAGE_LOAD_START)
                     .setImageLocation(imageUrl)
                     .setImageElement(imageElement)
                     .triggerSync();
 
                 this._loadImage(imageElement, imageUrl.toString())
                     .done(function () {
-                        that.spawnEvent(giant.EVENT_IMAGE_LOAD_SUCCESS)
+                        that.spawnEvent($transport.EVENT_IMAGE_LOAD_SUCCESS)
                             .setImageLocation(imageUrl)
                             .setImageElement(imageElement)
                             .triggerSync();
@@ -91,7 +91,7 @@ $oop.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
                         deferred.resolve(imageUrl, imageElement);
                     })
                     .fail(function () {
-                        that.spawnEvent(giant.EVENT_IMAGE_LOAD_FAILURE)
+                        that.spawnEvent($transport.EVENT_IMAGE_LOAD_FAILURE)
                             .setImageLocation(imageUrl)
                             .setImageElement(imageElement)
                             .triggerSync();
@@ -107,7 +107,7 @@ $oop.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
 (function () {
     "use strict";
 
-    $oop.addGlobalConstants.call(giant, /** @lends giant */{
+    $oop.addGlobalConstants.call($transport, /** @lends $transport */{
         /**
          * Signals that an Image started loading.
          * @constant
@@ -128,17 +128,17 @@ $oop.postpone(giant, 'ImageLoader', function (ns, className, /**jQuery*/$) {
     });
 }());
 
-$oop.amendPostponed(giant, 'ImageUrl', function () {
+$oop.amendPostponed($transport, 'ImageUrl', function () {
     "use strict";
 
-    giant.ImageUrl
-        .addMethods(/** @lends giant.ImageUrl */{
+    $transport.ImageUrl
+        .addMethods(/** @lends $transport.ImageUrl */{
             /**
              * Converts `ImageUrl` to `ImageLoader`.
-             * @returns {giant.ImageLoader}
+             * @returns {$transport.ImageLoader}
              */
             toImageLoader: function () {
-                return giant.ImageLoader.create(this);
+                return $transport.ImageLoader.create(this);
             }
         });
 });

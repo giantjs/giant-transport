@@ -1,5 +1,5 @@
-/*global giant, console, jQuery */
-$oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
+/*global $transport, console, jQuery */
+$oop.postpone($transport, 'Service', function (ns, className, /**jQuery*/$) {
     "use strict";
 
     var base = $oop.Base,
@@ -8,10 +8,10 @@ $oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
 
     /**
      * Creates a Service instance.
-     * @name giant.Service.create
+     * @name $transport.Service.create
      * @function
-     * @param {giant.Request} request
-     * @returns {giant.Service}
+     * @param {$transport.Request} request
+     * @returns {$transport.Service}
      */
 
     /**
@@ -24,9 +24,9 @@ $oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
      * @extends $oop.Base
      * @extends $event.Evented
      */
-    giant.Service = self
+    $transport.Service = self
         .setEventSpace($event.eventSpace)
-        .addConstants(/** @lends giant.Service */{
+        .addConstants(/** @lends $transport.Service */{
             /**
              * Default timeout for service calls in [ms].
              * @constant
@@ -44,7 +44,7 @@ $oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
                 DELETE: 204
             }
         })
-        .addPrivateMethods(/** @lends giant.Service# */{
+        .addPrivateMethods(/** @lends $transport.Service# */{
             /**
              * @param {object} ajaxOptions
              * @returns {jQuery.Promise}
@@ -65,21 +65,21 @@ $oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
                     request = this.request;
 
                 // sending notification about starting the service
-                this.spawnEvent(giant.EVENT_SERVICE_START)
+                this.spawnEvent($transport.EVENT_SERVICE_START)
                     .setRequest(request)
                     .triggerSync();
 
                 // adding handlers
                 ajaxPromise
                     .done(function (responseNode, textStatus, jqXHR) {
-                        that.spawnEvent(giant.EVENT_SERVICE_SUCCESS)
+                        that.spawnEvent($transport.EVENT_SERVICE_SUCCESS)
                             .setRequest(request)
                             .setResponseNode(responseNode)
                             .setJqXhr(jqXHR)
                             .triggerSync();
                     })
                     .fail(function (jqXHR, textStatus, errorThrown) {
-                        that.spawnEvent(giant.EVENT_SERVICE_FAILURE)
+                        that.spawnEvent($transport.EVENT_SERVICE_FAILURE)
                             .setRequest(request)
                             .setResponseNode(errorThrown)
                             .setJqXhr(jqXHR)
@@ -127,12 +127,12 @@ $oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
                     }))
                     .items;
 
-                var promise = giant.PromiseLoop
+                var promise = $transport.PromiseLoop
                     .retryOnFail(function () {
                         return that._ajaxProxy(ajaxOptions);
                     }, this.retryCount, this.retryDelay)
                     .progress(function (stop, jqXHR, textStatus, errorThrown) {
-                        that.spawnEvent(giant.EVENT_SERVICE_RETRY)
+                        that.spawnEvent($transport.EVENT_SERVICE_RETRY)
                             .setRequest(request)
                             .setResponseNode(errorThrown)
                             .setJqXhr(jqXHR)
@@ -145,9 +145,9 @@ $oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
                 return promise;
             }
         })
-        .addMethods(/** @lends giant.Service# */{
+        .addMethods(/** @lends $transport.Service# */{
             /**
-             * @param {giant.Request} request
+             * @param {$transport.Request} request
              * @ignore
              */
             init: function (request) {
@@ -161,7 +161,7 @@ $oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
 
                 /**
                  * Request associated with the service call.
-                 * @type {giant.Request}
+                 * @type {$transport.Request}
                  */
                 this.request = request;
 
@@ -184,7 +184,7 @@ $oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
                  */
                 this.ajaxOptions = $data.Collection.create();
 
-                /** @type {giant.Throttler} */
+                /** @type {$transport.Throttler} */
                 this.callServiceThrottler = this._callService.toThrottler();
 
                 // setting event path to endpoint's event path
@@ -194,7 +194,7 @@ $oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
             /**
              * Sets how many times a failed service call will be re-attempted.
              * @param {number} retryCount
-             * @returns {giant.Service}
+             * @returns {$transport.Service}
              */
             setRetryCount: function (retryCount) {
                 $assertion.isNumber(retryCount, "Invalid retry count");
@@ -205,7 +205,7 @@ $oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
             /**
              * Sets delay in milliseconds between consecutive attempts.
              * @param {number} retryDelay
-             * @returns {giant.Service}
+             * @returns {$transport.Service}
              */
             setRetryDelay: function (retryDelay) {
                 $assertion.isNumber(retryDelay, "Invalid retry count");
@@ -217,7 +217,7 @@ $oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
              * Sets custom ajax option key-value pair. Overwrites existing option entry by the same `optionName`.
              * @param {string} optionName
              * @param {*} optionValue
-             * @returns {giant.Service}
+             * @returns {$transport.Service}
              */
             setAjaxOption: function (optionName, optionValue) {
                 $assertion.isString(optionName, "Invalid ajax option name");
@@ -229,7 +229,7 @@ $oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
              * Sets multiple custom ajax option key-value pairs. Overwrites existing ajax option entries
              * having the same keys.
              * @param {object} ajaxOptions
-             * @returns {giant.Service}
+             * @returns {$transport.Service}
              */
             addAjaxOptions: function (ajaxOptions) {
                 $assertion.isObject(ajaxOptions, "Invalid ajax options");
@@ -348,7 +348,7 @@ $oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
 (function () {
     "use strict";
 
-    $oop.addGlobalConstants.call(giant, /** @lends giant */{
+    $oop.addGlobalConstants.call($transport, /** @lends $transport */{
         /**
          * Signals the start of a Service call.
          * @constant
@@ -375,37 +375,37 @@ $oop.postpone(giant, 'Service', function (ns, className, /**jQuery*/$) {
     });
 }());
 
-$oop.amendPostponed(giant, 'Request', function () {
+$oop.amendPostponed($transport, 'Request', function () {
     "use strict";
 
-    giant.Request
-        .addMethods(/** @lends giant.Request */{
-            /** @returns {giant.Service} */
+    $transport.Request
+        .addMethods(/** @lends $transport.Request */{
+            /** @returns {$transport.Service} */
             toService: function () {
-                return giant.Service.create(this);
+                return $transport.Service.create(this);
             }
         });
 });
 
-$oop.postpone(giant, 'logServiceEvents', function () {
+$oop.postpone($transport, 'logServiceEvents', function () {
     "use strict";
 
     /**
      * Starts logging all service related events to the console.
      * @type {function}
      */
-    giant.logServiceEvents = function () {
+    $transport.logServiceEvents = function () {
         [].toEndpoint()
-            .subscribeTo(giant.EVENT_SERVICE_START, function (event) {
+            .subscribeTo($transport.EVENT_SERVICE_START, function (event) {
                 console.info("service start", event.request.endpoint.toString(), event);
             })
-            .subscribeTo(giant.EVENT_SERVICE_RETRY, function (event) {
+            .subscribeTo($transport.EVENT_SERVICE_RETRY, function (event) {
                 console.warn("service retry", event.request.endpoint.toString(), event);
             })
-            .subscribeTo(giant.EVENT_SERVICE_SUCCESS, function (event) {
+            .subscribeTo($transport.EVENT_SERVICE_SUCCESS, function (event) {
                 console.info("service success", event.request.endpoint.toString(), event);
             })
-            .subscribeTo(giant.EVENT_SERVICE_FAILURE, function (event) {
+            .subscribeTo($transport.EVENT_SERVICE_FAILURE, function (event) {
                 console.warn("service failed", event.request.endpoint.toString(), event);
             });
     };

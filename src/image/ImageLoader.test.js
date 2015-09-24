@@ -1,4 +1,4 @@
-/*global giant, $ */
+/*global $transport, $ */
 (function () {
     "use strict";
 
@@ -6,15 +6,15 @@
 
     test("Instantiation", function () {
         throws(function () {
-            giant.ImageLoader.create();
+            $transport.ImageLoader.create();
         }, "should raise exception on no arguments");
 
         throws(function () {
-            giant.ImageLoader.create('foo');
+            $transport.ImageLoader.create('foo');
         }, "should raise exception on invalid argument");
 
         var imageUrl = 'foo/bar'.toImageUrl(),
-            image = giant.ImageLoader.create(imageUrl);
+            image = $transport.ImageLoader.create(imageUrl);
 
         strictEqual(image.imageUrl, imageUrl, "should set imageUrl property");
         strictEqual(image.eventPath, imageUrl.eventPath, "should set eventPath property");
@@ -24,7 +24,7 @@
         var imageUrl = 'foo/bar'.toImageUrl(),
             image = imageUrl.toImageLoader();
 
-        ok(image.isA(giant.ImageLoader), "should return an ImageLoader instance");
+        ok(image.isA($transport.ImageLoader), "should return an ImageLoader instance");
         strictEqual(image.imageUrl, imageUrl, "should set imageUrl property to self");
     });
 
@@ -50,16 +50,16 @@
         });
 
         'foo/bar'.toImageUrl()
-            .subscribeTo(giant.EVENT_IMAGE_LOAD_START, function (event) {
-                ok(event.isA(giant.ImageEvent), "should trigger image load start event");
+            .subscribeTo($transport.EVENT_IMAGE_LOAD_START, function (event) {
+                ok(event.isA($transport.ImageEvent), "should trigger image load start event");
                 equal(event.originalPath.toString(), 'image>foo>bar', "should trigger start event on correct path");
                 strictEqual(event.imageUrl, image.imageUrl,
                     "should set event's imageUrl to image's imageUrl");
                 strictEqual(event.imageElement, imageElement,
                     "should set event's imageElement to created image element");
             })
-            .subscribeTo(giant.EVENT_IMAGE_LOAD_SUCCESS, function (event) {
-                ok(event.isA(giant.ImageEvent), "should trigger image load success event");
+            .subscribeTo($transport.EVENT_IMAGE_LOAD_SUCCESS, function (event) {
+                ok(event.isA($transport.ImageEvent), "should trigger image load success event");
                 equal(event.originalPath.toString(), 'image>foo>bar', "should trigger success event on correct path");
                 strictEqual(event.imageUrl, image.imageUrl,
                     "should set event's imageUrl to image's imageUrl");
@@ -103,16 +103,16 @@
         });
 
         'foo/bar'.toImageUrl()
-            .subscribeTo(giant.EVENT_IMAGE_LOAD_START, function (event) {
-                ok(event.isA(giant.ImageEvent), "should trigger image load start event");
+            .subscribeTo($transport.EVENT_IMAGE_LOAD_START, function (event) {
+                ok(event.isA($transport.ImageEvent), "should trigger image load start event");
                 equal(event.originalPath.toString(), 'image>foo>bar', "should trigger start event on correct path");
                 strictEqual(event.imageUrl, image.imageUrl,
                     "should set event's imageUrl to image's imageUrl");
                 strictEqual(event.imageElement, imageElement,
                     "should set event's imageElement to created image element");
             })
-            .subscribeTo(giant.EVENT_IMAGE_LOAD_FAILURE, function (event) {
-                ok(event.isA(giant.ImageEvent), "should trigger image load failure event");
+            .subscribeTo($transport.EVENT_IMAGE_LOAD_FAILURE, function (event) {
+                ok(event.isA($transport.ImageEvent), "should trigger image load failure event");
                 equal(event.originalPath.toString(), 'image>foo>bar', "should trigger failure event on correct path");
                 strictEqual(event.imageUrl, image.imageUrl,
                     "should set event's imageUrl to image's imageUrl");

@@ -1,4 +1,4 @@
-/*global giant */
+/*global $transport */
 (function () {
     "use strict";
 
@@ -6,20 +6,20 @@
 
     test("Instantiation", function () {
         throws(function () {
-            giant.Request.create();
+            $transport.Request.create();
         }, "should raise exception on absent arguments");
 
         throws(function () {
-            giant.Request.create('foo');
+            $transport.Request.create('foo');
         }, "should raise exception on invalid endpoint argument");
 
         throws(function () {
-            giant.Request.create('foo/bar'.toEndpoint(), 'foo');
+            $transport.Request.create('foo/bar'.toEndpoint(), 'foo');
         }, "should raise exception on invalid parameters argument");
 
         var endpoint = 'foo/bar'.toEndpoint(),
             params = {},
-            request = giant.Request.create(endpoint, params);
+            request = $transport.Request.create(endpoint, params);
 
         strictEqual(request.endpoint, endpoint, "should set endpoint property to the one specified");
         equal(request.httpMethod, 'GET', "should set HTTP method property to 'GET'");
@@ -33,7 +33,7 @@
         var params = {},
             request = 'foo/bar'.toRequest(params);
 
-        ok(request.isA(giant.Request), "should return a Request instance");
+        ok(request.isA($transport.Request), "should return a Request instance");
         equal(request.endpoint.toString(), 'foo/bar', "should set endpoint to one based on the string");
         strictEqual(request.params.items, params, "should set params to the one specified");
     });
@@ -42,7 +42,7 @@
         var params = {},
             request = ['foo', 'bar'].toRequest(params);
 
-        ok(request.isA(giant.Request), "should return a Request instance");
+        ok(request.isA($transport.Request), "should return a Request instance");
         equal(request.endpoint.toString(), 'foo/bar', "should set endpoint to one based on the array");
         strictEqual(request.params.items, params, "should set params to the one specified");
     });
@@ -52,7 +52,7 @@
             endpoint = 'foo/bar'.toEndpoint(),
             request = endpoint.toRequest(params);
 
-        ok(request.isA(giant.Request), "should return a Request instance");
+        ok(request.isA($transport.Request), "should return a Request instance");
         strictEqual(request.endpoint, endpoint, "should set endpoint property to the endpoint converted");
         strictEqual(request.params.items, params, "should set params to the one specified");
     });

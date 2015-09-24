@@ -1,4 +1,4 @@
-/*global giant, shoehine, Q, app */
+/*global $transport, shoehine, Q, app */
 (function () {
     "use strict";
 
@@ -8,7 +8,7 @@
         var hash = $data.Hash.create(),
             promiseCollection = hash.toQPromiseCollection();
 
-        ok(promiseCollection.isA(giant.QPromiseCollection), "should return giant.QPromiseCollection instance");
+        ok(promiseCollection.isA($transport.QPromiseCollection), "should return giant.QPromiseCollection instance");
     });
 
     test("Conversion from Array", function () {
@@ -17,7 +17,7 @@
             array = [promise1, promise2],
             promiseCollection = array.toQPromiseCollection();
 
-        ok(promiseCollection.isA(giant.QPromiseCollection), "should return giant.QPromiseCollection instance");
+        ok(promiseCollection.isA($transport.QPromiseCollection), "should return giant.QPromiseCollection instance");
         deepEqual(promiseCollection.items, [promise1, promise2], "should set collection contents");
     });
 

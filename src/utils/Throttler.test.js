@@ -1,30 +1,30 @@
-/*global giant, shoehine, Q, $ */
+/*global $transport, shoehine, Q, $ */
 (function () {
     "use strict";
 
     module("Throttler", {
         setup: function () {
-            giant.Throttler.promiseRegistry.clear();
+            $transport.Throttler.promiseRegistry.clear();
         },
 
         teardown: function () {
-            giant.Throttler.promiseRegistry.clear();
+            $transport.Throttler.promiseRegistry.clear();
         }
     });
 
     test("Instantiation", function () {
         throws(function () {
-            giant.Throttler.create();
+            $transport.Throttler.create();
         }, "should raise exception on missing argument");
 
         throws(function () {
-            giant.Throttler.create('foo');
+            $transport.Throttler.create('foo');
         }, "should raise exception on invalid argument");
 
         function foo() {
         }
 
-        var throttler = giant.Throttler.create(foo);
+        var throttler = $transport.Throttler.create(foo);
 
         strictEqual(throttler.originalFunction, foo, "should set originalFunction property");
     });
@@ -35,7 +35,7 @@
 
         var throttler = foo.toThrottler();
 
-        ok(throttler.isA(giant.Throttler), "should return Throttler instance");
+        ok(throttler.isA($transport.Throttler), "should return Throttler instance");
         strictEqual(throttler.originalFunction, foo, "should set originalFunction property");
     });
 

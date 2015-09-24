@@ -1,5 +1,5 @@
-/*global giant, jQuery */
-$oop.postpone(giant, 'PromiseLoop', function (ns, className, /**jQuery*/$) {
+/*global $transport, jQuery */
+$oop.postpone($transport, 'PromiseLoop', function (ns, className, /**jQuery*/$) {
     "use strict";
 
     var base = $oop.Base,
@@ -10,12 +10,12 @@ $oop.postpone(giant, 'PromiseLoop', function (ns, className, /**jQuery*/$) {
      * @class
      * @extends $oop.Base
      */
-    giant.PromiseLoop = self
-        .addConstants(/** @lends giant.PromiseLoop */{
+    $transport.PromiseLoop = self
+        .addConstants(/** @lends $transport.PromiseLoop */{
             /** @constant */
             NOTIFICATION_TYPE_RETRY: 'notification-retry'
         })
-        .addMethods(/** @lends giant.PromiseLoop */{
+        .addMethods(/** @lends $transport.PromiseLoop */{
             /**
              * Runs handler and re-tries the specified number of times if the promise fails.
              * @param {function} handler Expected to return a jQuery promise.

@@ -1,6 +1,6 @@
-/*global giant, Q, jQuery */
+/*global $transport, Q, jQuery */
 /*jshint node:true */
-$oop.postpone(giant, 'File', function () {
+$oop.postpone($transport, 'File', function () {
     "use strict";
 
     var base = $oop.Base,
@@ -10,10 +10,10 @@ $oop.postpone(giant, 'File', function () {
 
     /**
      * Creates an File instance.
-     * @name giant.File.create
+     * @name $transport.File.create
      * @function
-     * @param {giant.FilePath} filePath File location.
-     * @returns {giant.File}
+     * @param {$transport.FilePath} filePath File location.
+     * @returns {$transport.File}
      */
 
     /**
@@ -24,9 +24,9 @@ $oop.postpone(giant, 'File', function () {
      * @extends $oop.Base
      * @extends $event.Evented
      */
-    giant.File = self
+    $transport.File = self
         .setEventSpace($event.eventSpace)
-        .addPrivateMethods(/** @lends giant.File# */{
+        .addPrivateMethods(/** @lends $transport.File# */{
             /**
              * @param {string} filename
              * @param {object} options
@@ -59,20 +59,20 @@ $oop.postpone(giant, 'File', function () {
                     deferred = Q.defer(),
                     event;
 
-                this.spawnEvent(giant.EVENT_FILE_READ_START)
+                this.spawnEvent($transport.EVENT_FILE_READ_START)
                     .setFilePath(filePath)
                     .triggerSync();
 
                 this._readFileProxy(filePath.toString(), null, function (err, data) {
                     if (err) {
-                        event = that.spawnEvent(giant.EVENT_FILE_READ_FAILURE)
+                        event = that.spawnEvent($transport.EVENT_FILE_READ_FAILURE)
                             .setFilePath(filePath)
                             .setFileError(err)
                             .triggerSync();
 
                         deferred.reject(event);
                     } else {
-                        event = that.spawnEvent(giant.EVENT_FILE_READ_SUCCESS)
+                        event = that.spawnEvent($transport.EVENT_FILE_READ_SUCCESS)
                             .setFilePath(filePath)
                             .setFileData(data)
                             .triggerSync();
@@ -84,9 +84,9 @@ $oop.postpone(giant, 'File', function () {
                 return deferred.promise;
             }
         })
-        .addMethods(/** @lends giant.File# */{
+        .addMethods(/** @lends $transport.File# */{
             /**
-             * @param {giant.FilePath} filePath
+             * @param {$transport.FilePath} filePath
              * @ignore
              */
             init: function (filePath) {
@@ -98,11 +98,11 @@ $oop.postpone(giant, 'File', function () {
 
                 /**
                  * Local path to the current file.
-                 * @type {giant.FilePath}
+                 * @type {$transport.FilePath}
                  */
                 this.filePath = filePath;
 
-                /** @type {giant.Throttler} */
+                /** @type {$transport.Throttler} */
                 this.readFileThrottler = this._readFile.toThrottler();
 
                 this.setEventPath(filePath.eventPath);
@@ -124,19 +124,19 @@ $oop.postpone(giant, 'File', function () {
                 var filePath = this.filePath,
                     data;
 
-                this.spawnEvent(giant.EVENT_FILE_READ_START)
+                this.spawnEvent($transport.EVENT_FILE_READ_START)
                     .setFilePath(filePath)
                     .triggerSync();
 
                 try {
                     data = this._readFileSyncProxy(filePath.toString(), null);
 
-                    this.spawnEvent(giant.EVENT_FILE_READ_SUCCESS)
+                    this.spawnEvent($transport.EVENT_FILE_READ_SUCCESS)
                         .setFilePath(filePath)
                         .setFileData(data)
                         .triggerSync();
                 } catch (e) {
-                    this.spawnEvent(giant.EVENT_FILE_READ_FAILURE)
+                    this.spawnEvent($transport.EVENT_FILE_READ_FAILURE)
                         .setFilePath(filePath)
                         .setFileError(e)
                         .triggerSync();
@@ -150,7 +150,7 @@ $oop.postpone(giant, 'File', function () {
 (function () {
     "use strict";
 
-    $oop.addGlobalConstants.call(giant, /** @lends giant */{
+    $oop.addGlobalConstants.call($transport, /** @lends $transport */{
         /**
          * Signals that a File has started loading.
          * @constant
@@ -171,17 +171,17 @@ $oop.postpone(giant, 'File', function () {
     });
 }());
 
-$oop.amendPostponed(giant, 'FilePath', function () {
+$oop.amendPostponed($transport, 'FilePath', function () {
     "use strict";
 
-    giant.FilePath
-        .addMethods(/** @lends giant.ImageUrl */{
+    $transport.FilePath
+        .addMethods(/** @lends $transport.ImageUrl */{
             /**
              * Converts `FilePath` to `File`.
-             * @returns {giant.File}
+             * @returns {$transport.File}
              */
             toFile: function () {
-                return giant.File.create(this);
+                return $transport.File.create(this);
             }
         });
 });

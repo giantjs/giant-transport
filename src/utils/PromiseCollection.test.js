@@ -1,4 +1,4 @@
-/*global giant, $ */
+/*global $transport, $ */
 (function () {
     "use strict";
 
@@ -25,7 +25,7 @@
     test("Conversion from array", function () {
         var promiseCollection = promises.toPromiseCollection();
 
-        ok(promiseCollection.isA(giant.PromiseCollection), "should return a PromiseCollection instance");
+        ok(promiseCollection.isA($transport.PromiseCollection), "should return a PromiseCollection instance");
         strictEqual(promiseCollection.items, promises, "should set items buffer to promises array");
     });
 
@@ -33,7 +33,7 @@
         var promiseHash = promises.toHash(),
             promiseCollection = promiseHash.toPromiseCollection();
 
-        ok(promiseCollection.isA(giant.PromiseCollection), "should return a PromiseCollection instance");
+        ok(promiseCollection.isA($transport.PromiseCollection), "should return a PromiseCollection instance");
         strictEqual(promiseCollection.items, promises, "should set items buffer to promises array");
     });
 

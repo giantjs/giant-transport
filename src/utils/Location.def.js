@@ -1,5 +1,5 @@
-/*global giant */
-$oop.postpone(giant, 'Location', function () {
+/*global $transport */
+$oop.postpone($transport, 'Location', function () {
     "use strict";
 
     var base = $oop.Base,
@@ -9,10 +9,10 @@ $oop.postpone(giant, 'Location', function () {
     /**
      * Creates a Location instance.
      * Do not instantiate Location directly unless there are a surrogate rules set up.
-     * @name giant.Location.create
+     * @name $transport.Location.create
      * @function
      * @param {$data.Path} locationPath Path that represents the endpoints.
-     * @returns {giant.Location}
+     * @returns {$transport.Location}
      */
 
     /**
@@ -22,9 +22,9 @@ $oop.postpone(giant, 'Location', function () {
      * @extends $oop.Base
      * @extends $event.Evented
      */
-    giant.Location = self
+    $transport.Location = self
         .setEventSpace($event.eventSpace)
-        .addConstants(/** @lends giant.Location */{
+        .addConstants(/** @lends $transport.Location */{
             /**
              * Root path for events triggered on the location.
              * Gets prepended to the `eventPath` of the instance.
@@ -45,7 +45,7 @@ $oop.postpone(giant, 'Location', function () {
              */
             LEADING_TRAILING_SLASHES: /(^\/+)|(\/+$)/g
         })
-        .addMethods(/** @lends giant.Location# */{
+        .addMethods(/** @lends $transport.Location# */{
             /**
              * @param {$data.Path} locationPath
              * @ignore
@@ -68,7 +68,7 @@ $oop.postpone(giant, 'Location', function () {
 
             /**
              * Tells if the specified location is equivalent to the current one.
-             * @param {giant.Location} location
+             * @param {$transport.Location} location
              * @returns {boolean}
              */
             equals: function (location) {
@@ -82,8 +82,8 @@ $oop.postpone(giant, 'Location', function () {
             /**
              * Appends specified location to current location.
              * The base class of the returned instance is determined by the current instance.
-             * @param {giant.Location} location
-             * @returns {giant.Location}
+             * @param {$transport.Location} location
+             * @returns {$transport.Location}
              */
             append: function (location) {
                 $assertion.isLocation(location, "Invalid location");
@@ -93,8 +93,8 @@ $oop.postpone(giant, 'Location', function () {
             /**
              * Prepends specified location to current location.
              * The base class of the returned instance is determined by the current instance.
-             * @param {giant.Location} location
-             * @returns {giant.Location}
+             * @param {$transport.Location} location
+             * @returns {$transport.Location}
              */
             prepend: function (location) {
                 $assertion.isLocation(location, "Invalid location");
@@ -122,16 +122,16 @@ $oop.postpone(giant, 'Location', function () {
 (function () {
     "use strict";
 
-    $assertion.addTypes(/** @lends giant */{
-        /** @param {giant.Location} expr */
+    $assertion.addTypes(/** @lends $transport */{
+        /** @param {$transport.Location} expr */
         isLocation: function (expr) {
-            return giant.Location.isBaseOf(expr);
+            return $transport.Location.isBaseOf(expr);
         },
 
-        /** @param {giant.Location} [expr] */
+        /** @param {$transport.Location} [expr] */
         isLocationOptional: function (expr) {
             return typeof expr === 'undefined' ||
-                   giant.Location.isBaseOf(expr);
+                   $transport.Location.isBaseOf(expr);
         }
     });
 }());

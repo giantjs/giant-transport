@@ -1,6 +1,6 @@
-/*global giant, jQuery */
+/*global $transport, jQuery */
 /*jshint node:true */
-$oop.postpone(giant, 'FileEvent', function () {
+$oop.postpone($transport, 'FileEvent', function () {
     "use strict";
 
     var base = $event.Event,
@@ -8,19 +8,19 @@ $oop.postpone(giant, 'FileEvent', function () {
 
     /**
      * Creates an FileEvent instance.
-     * @name giant.FileEvent.create
+     * @name $transport.FileEvent.create
      * @function
      * @param {string} eventName Event name
      * @param {$event.EventSpace} eventSpace Event space
-     * @returns {giant.FileEvent}
+     * @returns {$transport.FileEvent}
      */
 
     /**
      * @class
      * @extends $event.Event
      */
-    giant.FileEvent = self
-        .addMethods(/** @lends giant.FileEvent# */{
+    $transport.FileEvent = self
+        .addMethods(/** @lends $transport.FileEvent# */{
             /**
              * @param {string} eventName Event name
              * @param {$event.EventSpace} eventSpace Event space
@@ -29,7 +29,7 @@ $oop.postpone(giant, 'FileEvent', function () {
             init: function (eventName, eventSpace) {
                 base.init.call(this, eventName, eventSpace);
 
-                /** @type {giant.FilePath} */
+                /** @type {$transport.FilePath} */
                 this.filePath = undefined;
 
                 /** @type {Error} */
@@ -40,8 +40,8 @@ $oop.postpone(giant, 'FileEvent', function () {
             },
 
             /**
-             * @param {giant.FilePath} filePath
-             * @returns {giant.FileEvent}
+             * @param {$transport.FilePath} filePath
+             * @returns {$transport.FileEvent}
              */
             setFilePath: function (filePath) {
                 $assertion.isLocation(filePath, "Invalid location");
@@ -51,7 +51,7 @@ $oop.postpone(giant, 'FileEvent', function () {
 
             /**
              * @param {Error} fileError
-             * @returns {giant.FileEvent}
+             * @returns {$transport.FileEvent}
              */
             setFileError: function (fileError) {
                 $assertion.assert(fileError instanceof Error, "Invalid file error");
@@ -61,7 +61,7 @@ $oop.postpone(giant, 'FileEvent', function () {
 
             /**
              * @param {string} fileData
-             * @returns {giant.FileEvent}
+             * @returns {$transport.FileEvent}
              */
             setFileData: function (fileData) {
                 this.fileData = fileData;
@@ -72,10 +72,10 @@ $oop.postpone(giant, 'FileEvent', function () {
              * Clones event instance. In addition to `$event.Event.clone()`, also copies file-specific properties
              * (by reference).
              * @param {$data.Path} [currentPath]
-             * @returns {giant.FileEvent}
+             * @returns {$transport.FileEvent}
              */
             clone: function (currentPath) {
-                var clone = /** @type {giant.FileEvent} */base.clone.call(this, currentPath);
+                var clone = /** @type {$transport.FileEvent} */base.clone.call(this, currentPath);
 
                 return clone
                     .setFilePath(this.filePath)
@@ -89,7 +89,7 @@ $oop.amendPostponed($event, 'Event', function () {
     "use strict";
 
     $event.Event
-        .addSurrogate(giant, 'FileEvent', function (eventName) {
+        .addSurrogate($transport, 'FileEvent', function (eventName) {
             var prefix = 'file';
             return eventName.substr(0, prefix.length) === prefix;
         });

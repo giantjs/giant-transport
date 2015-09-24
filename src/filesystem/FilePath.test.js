@@ -1,4 +1,4 @@
-/*global giant */
+/*global $transport */
 (function () {
     "use strict";
 
@@ -7,7 +7,7 @@
     test("Conversion from string", function () {
         var filePath = 'foo/bar'.toFilePath();
 
-        ok(filePath.isA(giant.FilePath), "should return FilePath instance");
+        ok(filePath.isA($transport.FilePath), "should return FilePath instance");
         equal(filePath.locationPath.toString(), 'foo>bar',
             "should set locationPath to the one specified in slash notation");
 
@@ -18,7 +18,7 @@
     test("Conversion from array", function () {
         var filePath = ['foo', 'bar'].toFilePath();
 
-        ok(filePath.isA(giant.FilePath), "should return FilePath instance");
+        ok(filePath.isA($transport.FilePath), "should return FilePath instance");
         equal(filePath.locationPath.toString(), 'foo>bar',
             "should set locationPath to the one specified as array");
     });
@@ -27,7 +27,7 @@
         var locationPath = 'foo>bar'.toPath(),
             filePath = locationPath.toFilePath();
 
-        ok(filePath.isA(giant.FilePath), "should return FilePath instance");
+        ok(filePath.isA($transport.FilePath), "should return FilePath instance");
         strictEqual(filePath.locationPath, locationPath,
             "should set locationPath to the one that was converted");
     });
@@ -38,7 +38,7 @@
         var filePath = 'foo/bar'.toFilePath(),
             promise = {};
 
-        giant.File.addMocks({
+        $transport.File.addMocks({
             readFile: function () {
                 strictEqual(this.filePath, filePath, "should load file for specified path");
                 return promise;
@@ -47,7 +47,7 @@
 
         strictEqual(filePath.readFile(), promise, "should return promise from File.readFile");
 
-        giant.File.removeMocks();
+        $transport.File.removeMocks();
     });
 
     test("Synchronous file loading", function () {
@@ -56,7 +56,7 @@
         var filePath = 'foo/bar'.toFilePath(),
             promise = {};
 
-        giant.File.addMocks({
+        $transport.File.addMocks({
             readFileSync: function () {
                 strictEqual(this.filePath, filePath, "should load file for specified path synchronously");
                 return promise;
@@ -65,6 +65,6 @@
 
         strictEqual(filePath.readFileSync(), promise, "should return promise from File.readFileSync");
 
-        giant.File.removeMocks();
+        $transport.File.removeMocks();
     });
 }());

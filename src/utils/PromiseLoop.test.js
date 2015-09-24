@@ -1,4 +1,4 @@
-/*global giant, shoehine, $ */
+/*global $transport, shoehine, $ */
 (function () {
     "use strict";
 
@@ -7,7 +7,7 @@
     test("Successful call", function () {
         expect(2);
 
-        giant.PromiseLoop
+        $transport.PromiseLoop
             .retryOnFail(function () {
                 ok(true, "should call handler");
                 return $.Deferred().resolve('foo');
@@ -20,7 +20,7 @@
     test("Failure with no retries", function () {
         expect(2);
 
-        giant.PromiseLoop
+        $transport.PromiseLoop
             .retryOnFail(function () {
                 ok(true, "should call handler");
                 return $.Deferred().reject('foo');
@@ -33,7 +33,7 @@
     asyncTest("Failure with one retry", function () {
         expect(3);
 
-        giant.PromiseLoop
+        $transport.PromiseLoop
             .retryOnFail(function () {
                 ok(true, "should call handler"); // will be hit 2x
                 return $.Deferred().reject('foo');
@@ -53,7 +53,7 @@
             ],
             i = 0;
 
-        giant.PromiseLoop
+        $transport.PromiseLoop
             .retryOnFail(function () {
                 return promises[i++];
             }, 2)

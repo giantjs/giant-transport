@@ -1,25 +1,25 @@
-/*global giant */
-$oop.postpone(giant, 'Endpoint', function () {
+/*global $transport */
+$oop.postpone($transport, 'Endpoint', function () {
     "use strict";
 
-    var base = giant.Location,
+    var base = $transport.Location,
         self = base.extend();
 
     /**
      * Creates an Endpoint instance.
-     * @name giant.Endpoint.create
+     * @name $transport.Endpoint.create
      * @function
      * @param {$data.Path} endpointPath
-     * @returns {giant.Endpoint}
+     * @returns {$transport.Endpoint}
      */
 
     /**
      * The Endpoint is a Location that represents a service endpoint.
      * @class
-     * @extends giant.Location
+     * @extends $transport.Location
      */
-    giant.Endpoint = self
-        .addConstants(/** @lends giant.Endpoint */{
+    $transport.Endpoint = self
+        .addConstants(/** @lends $transport.Endpoint */{
             /**
              * Event root path specifically for endpoints.
              * @constant
@@ -35,10 +35,10 @@ $oop.amendPostponed($data, 'Path', function () {
     $data.Path.addMethods(/** @lends $data.Path# */{
         /**
          * Converts `Path` instance to `Endpoint`
-         * @returns {giant.Endpoint}
+         * @returns {$transport.Endpoint}
          */
         toEndpoint: function () {
-            return giant.Endpoint.create(this);
+            return $transport.Endpoint.create(this);
         }
     });
 });
@@ -49,11 +49,11 @@ $oop.amendPostponed($data, 'Path', function () {
     $oop.extendBuiltIn(String.prototype, /** @lends String# */{
         /**
          * Converts `String` to `Endpoint`
-         * @returns {giant.Endpoint}
+         * @returns {$transport.Endpoint}
          */
         toEndpoint: function () {
-            return giant.Endpoint.create(this
-                .replace(giant.Location.LEADING_TRAILING_SLASHES, '') // removing leading & trailing slashes
+            return $transport.Endpoint.create(this
+                .replace($transport.Location.LEADING_TRAILING_SLASHES, '') // removing leading & trailing slashes
                 .split('/') // splitting up slash-separated path
                 .toPath());
         }
@@ -62,10 +62,10 @@ $oop.amendPostponed($data, 'Path', function () {
     $oop.extendBuiltIn(Array.prototype, /** @lends Array# */{
         /**
          * Converts `Array` to `Endpoint`
-         * @returns {giant.Endpoint}
+         * @returns {$transport.Endpoint}
          */
         toEndpoint: function () {
-            return giant.Endpoint.create(this.toPath());
+            return $transport.Endpoint.create(this.toPath());
         }
     });
 }());

@@ -1,15 +1,15 @@
-/*global giant, jQuery */
-$oop.postpone(giant, 'PromiseCollection', function (ns, className, /**jQuery*/$) {
+/*global $transport, jQuery */
+$oop.postpone($transport, 'PromiseCollection', function (ns, className, /**jQuery*/$) {
     "use strict";
 
     var modelPromise = $.Deferred().promise();
 
     /**
      * Creates a PromiseCollection instance.
-     * @name giant.PromiseCollection.create
+     * @name $transport.PromiseCollection.create
      * @function
      * @param {object} items
-     * @returns {giant.PromiseCollection}
+     * @returns {$transport.PromiseCollection}
      */
 
     /**
@@ -20,8 +20,8 @@ $oop.postpone(giant, 'PromiseCollection', function (ns, className, /**jQuery*/$)
      * @extends $data.Collection
      * @extends jQuery.Promise
      */
-    giant.PromiseCollection = $data.Collection.of(modelPromise)
-        .addMethods(/** @lends giant.PromiseCollection# */{
+    $transport.PromiseCollection = $data.Collection.of(modelPromise)
+        .addMethods(/** @lends $transport.PromiseCollection# */{
             /**
              * Obtains joined promise for all promises in the collection.
              * @returns {jQuery.Promise}
@@ -39,10 +39,10 @@ $oop.amendPostponed($data, 'Hash', function () {
         .addMethods(/** @lends $data.Hash */{
             /**
              * Converts `Hash` to `PromiseCollection`.
-             * @returns {giant.PromiseCollection}
+             * @returns {$transport.PromiseCollection}
              */
             toPromiseCollection: function () {
-                return giant.PromiseCollection.create(this.items);
+                return $transport.PromiseCollection.create(this.items);
             }
         });
 });
@@ -53,10 +53,10 @@ $oop.amendPostponed($data, 'Hash', function () {
     $oop.extendBuiltIn(Array.prototype, /** @lends Array# */{
         /**
          * Converts `Array` to `PromiseCollection`.
-         * @returns {giant.PromiseCollection}
+         * @returns {$transport.PromiseCollection}
          */
         toPromiseCollection: function () {
-            return giant.PromiseCollection.create(this);
+            return $transport.PromiseCollection.create(this);
         }
     });
 }());

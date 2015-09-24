@@ -1,16 +1,16 @@
-/*global giant */
-$oop.postpone(giant, 'Request', function () {
+/*global $transport */
+$oop.postpone($transport, 'Request', function () {
     "use strict";
 
     var base = $oop.Base,
         self = base.extend();
 
     /**
-     * @name giant.Request.create
+     * @name $transport.Request.create
      * @function
-     * @param {giant.Endpoint} endpoint
+     * @param {$transport.Endpoint} endpoint
      * @param {object} [params]
-     * @returns {giant.Request}
+     * @returns {$transport.Request}
      */
 
     /**
@@ -18,8 +18,8 @@ $oop.postpone(giant, 'Request', function () {
      * @class
      * @extends $oop.Base
      */
-    giant.Request = self
-        .addConstants(/** @lends giant.Request */{
+    $transport.Request = self
+        .addConstants(/** @lends $transport.Request */{
             /**
              * @type {object}
              * @constant
@@ -43,9 +43,9 @@ $oop.postpone(giant, 'Request', function () {
                 'json'   : 'json'
             }
         })
-        .addMethods(/** @lends giant.Request# */{
+        .addMethods(/** @lends $transport.Request# */{
             /**
-             * @param {giant.Endpoint} endpoint
+             * @param {$transport.Endpoint} endpoint
              * @param {object} [params]
              * @ignore
              */
@@ -56,7 +56,7 @@ $oop.postpone(giant, 'Request', function () {
 
                 /**
                  * Endpoint the request addresses.
-                 * @type {giant.Endpoint}
+                 * @type {$transport.Endpoint}
                  */
                 this.endpoint = endpoint;
 
@@ -88,7 +88,7 @@ $oop.postpone(giant, 'Request', function () {
             /**
              * Sets HTTP method property.
              * @param {string} httpMethod A valid HTTP method string. 'GET', 'POST', 'DELETE', etc.
-             * @returns {giant.Request}
+             * @returns {$transport.Request}
              */
             setHttpMethod: function (httpMethod) {
                 $assertion.isHttpMethod(httpMethod, "Invalid HTTP method");
@@ -99,7 +99,7 @@ $oop.postpone(giant, 'Request', function () {
             /**
              * Sets body format property.
              * @param {string} bodyFormat Either 'default' or 'json'.
-             * @returns {giant.Request}
+             * @returns {$transport.Request}
              */
             setBodyFormat: function (bodyFormat) {
                 $assertion.isBodyFormat(bodyFormat, "Invalid body format");
@@ -113,7 +113,7 @@ $oop.postpone(giant, 'Request', function () {
              * request.setHeader('Content-Type', 'application/json);
              * @param {string} headerName Name of header entry.
              * @param {string} headerValue Header entry value.
-             * @returns {giant.Request}
+             * @returns {$transport.Request}
              */
             setHeader: function (headerName, headerValue) {
                 $assertion
@@ -126,7 +126,7 @@ $oop.postpone(giant, 'Request', function () {
             /**
              * Sets multiple header key-value pairs. Overwrites existing header entries having the same keys.
              * @param {object} headers
-             * @returns {giant.Request}
+             * @returns {$transport.Request}
              */
             addHeaders: function (headers) {
                 $assertion.isObject(headers, "Invalid headers");
@@ -145,7 +145,7 @@ $oop.postpone(giant, 'Request', function () {
              * Sets query parameter key-value pair. Overwrites existing parameter entry by the same `paramName`.
              * @param {string} paramName Name of query parameter.
              * @param {*} paramValue Query parameter value.
-             * @returns {giant.Request}
+             * @returns {$transport.Request}
              */
             setParam: function (paramName, paramValue) {
                 $assertion.isString(paramName, "Invalid param name");
@@ -157,7 +157,7 @@ $oop.postpone(giant, 'Request', function () {
              * Sets multiple query parameter key-value pairs. Overwrites existing query parameter entries
              * having the same keys.
              * @param {object} params
-             * @returns {giant.Request}
+             * @returns {$transport.Request}
              */
             addParams: function (params) {
                 $assertion.isObject(params, "Invalid params");
@@ -195,18 +195,18 @@ $oop.postpone(giant, 'Request', function () {
         });
 });
 
-$oop.amendPostponed(giant, 'Endpoint', function () {
+$oop.amendPostponed($transport, 'Endpoint', function () {
     "use strict";
 
-    giant.Endpoint
-        .addMethods(/** @lends giant.Endpoint# */{
+    $transport.Endpoint
+        .addMethods(/** @lends $transport.Endpoint# */{
             /**
              * Converts endpoint to `Request`.
              * @param {object} [params]
-             * @returns {giant.Request}
+             * @returns {$transport.Request}
              */
             toRequest: function (params) {
-                return giant.Request.create(this, params);
+                return $transport.Request.create(this, params);
             }
         });
 });
@@ -214,26 +214,26 @@ $oop.amendPostponed(giant, 'Endpoint', function () {
 (function () {
     "use strict";
 
-    $assertion.addTypes(/** @lends giant */{
+    $assertion.addTypes(/** @lends $transport */{
         /** @param {string} expr */
         isHttpMethod: function (expr) {
-            return expr && giant.Request.httpMethods[expr] === expr;
+            return expr && $transport.Request.httpMethods[expr] === expr;
         },
 
         /** @param {string} expr */
         isBodyFormat: function (expr) {
-            return expr && giant.Request.bodyFormats[expr] === expr;
+            return expr && $transport.Request.bodyFormats[expr] === expr;
         },
 
-        /** @param {giant.Request} expr */
+        /** @param {$transport.Request} expr */
         isRequest: function (expr) {
-            return giant.Request.isBaseOf(expr);
+            return $transport.Request.isBaseOf(expr);
         },
 
-        /** @param {giant.Request} [expr] */
+        /** @param {$transport.Request} [expr] */
         isRequestOptional: function (expr) {
             return typeof expr === 'undefined' ||
-                giant.Request.isBaseOf(expr);
+                $transport.Request.isBaseOf(expr);
         }
     });
 
@@ -241,12 +241,12 @@ $oop.amendPostponed(giant, 'Endpoint', function () {
         /**
          * Converts `Array` to `Request`.
          * @param {object} [params]
-         * @returns {giant.Request}
+         * @returns {$transport.Request}
          * @example
          * ['foo', 'bar'].toRequest()
          */
         toRequest: function (params) {
-            return giant.Request.create(this.toEndpoint(), params);
+            return $transport.Request.create(this.toEndpoint(), params);
         }
     });
 
@@ -254,12 +254,12 @@ $oop.amendPostponed(giant, 'Endpoint', function () {
         /**
          * Converts `String` to `Request`.
          * @param {object} [params]
-         * @returns {giant.Request}
+         * @returns {$transport.Request}
          * @example
          * 'foo/bar'.toRequest()
          */
         toRequest: function (params) {
-            return giant.Request.create(this.toEndpoint(), params);
+            return $transport.Request.create(this.toEndpoint(), params);
         }
     });
 }());

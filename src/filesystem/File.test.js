@@ -1,4 +1,4 @@
-/*global giant, Q */
+/*global $transport, Q */
 (function () {
     "use strict";
 
@@ -6,15 +6,15 @@
 
     test("Instantiation", function () {
         throws(function () {
-            giant.File.create();
+            $transport.File.create();
         }, "should raise exception on no arguments");
 
         throws(function () {
-            giant.File.create('foo');
+            $transport.File.create('foo');
         }, "should raise exception on invalid argument");
 
         var filePath = 'foo/bar'.toFilePath(),
-            file = giant.File.create(filePath);
+            file = $transport.File.create(filePath);
 
         strictEqual(file.filePath, filePath, "should set filePath property");
         strictEqual(file.eventPath, filePath.eventPath, "should set eventPath property");
@@ -24,7 +24,7 @@
         var filePath = 'foo/bar'.toFilePath(),
             file = filePath.toFile();
 
-        ok(file.isA(giant.File), "should return an File instance");
+        ok(file.isA($transport.File), "should return an File instance");
         strictEqual(file.filePath, filePath, "should set filePath property to self");
     });
 
@@ -43,14 +43,14 @@
         });
 
         'foo/bar'.toFilePath()
-            .subscribeTo(giant.EVENT_FILE_READ_START, function (event) {
-                ok(event.isA(giant.FileEvent), "should trigger file load start event");
+            .subscribeTo($transport.EVENT_FILE_READ_START, function (event) {
+                ok(event.isA($transport.FileEvent), "should trigger file load start event");
                 equal(event.originalPath.toString(), 'file>foo>bar', "should trigger start event on correct path");
                 strictEqual(event.filePath, file.filePath,
                     "should set event's filePath to file's filePath");
             })
-            .subscribeTo(giant.EVENT_FILE_READ_SUCCESS, function (event) {
-                ok(event.isA(giant.FileEvent), "should trigger file load success event");
+            .subscribeTo($transport.EVENT_FILE_READ_SUCCESS, function (event) {
+                ok(event.isA($transport.FileEvent), "should trigger file load success event");
                 equal(event.originalPath.toString(), 'file>foo>bar', "should trigger success event on correct path");
                 strictEqual(event.filePath, file.filePath,
                     "should set event's filePath to file's filePath");
@@ -60,7 +60,7 @@
 
         file.readFile()
             .then(function (event) {
-                ok(event.isA(giant.FileEvent), "should return promise resolved with the success event");
+                ok(event.isA($transport.FileEvent), "should return promise resolved with the success event");
                 strictEqual(event.filePath, file.filePath, "should pass filePath to promise");
                 equal(event.fileData, 'fileContents', "should pass file contents to resolved promise");
                 start();
@@ -85,8 +85,8 @@
         });
 
         'foo/bar'.toFilePath()
-            .subscribeTo(giant.EVENT_FILE_READ_FAILURE, function (event) {
-                ok(event.isA(giant.FileEvent), "should trigger file load success event");
+            .subscribeTo($transport.EVENT_FILE_READ_FAILURE, function (event) {
+                ok(event.isA($transport.FileEvent), "should trigger file load success event");
                 equal(event.originalPath.toString(), 'file>foo>bar', "should trigger success event on correct path");
                 strictEqual(event.filePath, file.filePath,
                     "should set event's filePath to file's filePath");
@@ -96,7 +96,7 @@
 
         file.readFile()
             .catch(function (event) {
-                ok(event.isA(giant.FileEvent), "should return promise resolved with the failure event");
+                ok(event.isA($transport.FileEvent), "should return promise resolved with the failure event");
                 strictEqual(event.filePath, file.filePath, "should pass filePath to promise");
                 equal(event.fileError, error, "should pass error to rejected promise");
                 start();
@@ -119,14 +119,14 @@
         });
 
         'foo/bar'.toFilePath()
-            .subscribeTo(giant.EVENT_FILE_READ_START, function (event) {
-                ok(event.isA(giant.FileEvent), "should trigger file load start event");
+            .subscribeTo($transport.EVENT_FILE_READ_START, function (event) {
+                ok(event.isA($transport.FileEvent), "should trigger file load start event");
                 equal(event.originalPath.toString(), 'file>foo>bar', "should trigger start event on correct path");
                 strictEqual(event.filePath, file.filePath,
                     "should set event's filePath to file's filePath");
             })
-            .subscribeTo(giant.EVENT_FILE_READ_SUCCESS, function (event) {
-                ok(event.isA(giant.FileEvent), "should trigger file load success event");
+            .subscribeTo($transport.EVENT_FILE_READ_SUCCESS, function (event) {
+                ok(event.isA($transport.FileEvent), "should trigger file load success event");
                 equal(event.originalPath.toString(), 'file>foo>bar', "should trigger success event on correct path");
                 strictEqual(event.filePath, file.filePath,
                     "should set event's filePath to file's filePath");
@@ -154,8 +154,8 @@
         });
 
         'foo/bar'.toFilePath()
-            .subscribeTo(giant.EVENT_FILE_READ_FAILURE, function (event) {
-                ok(event.isA(giant.FileEvent), "should trigger file load success event");
+            .subscribeTo($transport.EVENT_FILE_READ_FAILURE, function (event) {
+                ok(event.isA($transport.FileEvent), "should trigger file load success event");
                 equal(event.originalPath.toString(), 'file>foo>bar', "should trigger success event on correct path");
                 strictEqual(event.filePath, file.filePath,
                     "should set event's filePath to file's filePath");

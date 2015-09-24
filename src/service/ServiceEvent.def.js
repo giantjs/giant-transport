@@ -1,5 +1,5 @@
-/*global giant */
-$oop.postpone(giant, 'ServiceEvent', function () {
+/*global $transport */
+$oop.postpone($transport, 'ServiceEvent', function () {
     "use strict";
 
     var base = $event.Event,
@@ -7,11 +7,11 @@ $oop.postpone(giant, 'ServiceEvent', function () {
 
     /**
      * Creates a ServiceEvent instance.
-     * @name giant.ServiceEvent.create
+     * @name $transport.ServiceEvent.create
      * @function
      * @param {string} eventName Event name
      * @param {$event.EventSpace} eventSpace Event space
-     * @returns {giant.ServiceEvent}
+     * @returns {$transport.ServiceEvent}
      */
 
     /**
@@ -21,8 +21,8 @@ $oop.postpone(giant, 'ServiceEvent', function () {
      * @class
      * @extends $event.Event
      */
-    giant.ServiceEvent = self
-        .addMethods(/** @lends giant.ServiceEvent# */{
+    $transport.ServiceEvent = self
+        .addMethods(/** @lends $transport.ServiceEvent# */{
             /**
              * @param {string} eventName Event name
              * @param {$event.EventSpace} eventSpace Event space
@@ -33,7 +33,7 @@ $oop.postpone(giant, 'ServiceEvent', function () {
 
                 /**
                  * Request associated with the event.
-                 * @type {giant.Request}
+                 * @type {$transport.Request}
                  */
                 this.request = undefined;
 
@@ -52,8 +52,8 @@ $oop.postpone(giant, 'ServiceEvent', function () {
 
             /**
              * Sets request property.
-             * @param {giant.Request} request
-             * @returns {giant.ServiceEvent}
+             * @param {$transport.Request} request
+             * @returns {$transport.ServiceEvent}
              */
             setRequest: function (request) {
                 $assertion.isRequest(request, "Invalid request");
@@ -75,7 +75,7 @@ $oop.postpone(giant, 'ServiceEvent', function () {
             /**
              * Sets the response data node property.
              * @param {*} responseNode
-             * @returns {giant.ServiceEvent}
+             * @returns {$transport.ServiceEvent}
              */
             setResponseNode: function (responseNode) {
                 this.responseNode = responseNode;
@@ -103,7 +103,7 @@ $oop.postpone(giant, 'ServiceEvent', function () {
              * @param {$data.Path} [path] Path pointing to the node to be fetched. When absent,
              * the entire `responseNode` will be returned.
              * @returns {$data.Hash}
-             * @see giant.ServiceEvent#getResponseNode
+             * @see $transport.ServiceEvent#getResponseNode
              */
             getResponseNodeAsHash: function (path) {
                 $assertion.isPathOptional(path, "Invalid path");
@@ -133,7 +133,7 @@ $oop.postpone(giant, 'ServiceEvent', function () {
             /**
              * Sets jQuery XHR property.
              * @param {jQuery.jqXHR} jqXhr
-             * @returns {giant.ServiceEvent}
+             * @returns {$transport.ServiceEvent}
              */
             setJqXhr: function (jqXhr) {
                 this.jqXhr = jqXhr;
@@ -153,11 +153,11 @@ $oop.postpone(giant, 'ServiceEvent', function () {
              * Clones event instance. In addition to `$event.Event.clone()`, also copies service-specific properties
              * (by reference).
              * @param {$data.Path} [currentPath]
-             * @returns {giant.ServiceEvent}
+             * @returns {$transport.ServiceEvent}
              * @see $event.Event#clone
              */
             clone: function (currentPath) {
-                var clone = /** @type {giant.ServiceEvent} */base.clone.call(this, currentPath);
+                var clone = /** @type {$transport.ServiceEvent} */base.clone.call(this, currentPath);
 
                 return clone
                     .setRequest(this.request)
@@ -171,7 +171,7 @@ $oop.amendPostponed($event, 'Event', function () {
     "use strict";
 
     $event.Event
-        .addSurrogate(giant, 'ServiceEvent', function (eventName) {
+        .addSurrogate($transport, 'ServiceEvent', function (eventName) {
             var prefix = 'service';
             return eventName.substr(0, prefix.length) === prefix;
         });

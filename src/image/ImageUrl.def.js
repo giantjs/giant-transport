@@ -1,25 +1,25 @@
-/*global giant, jQuery */
-$oop.postpone(giant, 'ImageUrl', function () {
+/*global $transport, jQuery */
+$oop.postpone($transport, 'ImageUrl', function () {
     "use strict";
 
-    var base = giant.Location,
+    var base = $transport.Location,
         self = base.extend();
 
     /**
      * Creates an ImageUrl instance.
-     * @name giant.ImageUrl.create
+     * @name $transport.ImageUrl.create
      * @function
      * @param {$data.Path} imagePath
-     * @returns {giant.ImageUrl}
+     * @returns {$transport.ImageUrl}
      */
 
     /**
      * The ImageUrl is a Location that allows dynamic loading of images via DOM image element.
      * @class
-     * @extends giant.Location
+     * @extends $transport.Location
      */
-    giant.ImageUrl = self
-        .addConstants(/** @lends giant.ImageUrl */{
+    $transport.ImageUrl = self
+        .addConstants(/** @lends $transport.ImageUrl */{
             /**
              * Root path for all image event paths.
              * @constant
@@ -27,13 +27,13 @@ $oop.postpone(giant, 'ImageUrl', function () {
              */
             EVENT_ROOT_PATH: 'image'
         })
-        .addMethods(/** @lends giant.ImageUrl# */{
+        .addMethods(/** @lends $transport.ImageUrl# */{
             /**
              * Initiates loading of image.
              * @returns {jQuery.Promise}
              */
             loadImage: function () {
-                return giant.ImageLoader.create(this).loadImage();
+                return $transport.ImageLoader.create(this).loadImage();
             }
         });
 });
@@ -44,10 +44,10 @@ $oop.amendPostponed($data, 'Path', function () {
     $data.Path.addMethods(/** @lends $data.Path# */{
         /**
          * Converts `Path` to `ImageUrl`.
-         * @returns {giant.ImageUrl}
+         * @returns {$transport.ImageUrl}
          */
         toImageUrl: function () {
-            return giant.ImageUrl.create(this);
+            return $transport.ImageUrl.create(this);
         }
     });
 });
@@ -58,11 +58,11 @@ $oop.amendPostponed($data, 'Path', function () {
     $oop.extendBuiltIn(String.prototype, /** @lends String# */{
         /**
          * Converts `String` to `ImageUrl`.
-         * @returns {giant.ImageUrl}
+         * @returns {$transport.ImageUrl}
          */
         toImageUrl: function () {
-            return giant.ImageUrl.create(this
-                .replace(giant.Location.LEADING_TRAILING_SLASHES, '') // removing leading & trailing slashes
+            return $transport.ImageUrl.create(this
+                .replace($transport.Location.LEADING_TRAILING_SLASHES, '') // removing leading & trailing slashes
                 .split('/') // splitting up slash-separated path
                 .toPath());
         }
@@ -71,10 +71,10 @@ $oop.amendPostponed($data, 'Path', function () {
     $oop.extendBuiltIn(Array.prototype, /** @lends Array# */{
         /**
          * Converts `Array` to `ImageUrl`.
-         * @returns {giant.ImageUrl}
+         * @returns {$transport.ImageUrl}
          */
         toImageUrl: function () {
-            return giant.ImageUrl.create(this.toPath());
+            return $transport.ImageUrl.create(this.toPath());
         }
     });
 }());

@@ -1,5 +1,5 @@
-/*global giant */
-$oop.postpone(giant, 'Throttler', function () {
+/*global $transport */
+$oop.postpone($transport, 'Throttler', function () {
     "use strict";
 
     var base = $oop.Base,
@@ -7,10 +7,10 @@ $oop.postpone(giant, 'Throttler', function () {
         slice = Array.prototype.slice;
 
     /**
-     * @name giant.Throttler.create
+     * @name $transport.Throttler.create
      * @function
      * @param {function} originalFunction
-     * @returns {giant.Throttler}
+     * @returns {$transport.Throttler}
      */
 
     /**
@@ -19,15 +19,15 @@ $oop.postpone(giant, 'Throttler', function () {
      * @class
      * @extends $oop.Base
      */
-    giant.Throttler = self
-        .addConstants(/** @lends giant.Throttler */{
+    $transport.Throttler = self
+        .addConstants(/** @lends $transport.Throttler */{
             /**
              * @type {$data.Collection}
              * @constant
              */
             promiseRegistry: $data.Collection.create()
         })
-        .addMethods(/** @lends giant.Throttler# */{
+        .addMethods(/** @lends $transport.Throttler# */{
             /**
              * @param {function} originalFunction
              * @ignore
@@ -79,10 +79,10 @@ $oop.postpone(giant, 'Throttler', function () {
     $oop.extendBuiltIn(Function.prototype, /** @lends Function# */{
         /**
          * Converts `Function` to `Throttler`.
-         * @returns {giant.Throttler}
+         * @returns {$transport.Throttler}
          */
         toThrottler: function () {
-            return giant.Throttler.create(this);
+            return $transport.Throttler.create(this);
         }
     });
 }());

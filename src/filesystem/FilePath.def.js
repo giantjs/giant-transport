@@ -1,25 +1,25 @@
-/*global giant */
-$oop.postpone(giant, 'FilePath', function () {
+/*global $transport */
+$oop.postpone($transport, 'FilePath', function () {
     "use strict";
 
-    var base = giant.Location,
+    var base = $transport.Location,
         self = base.extend();
 
     /**
      * Creates an FilePath instance.
-     * @name giant.FilePath.create
+     * @name $transport.FilePath.create
      * @function
      * @param {$data.Path} imagePath
-     * @returns {giant.FilePath}
+     * @returns {$transport.FilePath}
      */
 
     /**
      * The FilePath is a Location that allows loading of local files.
      * @class
-     * @extends giant.Location
+     * @extends $transport.Location
      */
-    giant.FilePath = self
-        .addConstants(/** @lends giant.FilePath */{
+    $transport.FilePath = self
+        .addConstants(/** @lends $transport.FilePath */{
             /**
              * Root path for all file event paths.
              * @constant
@@ -27,20 +27,20 @@ $oop.postpone(giant, 'FilePath', function () {
              */
             EVENT_ROOT_PATH: 'file'
         })
-        .addMethods(/** @lends giant.FilePath# */{
+        .addMethods(/** @lends $transport.FilePath# */{
             /**
              * Reads the file at the current path.
              * @returns {Q.Promise}
              */
             readFile: function () {
-                return giant.File.create(this).readFile();
+                return $transport.File.create(this).readFile();
             },
 
             /**
              * @returns {*}
              */
             readFileSync: function () {
-                return giant.File.create(this).readFileSync();
+                return $transport.File.create(this).readFileSync();
             }
         });
 });
@@ -51,10 +51,10 @@ $oop.amendPostponed($data, 'Path', function () {
     $data.Path.addMethods(/** @lends $data.Path# */{
         /**
          * Converts `Path` to `FilePath`.
-         * @returns {giant.FilePath}
+         * @returns {$transport.FilePath}
          */
         toFilePath: function () {
-            return giant.FilePath.create(this);
+            return $transport.FilePath.create(this);
         }
     });
 });
@@ -65,11 +65,11 @@ $oop.amendPostponed($data, 'Path', function () {
     $oop.extendBuiltIn(String.prototype, /** @lends String# */{
         /**
          * Converts `String` to `FilePath`.
-         * @returns {giant.FilePath}
+         * @returns {$transport.FilePath}
          */
         toFilePath: function () {
-            return giant.FilePath.create(this
-                .replace(giant.Location.LEADING_TRAILING_SLASHES, '') // removing leading & trailing slashes
+            return $transport.FilePath.create(this
+                .replace($transport.Location.LEADING_TRAILING_SLASHES, '') // removing leading & trailing slashes
                 .split('/') // splitting up slash-separated path
                 .toPath());
         }
@@ -78,10 +78,10 @@ $oop.amendPostponed($data, 'Path', function () {
     $oop.extendBuiltIn(Array.prototype, /** @lends Array# */{
         /**
          * Converts `Array` to `FilePath`.
-         * @returns {giant.FilePath}
+         * @returns {$transport.FilePath}
          */
         toFilePath: function () {
-            return giant.FilePath.create(this.toPath());
+            return $transport.FilePath.create(this.toPath());
         }
     });
 }());

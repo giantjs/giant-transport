@@ -1,4 +1,4 @@
-/*global giant */
+/*global $transport */
 (function () {
     "use strict";
 
@@ -7,7 +7,7 @@
     test("Conversion from string", function () {
         var endpoint = 'foo/bar'.toEndpoint();
 
-        ok(endpoint.isA(giant.Endpoint), "should return Endpoint instance");
+        ok(endpoint.isA($transport.Endpoint), "should return Endpoint instance");
         equal(endpoint.locationPath.toString(), 'foo>bar',
             "should set locationPath to the one specified in slash notation");
 
@@ -18,8 +18,8 @@
     test("Conversion from array", function () {
         var endpoint = ['foo', 'bar'].toEndpoint();
 
-        ok(endpoint.isA(giant.Endpoint), "should return Endpoint instance");
-        ok(endpoint.isA(giant.Endpoint), "should return Endpoint instance");
+        ok(endpoint.isA($transport.Endpoint), "should return Endpoint instance");
+        ok(endpoint.isA($transport.Endpoint), "should return Endpoint instance");
         equal(endpoint.locationPath.toString(), 'foo>bar',
             "should set locationPath to the one specified as array");
     });
@@ -28,7 +28,7 @@
         var locationPath = 'foo>bar'.toPath(),
             endpoint = locationPath.toEndpoint();
 
-        ok(endpoint.isA(giant.Endpoint), "should return Endpoint instance");
+        ok(endpoint.isA($transport.Endpoint), "should return Endpoint instance");
         strictEqual(endpoint.locationPath, locationPath,
             "should set locationPath to the one that was converted");
     });
