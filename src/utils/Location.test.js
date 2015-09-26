@@ -1,4 +1,3 @@
-/*global $transport */
 (function () {
     "use strict";
 

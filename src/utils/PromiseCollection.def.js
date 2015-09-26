@@ -1,4 +1,3 @@
-/*global $transport, jQuery */
 $oop.postpone($transport, 'PromiseCollection', function (ns, className, /**jQuery*/$) {
     "use strict";
 

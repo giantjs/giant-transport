@@ -1,4 +1,3 @@
-/*global $transport */
 $oop.postpone($transport, 'ServiceEvent', function () {
     "use strict";
 

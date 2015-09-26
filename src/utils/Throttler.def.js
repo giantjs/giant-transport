@@ -1,4 +1,3 @@
-/*global $transport */
 $oop.postpone($transport, 'Throttler', function () {
     "use strict";
 

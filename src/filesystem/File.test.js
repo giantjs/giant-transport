@@ -1,4 +1,3 @@
-/*global $transport, Q */
 (function () {
     "use strict";
 

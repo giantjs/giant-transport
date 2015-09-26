@@ -1,4 +1,3 @@
-/*global $transport, jQuery */
 $oop.postpone($transport, 'ImageEvent', function () {
     "use strict";
 

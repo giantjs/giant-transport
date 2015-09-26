@@ -1,4 +1,3 @@
-/*global $transport, shoehine, Q, app */
 (function () {
     "use strict";
 

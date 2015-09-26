@@ -1,4 +1,3 @@
-/*global $transport */
 $oop.postpone($transport, 'FilePath', function () {
     "use strict";
 

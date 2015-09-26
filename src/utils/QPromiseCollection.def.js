@@ -1,4 +1,3 @@
-/*global $transport, Q */
 $oop.postpone($transport, 'QPromiseCollection', function () {
     "use strict";
 

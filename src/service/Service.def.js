@@ -1,4 +1,3 @@
-/*global $transport, console, jQuery */
 $oop.postpone($transport, 'Service', function (ns, className, /**jQuery*/$) {
     "use strict";
 

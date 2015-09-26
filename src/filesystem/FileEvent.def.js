@@ -1,4 +1,3 @@
-/*global $transport, jQuery */
 /*jshint node:true */
 $oop.postpone($transport, 'FileEvent', function () {
     "use strict";
