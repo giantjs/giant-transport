@@ -1,4 +1,4 @@
-$oop.postpone($transport, 'ImageLoader', function (ns, className, /**jQuery*/$) {
+$oop.postpone($transport, 'ImageLoader', function () {
     "use strict";
 
     var base = $oop.Base,
@@ -35,18 +35,18 @@ $oop.postpone($transport, 'ImageLoader', function (ns, className, /**jQuery*/$) 
              * Applies the specified src attribute to the specified image DOM element, and subscribes to its events.
              * @param {HTMLImageElement} imageElement
              * @param {string} srcAttribute
-             * @returns {jQuery.Promise}
+             * @returns {$utils.Promise}
              * @private
              */
             _loadImage: function (imageElement, srcAttribute) {
-                var deferred = $.Deferred();
+                var deferred = $utils.Deferred.create();
 
                 imageElement.onload = deferred.resolve.bind(deferred);
                 imageElement.onerror = deferred.reject.bind(deferred);
 
                 imageElement.src = srcAttribute;
 
-                return deferred.promise();
+                return deferred.promise;
             }
         })
         .addMethods(/** @lends $transport.ImageLoader# */{
@@ -67,13 +67,13 @@ $oop.postpone($transport, 'ImageLoader', function (ns, className, /**jQuery*/$) 
 
             /**
              * Loads image dynamically. Triggers appropriate events at each stage of the loading process.
-             * @returns {jQuery.Promise}
+             * @returns {$utils.Promise}
              */
             loadImage: function () {
                 var that = this,
                     imageUrl = this.imageUrl,
                     imageElement = this._createImageElementProxy(),
-                    deferred = $.Deferred();
+                    deferred = $utils.Deferred.create();
 
                 this.spawnEvent($transport.EVENT_IMAGE_LOAD_START)
                     .setImageLocation(imageUrl)
@@ -81,15 +81,15 @@ $oop.postpone($transport, 'ImageLoader', function (ns, className, /**jQuery*/$) 
                     .triggerSync();
 
                 this._loadImage(imageElement, imageUrl.toString())
-                    .done(function () {
+                    .then(function () {
                         that.spawnEvent($transport.EVENT_IMAGE_LOAD_SUCCESS)
                             .setImageLocation(imageUrl)
                             .setImageElement(imageElement)
                             .triggerSync();
 
                         deferred.resolve(imageUrl, imageElement);
-                    })
-                    .fail(function () {
+                    },
+                    function () {
                         that.spawnEvent($transport.EVENT_IMAGE_LOAD_FAILURE)
                             .setImageLocation(imageUrl)
                             .setImageElement(imageElement)
@@ -98,10 +98,10 @@ $oop.postpone($transport, 'ImageLoader', function (ns, className, /**jQuery*/$) 
                         deferred.reject(imageUrl, imageElement);
                     });
 
-                return deferred.promise();
+                return deferred.promise;
             }
         });
-}, jQuery);
+});
 
 (function () {
     "use strict";

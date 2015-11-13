@@ -9,9 +9,9 @@
         $transport.PromiseLoop
             .retryOnFail(function () {
                 ok(true, "should call handler");
-                return $.Deferred().resolve('foo');
+                return $utils.Deferred.create().resolve('foo').promise;
             })
-            .done(function (arg) {
+            .then(function (arg) {
                 equal(arg, 'foo', "should return a resolved promise");
             });
     });
@@ -22,9 +22,9 @@
         $transport.PromiseLoop
             .retryOnFail(function () {
                 ok(true, "should call handler");
-                return $.Deferred().reject('foo');
+                return $utils.Deferred.create().reject('foo').promise;
             })
-            .fail(function (arg) {
+            .then(null, function (arg) {
                 equal(arg, 'foo', "should return a failed promise");
             });
     });
@@ -35,9 +35,9 @@
         $transport.PromiseLoop
             .retryOnFail(function () {
                 ok(true, "should call handler"); // will be hit 2x
-                return $.Deferred().reject('foo');
+                return $utils.Deferred.create().reject('foo').promise;
             }, 1)
-            .fail(function (arg) {
+            .then(null, function (arg) {
                 equal(arg, 'foo', "should return a failed promise");
                 start();
             });
@@ -47,8 +47,8 @@
         expect(3);
 
         var promises = [
-                $.Deferred().reject('foo'),
-                $.Deferred().resolve('bar')
+                $utils.Deferred.create().reject('foo').promise,
+                $utils.Deferred.create().resolve('bar').promise
             ],
             i = 0;
 
@@ -56,13 +56,12 @@
             .retryOnFail(function () {
                 return promises[i++];
             }, 2)
-            .progress(function (stop, arg) {
-                equal(typeof stop, 'function', "should indicate progress");
-                equal(arg, 'foo', "should pass rejection arguments to progress handler");
-            })
-            .done(function (arg) {
+            .then(function (arg) {
                 equal(arg, 'bar', "should return first resolved promise");
                 start();
+            }, null, function (stop, arg) {
+                equal(typeof stop, 'function', "should indicate progress");
+                equal(arg, 'foo', "should pass rejection arguments to progress handler");
             });
     });
 }());

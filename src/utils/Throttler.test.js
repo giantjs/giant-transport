@@ -45,9 +45,9 @@
 
         function foo(arg) {
             equal(arg, 'foo', "should pass specified argument(s) to original function"); // x3
-            var deferred = $.Deferred();
+            var deferred = $utils.Deferred.create();
             deferreds.push(deferred);
-            return deferred.promise();
+            return deferred.promise;
         }
 
         var throttler = foo.toThrottler(),
@@ -63,14 +63,14 @@
             "should return different promise for same promise ID once previous promise has been resolved");
     });
 
-    asyncTest("Throttling with Q promise", function () {
+    test("Throttling with Q promise", function () {
         expect(6);
 
         var deferreds = [];
 
         function foo(arg) {
             equal(arg, 'foo', "should pass specified argument(s) to original function"); // x3
-            var deferred = Q.defer();
+            var deferred = $utils.Deferred.create();
             deferreds.push(deferred);
             return deferred.promise;
         }
@@ -82,10 +82,12 @@
         notStrictEqual(throttler.runThrottled('world', 'foo'), promise, "should return different promise for different promise ID");
 
         promise
-            .finally(function () {
+            .then(function () {
                 notStrictEqual(throttler.runThrottled('hello', 'foo'), promise,
                     "should return different promise for same promise ID once previous promise has been resolved");
-                start();
+            }, function () {
+                notStrictEqual(throttler.runThrottled('hello', 'foo'), promise,
+                    "should return different promise for same promise ID once previous promise has been resolved");
             });
 
         deferreds[0]

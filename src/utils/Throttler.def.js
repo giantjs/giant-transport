@@ -13,8 +13,7 @@ $oop.postpone($transport, 'Throttler', function () {
      */
 
     /**
-     * Throttles a function call. The original function is expected to return a promise. (Q or jQuery).
-     * TODO: Eliminate jQuery promises (0.4.0).
+     * Throttles a function call. The original function is expected to return a promise.
      * @class
      * @extends $oop.Base
      */
@@ -42,7 +41,7 @@ $oop.postpone($transport, 'Throttler', function () {
              * Runs the original function unless there is already a returned promise registered for it.
              * When there is, it just returns the promise from the previous call to the function.
              * @param {string} promiseId Identifies promise.
-             * @returns {Q.Promise|jQuery.Promise}
+             * @returns {$utils.Promise}
              */
             runThrottled: function (promiseId) {
                 var that = this,
@@ -55,16 +54,11 @@ $oop.postpone($transport, 'Throttler', function () {
 
                     this.promiseRegistry.setItem(promiseId, promise);
 
-                    // TODO: Remove jQuery version (0.4.0).
-                    if (promise.always) {
-                        promise.always(function () {
-                            that.promiseRegistry.deleteItem(promiseId);
-                        });
-                    } else if (promise['finally']) {
-                        promise['finally'](function () {
-                            that.promiseRegistry.deleteItem(promiseId);
-                        });
-                    }
+                    promise.then(function () {
+                        that.promiseRegistry.deleteItem(promiseId);
+                    }, function () {
+                        that.promiseRegistry.deleteItem(promiseId);
+                    });
                 }
 
                 return promise;

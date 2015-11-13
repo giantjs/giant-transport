@@ -49,13 +49,13 @@ $oop.postpone($transport, 'File', function () {
             },
 
             /**
-             * @returns {Q.Promise}
+             * @returns {$utils.Promise}
              * @private
              */
             _readFile: function () {
                 var that = this,
                     filePath = this.filePath,
-                    deferred = Q.defer(),
+                    deferred = $utils.Deferred.create(),
                     event;
 
                 this.spawnEvent($transport.EVENT_FILE_READ_START)
@@ -109,7 +109,7 @@ $oop.postpone($transport, 'File', function () {
 
             /**
              * Reads the current local file, triggering events and returning a promise.
-             * @returns {Q.Promise}
+             * @returns {$utils.Promise}
              */
             readFile: function () {
                 return this.readFileThrottler.runThrottled(this.filePath.toString());
@@ -144,7 +144,7 @@ $oop.postpone($transport, 'File', function () {
                 return data;
             }
         });
-}, jQuery);
+});
 
 (function () {
     "use strict";

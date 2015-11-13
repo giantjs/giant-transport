@@ -3,10 +3,6 @@
     "assets": {
       "js": [
         "src/namespace.js",
-        "src/utils/Deferred.def.js",
-        "src/utils/Promise.def.js",
-        "src/utils/PromiseCollection.def.js",
-        "src/utils/QPromiseCollection.def.js",
         "src/utils/PromiseLoop.def.js",
         "src/utils/Location.def.js",
         "src/utils/Throttler.def.js",

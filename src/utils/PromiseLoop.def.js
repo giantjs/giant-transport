@@ -1,4 +1,4 @@
-$oop.postpone($transport, 'PromiseLoop', function (ns, className, /**jQuery*/$) {
+$oop.postpone($transport, 'PromiseLoop', function () {
     "use strict";
 
     var base = $oop.Base,
@@ -20,12 +20,12 @@ $oop.postpone($transport, 'PromiseLoop', function (ns, className, /**jQuery*/$) 
              * @param {function} handler Expected to return a jQuery promise.
              * @param {number} [retryCount] Number of attempts after first failure.
              * @param {number} [retryDelay] Delay between retries in ms.
-             * @returns {jQuery.Promise}
+             * @returns {$utils.Promise}
              */
             retryOnFail: function (handler, retryCount, retryDelay) {
                 retryDelay = retryDelay || 0;
 
-                var deferred = $.Deferred(),
+                var deferred = $utils.Deferred.create(),
                     isRetryPrevented = false,
                     i = retryCount || 0;
 
@@ -36,12 +36,12 @@ $oop.postpone($transport, 'PromiseLoop', function (ns, className, /**jQuery*/$) 
 
                 // iterating asynchronously
                 (function next() {
-                    handler()
+                    handler().then(
                         // resolving returned promise when callback was successful
-                        .done(deferred.resolve.bind(this))
+                        deferred.resolve.bind(deferred),
 
                         // processing failed callback
-                        .fail(function () {
+                        function () {
                             var args;
 
                             if (i) {
@@ -72,7 +72,7 @@ $oop.postpone($transport, 'PromiseLoop', function (ns, className, /**jQuery*/$) 
                         });
                 }());
 
-                return deferred.promise();
+                return deferred.promise;
             }
         });
-}, jQuery);
+});

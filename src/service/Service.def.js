@@ -17,7 +17,6 @@ $oop.postpone($transport, 'Service', function (ns, className, /**jQuery*/$) {
      * The Service class represents a service associated with a specific request.
      * Implements an API to call the service in online or offline, asynchronous or synchronous modes.
      * Triggers events upon start, success, and failure of service calls.
-     * TODO: Replace jQuery promise with Q (0.4.0).
      * TODO: Perhaps throttler could be class-level?
      * @class
      * @extends $oop.Base
@@ -46,7 +45,7 @@ $oop.postpone($transport, 'Service', function (ns, className, /**jQuery*/$) {
         .addPrivateMethods(/** @lends $transport.Service# */{
             /**
              * @param {object} ajaxOptions
-             * @returns {jQuery.Promise}
+             * @returns {$utils.Promise}
              * @private
              */
             _ajaxProxy: function (ajaxOptions) {
@@ -55,8 +54,8 @@ $oop.postpone($transport, 'Service', function (ns, className, /**jQuery*/$) {
 
             /**
              * Triggers service related events (start - success/failure).
-             * @param {jQuery.Promise} ajaxPromise
-             * @returns {jQuery.Promise}
+             * @param {$utils.Promise} ajaxPromise
+             * @returns {$utils.Promise}
              * @private
              */
             _triggerEvents: function (ajaxPromise) {
@@ -70,14 +69,14 @@ $oop.postpone($transport, 'Service', function (ns, className, /**jQuery*/$) {
 
                 // adding handlers
                 ajaxPromise
-                    .done(function (responseNode, textStatus, jqXHR) {
+                    .then(function (responseNode, textStatus, jqXHR) {
                         that.spawnEvent($transport.EVENT_SERVICE_SUCCESS)
                             .setRequest(request)
                             .setResponseNode(responseNode)
                             .setJqXhr(jqXHR)
                             .triggerSync();
-                    })
-                    .fail(function (jqXHR, textStatus, errorThrown) {
+                    },
+                    function (jqXHR, textStatus, errorThrown) {
                         that.spawnEvent($transport.EVENT_SERVICE_FAILURE)
                             .setRequest(request)
                             .setResponseNode(errorThrown)
@@ -90,7 +89,7 @@ $oop.postpone($transport, 'Service', function (ns, className, /**jQuery*/$) {
 
             /**
              * @param {object} ajaxOptions
-             * @returns {jQuery.Promise}
+             * @returns {$utils.Promise}
              * @private
              */
             _callService: function (ajaxOptions) {
@@ -128,9 +127,13 @@ $oop.postpone($transport, 'Service', function (ns, className, /**jQuery*/$) {
 
                 var promise = $transport.PromiseLoop
                     .retryOnFail(function () {
-                        return that._ajaxProxy(ajaxOptions);
+                        var deferred = $utils.Deferred.create();
+                        that._ajaxProxy(ajaxOptions)
+                            .done(deferred.resolve.bind(deferred))
+                            .fail(deferred.reject.bind(deferred));
+                        return deferred.promise;
                     }, this.retryCount, this.retryDelay)
-                    .progress(function (stop, jqXHR, textStatus, errorThrown) {
+                    .then(null, null, function (stop, jqXHR, textStatus, errorThrown) {
                         that.spawnEvent($transport.EVENT_SERVICE_RETRY)
                             .setRequest(request)
                             .setResponseNode(errorThrown)
@@ -250,21 +253,21 @@ $oop.postpone($transport, 'Service', function (ns, className, /**jQuery*/$) {
              * service.callOfflineServiceWithSuccess({foo: 'bar'});
              * @param {*} responseNode Response body to be returned.
              * @param {number} [httpStatus] HTTP status code for the response.
-             * @returns {jQuery.Promise}
+             * @returns {$utils.Promise}
              */
             callOfflineServiceWithSuccess: function (responseNode, httpStatus) {
                 httpStatus = httpStatus || // whet the user specified
                     this.defaultHttpStatuses[this.request.httpMethod] || // or a known default value
                     200; // or 200
 
-                var deferred = $.Deferred();
+                var deferred = $utils.Deferred.create();
 
                 // making sure service call will be async, just like a real ajax call
                 setTimeout(function () {
                     deferred.resolve(responseNode, null, {status: httpStatus});
                 }, 0);
 
-                return this._triggerEvents(deferred.promise());
+                return this._triggerEvents(deferred.promise);
             },
 
             /**
@@ -272,19 +275,19 @@ $oop.postpone($transport, 'Service', function (ns, className, /**jQuery*/$) {
              * Offline service calls behave exactly like online calls except they don't make any ajax requests.
              * @param {*} errorThrown Error value to be returned.
              * @param {number} [httpStatus] HTTP status code for the response.
-             * @returns {jQuery.Promise}
+             * @returns {$utils.Promise}
              */
             callOfflineServiceWithFailure: function (errorThrown, httpStatus) {
                 httpStatus = httpStatus || 400;
 
-                var deferred = $.Deferred();
+                var deferred = $utils.Deferred.create();
 
                 // making sure service call will be async, just like a real ajax call
                 setTimeout(function () {
                     deferred.reject({status: httpStatus}, null, errorThrown);
                 }, 0);
 
-                return this._triggerEvents(deferred.promise());
+                return this._triggerEvents(deferred.promise);
             },
 
             /**
@@ -292,7 +295,7 @@ $oop.postpone($transport, 'Service', function (ns, className, /**jQuery*/$) {
              * if an identical service call is currently in progress.
              * @param {object} [ajaxOptions] Custom options for jQuery ajax.
              * In case of conflict, custom option overrides default.
-             * @returns {jQuery.Promise}
+             * @returns {$utils.Promise}
              */
             callService: function (ajaxOptions) {
                 $assertion.isObjectOptional(ajaxOptions, "Invalid ajax options");
@@ -310,20 +313,20 @@ $oop.postpone($transport, 'Service', function (ns, className, /**jQuery*/$) {
              * @example
              * service.callOfflineServiceWithSuccessSync({foo: 'bar'});
              * @param {*} responseNode Response body to be returned.
-             * @returns {jQuery.Promise}
+             * @returns {$utils.Promise}
              */
             callOfflineServiceWithSuccessSync: function (responseNode) {
-                return this._triggerEvents($.Deferred().resolve(responseNode, null, null));
+                return this._triggerEvents($utils.Deferred.create().resolve(responseNode, null, null).promise);
             },
 
             /**
              * Calls service in offline mode, synchronously, that will return with failure, carrying the specified error value.
              * Offline service calls behave exactly like online calls except they don't make any ajax requests.
              * @param {*} errorThrown Error value to be returned.
-             * @returns {jQuery.Promise}
+             * @returns {$utils.Promise}
              */
             callOfflineServiceWithFailureSync: function (errorThrown) {
-                return this._triggerEvents($.Deferred().reject(null, null, errorThrown));
+                return this._triggerEvents($utils.Deferred.create().reject(null, null, errorThrown).promise);
             },
 
             /**
@@ -332,7 +335,7 @@ $oop.postpone($transport, 'Service', function (ns, className, /**jQuery*/$) {
              * // loading static JSON file
              * 'files/data.json'.toRequest().toService().callServiceSync();
              * @param {object} [ajaxOptions] Custom options for jQuery ajax.
-             * @returns {jQuery.Promise}
+             * @returns {$utils.Promise}
              */
             callServiceSync: function (ajaxOptions) {
                 ajaxOptions = $data.Collection.create({async: false})

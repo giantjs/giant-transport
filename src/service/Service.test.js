@@ -148,11 +148,11 @@
         $transport.Throttler.promiseRegistry.addMocks({
             setItem: function (key, value) {
                 equal(key, request.toString(), "should set promise in registry");
-                strictEqual(value, promise, "should pass promise to registry setter");
+                ok(value.isA($utils.Promise), "should pass promise to registry setter");
             }
         });
 
-        strictEqual(service.callService(), promise, "should return promise from ajax call");
+        ok(service.callService().isA($utils.Promise), "should return Giant promise from ajax call");
 
         $transport.PromiseLoop.removeMocks();
         $transport.Throttler.promiseRegistry.removeMocks();
@@ -223,7 +223,7 @@
 
         service.addMocks({
             _ajaxProxy: function () {
-                return deferred.resolve(responseNode, textStatus, jqXhr);
+                return deferred.resolve(responseNode, textStatus, jqXhr).promise();
             }
         });
 
@@ -265,7 +265,7 @@
 
         service.addMocks({
             _ajaxProxy: function () {
-                return deferred.reject(jqXhr, textStatus, errorThrown);
+                return deferred.reject(jqXhr, textStatus, errorThrown).promise();
             }
         });
 
@@ -339,7 +339,7 @@
             _ajaxProxy: function (ajaxOptions) {
                 equal(ajaxOptions.data, JSON.stringify(params), "should set ajax data option to stringified params");
                 equal(ajaxOptions.headers['Content-Type'], 'application/json', "should set/overwrite content type header");
-                return $.Deferred().resolve();
+                return $.Deferred().resolve().promise();
             }
         });
 
@@ -355,7 +355,7 @@
 
         service.addMocks({
             _triggerEvents: function (ajaxPromise) {
-                ajaxPromise.done(function (responseNode, textStatus, jqXHR) {
+                ajaxPromise.then(function (responseNode, textStatus, jqXHR) {
                     strictEqual(responseNode, offlineResponseNode, "should pass response node to resolved promise");
                     strictEqual(textStatus, null, "should pass null as textStatus to resolved promise");
                     deepEqual(jqXHR, {status: 200}, "should pass object with status as jqXhr to resolved promise");
@@ -376,7 +376,7 @@
 
         service.addMocks({
             _triggerEvents: function (ajaxPromise) {
-                ajaxPromise.fail(function (jqXHR, textStatus, errorThrown) {
+                ajaxPromise.then(null, function (jqXHR, textStatus, errorThrown) {
                     deepEqual(jqXHR, {status: 400}, "should pass object with status as jqXhr to rejected promise");
                     strictEqual(textStatus, null, "should pass null as textStatus to rejected promise");
                     strictEqual(errorThrown, offlineErrorThrown, "should pass errorThrown to rejected promise");
@@ -396,9 +396,9 @@
             offlineResponseNode = {};
 
         service.addMocks({
-            _triggerEvents: function (ajaxPromise) {
-                equal(ajaxPromise.state(), 'resolved', "should call internal service method with resolved ajax promise");
-                ajaxPromise.done(function (responseNode, textStatus, jqXHR) {
+            _triggerEvents: function (promise) {
+                equal(promise.status, 'fulfilled', "should call internal service method with resolved ajax promise");
+                promise.then(function (responseNode, textStatus, jqXHR) {
                     strictEqual(responseNode, offlineResponseNode, "should pass response node to resolved promise");
                     strictEqual(textStatus, null, "should pass null as textStatus to resolved promise");
                     strictEqual(jqXHR, null, "should pass null as jqXhr to resolved promise");
@@ -417,9 +417,9 @@
             offlineErrorThrown = {};
 
         service.addMocks({
-            _triggerEvents: function (ajaxPromise) {
-                equal(ajaxPromise.state(), 'rejected', "should call internal service method with rejected ajax promise");
-                ajaxPromise.fail(function (jqXHR, textStatus, errorThrown) {
+            _triggerEvents: function (promise) {
+                equal(promise.status, 'failed', "should call internal service method with rejected ajax promise");
+                promise.then(null, function (jqXHR, textStatus, errorThrown) {
                     strictEqual(jqXHR, null, "should pass null as jqXhr to rejected promise");
                     strictEqual(textStatus, null, "should pass null as textStatus to rejected promise");
                     strictEqual(errorThrown, offlineErrorThrown, "should pass errorThrown to rejected promise");

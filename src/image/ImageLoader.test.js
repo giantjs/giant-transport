@@ -32,7 +32,7 @@
 
         var image = 'foo/bar'.toImageUrl().toImageLoader(),
             imageElement = document.createElement('img'),
-            deferred = $.Deferred();
+            deferred = $utils.Deferred.create();
 
         image.addMocks({
             _createImageElementProxy: function () {
@@ -44,7 +44,7 @@
                 strictEqual(element, imageElement, "should load image into created image element");
                 equal(srcAttribute, image.imageUrl.toString(),
                     "should set image src attribute to serialized image URL");
-                return deferred.promise();
+                return deferred.promise;
             }
         });
 
@@ -67,7 +67,7 @@
             });
 
         image.loadImage()
-            .done(function (location, element) {
+            .then(function (location, element) {
                 ok(true, "should resolve returned promise");
                 strictEqual(location, image.imageUrl,
                     "should set promise's  to imagimageLocatione loader's imageUrl");
@@ -85,7 +85,7 @@
 
         var image = 'foo/bar'.toImageUrl().toImageLoader(),
             imageElement = document.createElement('img'),
-            deferred = $.Deferred();
+            deferred = $utils.Deferred.create();
 
         image.addMocks({
             _createImageElementProxy: function () {
@@ -97,7 +97,7 @@
                 strictEqual(element, imageElement, "should load image into created image element");
                 equal(srcAttribute, image.imageUrl.toString(),
                     "should set image src attribute to serialized image URL");
-                return deferred.promise();
+                return deferred.promise;
             }
         });
 
@@ -120,7 +120,7 @@
             });
 
         image.loadImage()
-            .fail(function (location, element) {
+            .then(null, function (location, element) {
                 ok(true, "should reject returned promise");
                 strictEqual(location, image.imageUrl,
                     "should set promise's  to imagimageLocatione loader's imageUrl");

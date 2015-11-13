@@ -29,7 +29,7 @@ $oop.postpone($transport, 'ImageUrl', function () {
         .addMethods(/** @lends $transport.ImageUrl# */{
             /**
              * Initiates loading of image.
-             * @returns {jQuery.Promise}
+             * @returns {$utils.Promise}
              */
             loadImage: function () {
                 return $transport.ImageLoader.create(this).loadImage();

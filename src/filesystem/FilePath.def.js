@@ -29,7 +29,7 @@ $oop.postpone($transport, 'FilePath', function () {
         .addMethods(/** @lends $transport.FilePath# */{
             /**
              * Reads the file at the current path.
-             * @returns {Q.Promise}
+             * @returns {$utils.Promise}
              */
             readFile: function () {
                 return $transport.File.create(this).readFile();

@@ -27,7 +27,7 @@
         strictEqual(file.filePath, filePath, "should set filePath property to self");
     });
 
-    asyncTest("Successful file loading", function () {
+    test("Successful file loading", function () {
         expect(13);
 
         var file = 'foo/bar'.toFilePath().toFile();
@@ -62,13 +62,12 @@
                 ok(event.isA($transport.FileEvent), "should return promise resolved with the success event");
                 strictEqual(event.filePath, file.filePath, "should pass filePath to promise");
                 equal(event.fileData, 'fileContents', "should pass file contents to resolved promise");
-                start();
             });
 
         'foo/bar'.toFilePath().unsubscribeFrom();
     });
 
-    asyncTest("Unsuccessful file loading", function () {
+    test("Unsuccessful file loading", function () {
         expect(10);
 
         var file = 'foo/bar'.toFilePath().toFile(),
@@ -94,11 +93,10 @@
             });
 
         file.readFile()
-            .catch(function (event) {
+            .then(null, function (event) {
                 ok(event.isA($transport.FileEvent), "should return promise resolved with the failure event");
                 strictEqual(event.filePath, file.filePath, "should pass filePath to promise");
                 equal(event.fileError, error, "should pass error to rejected promise");
-                start();
             });
 
         'foo/bar'.toFilePath().unsubscribeFrom();
