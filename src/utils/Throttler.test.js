@@ -63,7 +63,7 @@
             "should return different promise for same promise ID once previous promise has been resolved");
     });
 
-    test("Throttling with Q promise", function () {
+    test("Throttling with promise", function () {
         expect(6);
 
         var deferreds = [];
