@@ -19,6 +19,12 @@ var $data = $data || require('giant-data');
 var $event = $event || require('giant-event');
 
 /**
+ * @function
+ * @see http://api.jquery.com
+ */
+var jQuery = jQuery || require('jquery');
+
+/**
  * Native string class.
  * @name String
  * @class
