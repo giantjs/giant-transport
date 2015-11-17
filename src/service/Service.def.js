@@ -116,12 +116,11 @@ $oop.postpone($transport, 'Service', function (ns, className, /**jQuery*/$) {
                 ajaxOptions = $data.Collection.create(ajaxOptions)
                     .mergeWith(this.ajaxOptions)
                     .mergeWith($data.Collection.create({
-                        dataType: "json",
-                        type    : request.httpMethod,
-                        url     : request.getUrl(),
-                        headers : requestHeaders,
-                        data    : requestBody,
-                        timeout : self.SERVICE_TIMEOUT
+                        type   : request.httpMethod,
+                        url    : request.getUrl(),
+                        headers: requestHeaders,
+                        data   : requestBody,
+                        timeout: self.SERVICE_TIMEOUT
                     }))
                     .items;
 

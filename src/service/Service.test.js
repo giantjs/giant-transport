@@ -124,7 +124,6 @@
                 deepEqual(
                     options,
                     {
-                        dataType: "json",
                         type    : 'GET',
                         url     : 'foo/bar'.toEndpoint().toString(),
                         headers : {},
