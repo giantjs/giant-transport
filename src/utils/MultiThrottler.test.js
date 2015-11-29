@@ -3,27 +3,27 @@
 
     module("Throttler", {
         setup: function () {
-            $transport.Throttler.promiseRegistry.clear();
+            $transport.MultiThrottler.promiseRegistry.clear();
         },
 
         teardown: function () {
-            $transport.Throttler.promiseRegistry.clear();
+            $transport.MultiThrottler.promiseRegistry.clear();
         }
     });
 
     test("Instantiation", function () {
         throws(function () {
-            $transport.Throttler.create();
+            $transport.MultiThrottler.create();
         }, "should raise exception on missing argument");
 
         throws(function () {
-            $transport.Throttler.create('foo');
+            $transport.MultiThrottler.create('foo');
         }, "should raise exception on invalid argument");
 
         function foo() {
         }
 
-        var throttler = $transport.Throttler.create(foo);
+        var throttler = $transport.MultiThrottler.create(foo);
 
         strictEqual(throttler.originalFunction, foo, "should set originalFunction property");
     });
@@ -32,9 +32,9 @@
         function foo() {
         }
 
-        var throttler = foo.toThrottler();
+        var throttler = foo.toMultiThrottler();
 
-        ok(throttler.isA($transport.Throttler), "should return Throttler instance");
+        ok(throttler.isA($transport.MultiThrottler), "should return Throttler instance");
         strictEqual(throttler.originalFunction, foo, "should set originalFunction property");
     });
 
@@ -50,7 +50,7 @@
             return deferred.promise;
         }
 
-        var throttler = foo.toThrottler(),
+        var throttler = foo.toMultiThrottler(),
             promise = throttler.runThrottled('hello', 'foo');
 
         strictEqual(throttler.runThrottled('hello', 'foo'), promise, "should return same promise for same promise ID");
@@ -75,7 +75,7 @@
             return deferred.promise;
         }
 
-        var throttler = foo.toThrottler(),
+        var throttler = foo.toMultiThrottler(),
             promise = throttler.runThrottled('hello', 'foo');
 
         strictEqual(throttler.runThrottled('hello', 'foo'), promise, "should return same promise for same promise ID");

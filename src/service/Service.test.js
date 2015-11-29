@@ -3,11 +3,11 @@
 
     module("Service", {
         setup: function () {
-            $transport.Throttler.promiseRegistry.clear();
+            $transport.MultiThrottler.promiseRegistry.clear();
         },
 
         teardown: function () {
-            $transport.Throttler.promiseRegistry.clear();
+            $transport.MultiThrottler.promiseRegistry.clear();
         }
     });
 
@@ -144,7 +144,7 @@
             }
         });
 
-        $transport.Throttler.promiseRegistry.addMocks({
+        $transport.MultiThrottler.promiseRegistry.addMocks({
             setItem: function (key, value) {
                 equal(key, request.toString(), "should set promise in registry");
                 ok(value.isA($utils.Promise), "should pass promise to registry setter");
@@ -154,7 +154,7 @@
         ok(service.callService().isA($utils.Promise), "should return Giant promise from ajax call");
 
         $transport.PromiseLoop.removeMocks();
-        $transport.Throttler.promiseRegistry.removeMocks();
+        $transport.MultiThrottler.promiseRegistry.removeMocks();
     });
 
     test("Calling service with custom options", function () {
@@ -239,7 +239,7 @@
             }
         });
 
-        $transport.Throttler.promiseRegistry.addMocks({
+        $transport.MultiThrottler.promiseRegistry.addMocks({
             deleteItem: function (key) {
                 equal(key, request.toString(), "should remove promise from registry");
             }
@@ -248,7 +248,7 @@
         service.callService();
 
         $transport.ServiceEvent.removeMocks();
-        $transport.Throttler.promiseRegistry.removeMocks();
+        $transport.MultiThrottler.promiseRegistry.removeMocks();
     });
 
     test("Failed service call", function () {
@@ -281,7 +281,7 @@
             }
         });
 
-        $transport.Throttler.promiseRegistry.addMocks({
+        $transport.MultiThrottler.promiseRegistry.addMocks({
             deleteItem: function (key) {
                 equal(key, request.toString(), "should remove promise from registry");
             }
@@ -290,7 +290,7 @@
         service.callService();
 
         $transport.ServiceEvent.removeMocks();
-        $transport.Throttler.promiseRegistry.removeMocks();
+        $transport.MultiThrottler.promiseRegistry.removeMocks();
     });
 
     test("Synchronous service call", function () {

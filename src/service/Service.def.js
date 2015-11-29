@@ -185,8 +185,8 @@ $oop.postpone($transport, 'Service', function (ns, className, /**jQuery*/$) {
                  */
                 this.ajaxOptions = $data.Collection.create();
 
-                /** @type {$transport.Throttler} */
-                this.callServiceThrottler = this._callService.toThrottler();
+                /** @type {$transport.MultiThrottler} */
+                this.callServiceThrottler = this._callService.toMultiThrottler();
 
                 // setting event path to endpoint's event path
                 this.setEventPath(request.endpoint.eventPath);

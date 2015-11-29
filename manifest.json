@@ -5,7 +5,7 @@
         "src/namespace.js",
         "src/utils/PromiseLoop.def.js",
         "src/utils/Location.def.js",
-        "src/utils/Throttler.def.js",
+        "src/utils/MultiThrottler.def.js",
         "src/service/Endpoint.def.js",
         "src/service/Request.def.js",
         "src/service/ServiceEvent.def.js",

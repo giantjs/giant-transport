@@ -1,4 +1,4 @@
-$oop.postpone($transport, 'Throttler', function () {
+$oop.postpone($transport, 'MultiThrottler', function () {
     "use strict";
 
     var base = $oop.Base,
@@ -6,10 +6,10 @@ $oop.postpone($transport, 'Throttler', function () {
         slice = Array.prototype.slice;
 
     /**
-     * @name $transport.Throttler.create
+     * @name $transport.MultiThrottler.create
      * @function
      * @param {function} originalFunction
-     * @returns {$transport.Throttler}
+     * @returns {$transport.MultiThrottler}
      */
 
     /**
@@ -17,15 +17,15 @@ $oop.postpone($transport, 'Throttler', function () {
      * @class
      * @extends $oop.Base
      */
-    $transport.Throttler = self
-        .addConstants(/** @lends $transport.Throttler */{
+    $transport.MultiThrottler = self
+        .addConstants(/** @lends $transport.MultiThrottler */{
             /**
              * @type {$data.Collection}
              * @constant
              */
             promiseRegistry: $data.Collection.create()
         })
-        .addMethods(/** @lends $transport.Throttler# */{
+        .addMethods(/** @lends $transport.MultiThrottler# */{
             /**
              * @param {function} originalFunction
              * @ignore
@@ -72,10 +72,10 @@ $oop.postpone($transport, 'Throttler', function () {
     $oop.extendBuiltIn(Function.prototype, /** @lends Function# */{
         /**
          * Converts `Function` to `Throttler`.
-         * @returns {$transport.Throttler}
+         * @returns {$transport.MultiThrottler}
          */
-        toThrottler: function () {
-            return $transport.Throttler.create(this);
+        toMultiThrottler: function () {
+            return $transport.MultiThrottler.create(this);
         }
     });
 }());

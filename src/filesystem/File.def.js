@@ -101,8 +101,8 @@ $oop.postpone($transport, 'File', function () {
                  */
                 this.filePath = filePath;
 
-                /** @type {$transport.Throttler} */
-                this.readFileThrottler = this._readFile.toThrottler();
+                /** @type {$transport.MultiThrottler} */
+                this.readFileThrottler = this._readFile.toMultiThrottler();
 
                 this.setEventPath(filePath.eventPath);
             },
